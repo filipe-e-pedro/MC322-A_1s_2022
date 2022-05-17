@@ -10,4 +10,24 @@ public class Caverna {
 	public Sala getSala(int posicao_x, int posicao_y) {
 		return salas[posicao_x][posicao_y];
 	}
+	
+	public String[][] getCaverna(){
+		String[][] matriz = new String[4][4];
+		Componente compMaiorPrioridade;
+		
+		for(int i = 0; i < 4; i++) {
+			for(int j = 0; j < 4; j++) {
+				if(salas[i][j].foiVisitada()) {
+					compMaiorPrioridade = salas[i][j].compMaisImportante();
+					if (compMaiorPrioridade == null)
+						matriz[i][j] = "#";
+					else
+						matriz[i][j] = compMaiorPrioridade.getNome();
+				}
+				else
+					matriz[i][j] = "-";
+			}
+		}
+		return matriz;
+	}
 }
