@@ -30,4 +30,10 @@ public class Caverna {
 		}
 		return matriz;
 	}
+
+	public boolean checaSala(int posicao_x, int posicao_y){
+		if (posicao_x < 0 || posicao_x > 3 || posicao_y < 0 || posicao_y > 3)
+			return true;
+		return false;
+	}
 }
