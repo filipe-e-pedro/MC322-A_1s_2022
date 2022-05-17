@@ -1,6 +1,10 @@
 package pt.c40task.l05wumpus;
 
 public class Heroi extends Componente{
+	private boolean possuiFlecha = true;
+	private boolean flechaEquipada = false;
+	private boolean vivo = true;
+
 	public Heroi(int posicao_x, int posicao_y, Caverna mapa) {
         super(posicao_x, posicao_y, mapa);
     }
@@ -15,4 +19,18 @@ public class Heroi extends Componente{
 	public int getPrioridade() {
         return 1;
     }
+
+	public void equiparFlecha() {
+		flechaEquipada = true;
+	}
+
+	public boolean getFlechaEquipada() {
+		return flechaEquipada;
+	}
+
+	public void morre() {
+		vivo = false;
+	}
+
+
 }	

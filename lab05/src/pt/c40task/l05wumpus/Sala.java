@@ -32,4 +32,19 @@ public class Sala {
 	public void setComponente(Componente comp) {
 		componentes[comp.getPrioridade()] = comp;
 	}
+
+	public void removeHeroi() {
+		componentes[1] = null;
+	}
+
+	public void adicionaHeroi(Heroi heroi) {
+		componentes[1] = heroi;
+	}
+	
+	public int[] getPosicao() {
+		int posicao[] = new int[2];
+		posicao[0] = posicao_x;
+		posicao[1] = posicao_y;
+		return posicao;
+	}
 }
