@@ -3,6 +3,7 @@ package pt.c40task.l05wumpus;
 public class Sala {
 	private Componente componentes[] = new Componente[4];
 	private int posicao_x, posicao_y;
+	private boolean revelada = false;
 	
 	public Sala(int posicao_x, int posicao_y, String componente, Caverna mapa){
 		this.posicao_x = posicao_x;
@@ -28,7 +29,15 @@ public class Sala {
 		}
 		return null;
 	}
+	
+	public void revelaSala() {
+		revelada = true;
+	}
 
+	public boolean foiVisitada() {
+		return revelada;
+	}
+	
 	public void setComponente(Componente comp) {
 		componentes[comp.getPrioridade()] = comp;
 	}
