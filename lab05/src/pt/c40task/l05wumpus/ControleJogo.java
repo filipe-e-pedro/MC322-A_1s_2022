@@ -89,13 +89,13 @@ public class ControleJogo {
 
     public void perde(){
         imprimeCaverna();
-        imprimeMensagem("Voce ganhou =D !!!");
+        imprimeMensagem("Voce perdeu =(...");
         tk.writeBoard(mapa.getCaverna(), score, 'L');
     }
 
     public void sai(){
         imprimeCaverna();
-        imprimeMensagem("Voce ganhou =D !!!");
+        imprimeMensagem("Volte sempre !");
         tk.writeBoard(mapa.getCaverna(), score, 'Q');
     }
 
