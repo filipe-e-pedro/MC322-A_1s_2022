@@ -68,4 +68,5 @@ public class Sala {
 	public boolean checaWumpus() {
 		return componentes[0].getNome() == "W";
 	}
+
 }
