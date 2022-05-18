@@ -3,6 +3,7 @@ package pt.c40task.l05wumpus;
 public class MontadorCaverna {
 	private Caverna mapa = new Caverna();
 	private Toolkit tk;
+	private Heroi heroi;
 	
 	public MontadorCaverna(Toolkit tk) {
 		this.tk = tk;
@@ -15,11 +16,18 @@ public class MontadorCaverna {
 		if(cave.length != 16)
 			System.out.println("Arquivo cave.csv com numero errado de salas");
 		else {
-			for(int i = 0; i < 16; i++) {
-				posicao_x = i/4;
-				posicao_y = i%4;
-				novaSala = new Sala(posicao_x, posicao_y, cave[i][2], mapa);
-				mapa.setSala(posicao_x, posicao_y, novaSala);
+			if(!cave[0][2].equalsIgnoreCase("P"))
+				System.out.println("Heroi nao esta na primeira sala");
+			else{
+				heroi = new Heroi(0, 0, mapa);
+				novaSala = new Sala(0, 0, "P", mapa);
+				mapa.setSala(0, 0, novaSala);
+				for(int i = 1; i < 16; i++) {
+					posicao_x = i/4;
+					posicao_y = i%4;
+					novaSala = new Sala(posicao_x, posicao_y, cave[i][2], mapa);
+					mapa.setSala(posicao_x, posicao_y, novaSala);
+				}
 			}
 		}
 	}
@@ -76,5 +84,9 @@ public class MontadorCaverna {
 		criaSalas();
 		geraBrisaFedor();
 		return mapa;
+	}
+
+	public Heroi getHeroi(){
+		return heroi;
 	}
 }

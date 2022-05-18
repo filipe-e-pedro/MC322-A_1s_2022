@@ -17,8 +17,6 @@ public class Sala {
 			this.componentes[0] = new Ouro(posicao_x, posicao_y, mapa);
 		else if(componente.equalsIgnoreCase("B")) 
 			this.componentes[0] = new Buraco(posicao_x, posicao_y, mapa);
-		else if(componente.equalsIgnoreCase("P")) 
-			this.componentes[1] = new Heroi(posicao_x, posicao_y, mapa);
 	}
 
 	public Componente compMaisImportante() {
@@ -29,7 +27,7 @@ public class Sala {
 		}
 		return null;
 	}
-	
+
 	public void revelaSala() {
 		revelada = true;
 	}
@@ -96,7 +94,7 @@ public class Sala {
 			pos2 = " fedor";
 		}
 		if (componentes[3] != null) {
-			pos2 = " brisa";
+			pos3 = " brisa";
 		}
 		return "Esta sala possui:" + pos0 + pos2 + pos3 + ".";
 	}

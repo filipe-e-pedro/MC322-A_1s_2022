@@ -5,7 +5,6 @@ import java.util.Random;
 public class Heroi extends Componente{
 	private boolean possuiFlecha = true;
 	private boolean flechaEquipada = false;
-	private boolean vivo = true;
 	private boolean possuiOuro = false;
 
 	public Heroi(int posicao_x, int posicao_y, Caverna mapa) {
@@ -16,9 +15,11 @@ public class Heroi extends Componente{
 		this.posicao_x = posicao_x;
 		this.posicao_y = posicao_y;
 	}
+
 	public String getNome() {
         return "P";
     }
+
 	public int getPrioridade() {
         return 1;
     }
@@ -29,12 +30,6 @@ public class Heroi extends Componente{
 
 	public boolean getFlechaEquipada() {
 		return flechaEquipada;
-	}
-
-	
-
-	public void morre() {
-		vivo = false;
 	}
 
 	public int atiraFlecha(Sala destino) {
@@ -51,8 +46,15 @@ public class Heroi extends Componente{
 		return -100;
 	}
 
+	public boolean getPossuiFlecha(){
+		return possuiFlecha;
+	}
+
 	public void pegaOuro() {
 		possuiOuro = true;
 	}
 
+	public boolean getOuro(){
+		return possuiOuro;
+	}
 }	

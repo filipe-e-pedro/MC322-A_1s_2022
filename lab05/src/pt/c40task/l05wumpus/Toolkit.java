@@ -100,4 +100,8 @@ public class Toolkit {
          erro.printStackTrace();
       }
    }
+
+   public BufferedReader getMoveStr(){
+      return moveStr;
+   }
 }
