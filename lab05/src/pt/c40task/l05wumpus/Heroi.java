@@ -1,5 +1,7 @@
 package pt.c40task.l05wumpus;
 
+import java.util.Random;
+
 public class Heroi extends Componente{
 	private boolean possuiFlecha = true;
 	private boolean flechaEquipada = false;
@@ -30,6 +32,18 @@ public class Heroi extends Componente{
 
 	public void morre() {
 		vivo = false;
+	}
+
+	public void atiraFlecha(Sala destino) {
+		Random rand = new Random();
+		possuiFlecha = false;
+		flechaEquipada = false;
+		if (destino.compMaisImportante().getNome() == "W") {
+			int acerto = rand.nextInt(2);
+			if (acerto == 1) {
+				destino.removeWumpus();
+			} 
+		}
 	}
 
 

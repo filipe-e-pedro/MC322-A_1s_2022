@@ -12,8 +12,8 @@ public class ControleJogo {
     }
 
     public void recebeComando(String tecla){
-        int posicao_x = heroi.getPosicao[0];
-        int posicao_y = heroi.getPosicao[1];
+        int posicao_x = heroi.getPosicao()[0];
+        int posicao_y = heroi.getPosicao()[1];
         if(tecla.equalsIgnoreCase("w") && mapa.checaSala(posicao_x, posicao_y+1)){
             move(posicao_x, posicao_y+1);
         }
@@ -32,12 +32,13 @@ public class ControleJogo {
         int inicio_x = heroi.getPosicao()[0];
         int inicio_y = heroi.getPosicao()[1];
         Sala atual = mapa.getSala(inicio_x, inicio_y);
-        Sala destino = mapa.getSala(destino_x, destino_y)
-        if(heroi.getflechaEquipada()){
-            atiraFlecha(destino);
+        Sala destino = mapa.getSala(destino_x, destino_y);
+        if(heroi.getFlechaEquipada()){
+            heroi.atiraFlecha(destino);
         }
-        if(checaBuraco || checaWumpus){
-            morre();
+        if(destino.checaBuraco() || destino.checaWumpus()){
+            heroi.morre();
+            atual.removeHeroi();
         }
         else{
             atual.removeHeroi();

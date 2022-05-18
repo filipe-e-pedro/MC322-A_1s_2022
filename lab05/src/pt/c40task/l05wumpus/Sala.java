@@ -56,4 +56,16 @@ public class Sala {
 		posicao[1] = posicao_y;
 		return posicao;
 	}
+
+	public void removeWumpus() {
+		componentes[0] = null;
+	}
+
+	public boolean checaBuraco() {
+		return componentes[0].getNome() == "B";
+	}
+
+	public boolean checaWumpus() {
+		return componentes[0].getNome() == "W";
+	}
 }
