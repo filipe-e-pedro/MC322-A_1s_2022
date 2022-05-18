@@ -79,4 +79,25 @@ public class Sala {
 		componentes[0] = null;
 	}
 
+	public String mensagemAuxilio() {
+		String pos0 = "";
+		String pos2 = "";
+		String pos3 = "";
+		if (componentes[0] != null && componentes[0].getNome() == "W") {
+			pos0 = " wumpus";
+		}
+		if (componentes[0] != null && componentes[0].getNome() == "B") {
+			pos0 = " buraco";
+		}
+		if (componentes[0] != null && componentes[0].getNome() == "O") {
+			pos0 = " ouro";
+		}
+		if (componentes[2] != null) {
+			pos2 = " fedor";
+		}
+		if (componentes[3] != null) {
+			pos2 = " brisa";
+		}
+		return "Esta sala possui:" + pos0 + pos2 + pos3 + ".";
+	}
 }

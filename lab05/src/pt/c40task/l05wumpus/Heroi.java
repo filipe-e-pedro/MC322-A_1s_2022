@@ -37,7 +37,7 @@ public class Heroi extends Componente{
 		vivo = false;
 	}
 
-	public void atiraFlecha(Sala destino) {
+	public int atiraFlecha(Sala destino) {
 		Random rand = new Random();
 		possuiFlecha = false;
 		flechaEquipada = false;
@@ -45,12 +45,14 @@ public class Heroi extends Componente{
 			int acerto = rand.nextInt(2);
 			if (acerto == 1) {
 				destino.removeWumpus();
+				return 400;
 			} 
 		}
+		return -100;
 	}
 
 	public void pegaOuro() {
-		// IMPLEMENTAR
+		possuiOuro = true;
 	}
 
 }	

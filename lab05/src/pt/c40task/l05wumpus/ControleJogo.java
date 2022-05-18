@@ -5,7 +5,7 @@ public class ControleJogo {
     private Caverna mapa;
     private Toolkit tk;
     private String player;
-    private int score;
+    private int score = 0;
 
     public ControleJogo(Heroi heroi, Caverna mapa, Toolkit tk){
         this.heroi = heroi;
@@ -56,12 +56,14 @@ public class ControleJogo {
         int inicio_y = heroi.getPosicao()[1];
 
         Sala destino = mapa.getSala(destino_x, destino_y);
+        score -= 15;
         if(destino.checaBuraco() || destino.checaWumpus()){
+            score -= 1000;
             perde();
         }
 
         if(heroi.getFlechaEquipada()){
-            heroi.atiraFlecha(destino);
+            score += heroi.atiraFlecha(destino);
         }
 
         else{
@@ -69,6 +71,7 @@ public class ControleJogo {
             heroi.setPosicao(destino_x, destino_y);
             destino.adicionaHeroi(heroi);
             destino.revelaSala();
+            imprimeMensagem(destino.mensagemAuxilio());
         }
     }
 
