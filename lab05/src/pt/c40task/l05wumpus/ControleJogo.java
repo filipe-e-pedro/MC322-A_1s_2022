@@ -16,7 +16,9 @@ public class ControleJogo {
     public void recebeComando(String tecla){
         int posicao_x = heroi.getPosicao()[0];
         int posicao_y = heroi.getPosicao()[1];
+
         Sala salaAtual = mapa.getSala(posicao_x, posicao_y);
+
         if(tecla.equalsIgnoreCase("w") && mapa.checaSala(posicao_x, posicao_y+1)){
             move(posicao_x, posicao_y+1, salaAtual);
         }
@@ -52,13 +54,16 @@ public class ControleJogo {
     public void move(int destino_x, int destino_y, Sala salaAtual){
         int inicio_x = heroi.getPosicao()[0];
         int inicio_y = heroi.getPosicao()[1];
+
         Sala destino = mapa.getSala(destino_x, destino_y);
-        if(heroi.getFlechaEquipada()){
-            atiraFlecha(destino);
-        }
         if(destino.checaBuraco() || destino.checaWumpus()){
             perde();
         }
+
+        if(heroi.getFlechaEquipada()){
+            heroi.atiraFlecha(destino);
+        }
+
         else{
             salaAtual.removeHeroi();
             heroi.setPosicao(destino_x, destino_y);

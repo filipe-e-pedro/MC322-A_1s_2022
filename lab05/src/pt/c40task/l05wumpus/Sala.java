@@ -74,4 +74,9 @@ public class Sala {
 		posicao[1] = posicao_y;
 		return posicao;
 	}
+
+	public void removeWumpus() {
+		componentes[0] = null;
+	}
+
 }
