@@ -73,8 +73,8 @@ public class Toolkit {
       }
       return v;
    }
-   
-   public void writeBoard(char board[][], int score, char status){
+
+   public void writeBoard(String board[][], int score, char status){
       try {
          if (!firstBoard)
             outputStr.println("=====");

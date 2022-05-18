@@ -4,6 +4,7 @@ public class Heroi extends Componente{
 	private boolean possuiFlecha = true;
 	private boolean flechaEquipada = false;
 	private boolean vivo = true;
+	private boolean possuiOuro = false;
 
 	public Heroi(int posicao_x, int posicao_y, Caverna mapa) {
         super(posicao_x, posicao_y, mapa);
@@ -27,6 +28,8 @@ public class Heroi extends Componente{
 	public boolean getFlechaEquipada() {
 		return flechaEquipada;
 	}
+
+	
 
 	public void morre() {
 		vivo = false;

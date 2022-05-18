@@ -42,6 +42,24 @@ public class Sala {
 		componentes[comp.getPrioridade()] = comp;
 	}
 
+	public boolean checaBuraco(){
+		if(compMaisImportante().getNome() == "B"){
+			return true;
+		}
+		return false;
+	}
+
+	public boolean checaWumpus(){
+		if(compMaisImportante().getNome() == "W"){
+			return true;
+		}
+		return false;
+	}
+
+	public void removeOuro(){
+		componentes[0] = null;
+	}
+
 	public void removeHeroi() {
 		componentes[1] = null;
 	}
