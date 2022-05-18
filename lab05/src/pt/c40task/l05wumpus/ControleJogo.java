@@ -29,11 +29,11 @@ public class ControleJogo {
     }
 
     public void move(int destino_x, int destino_y){
-        int inicio_x = heroi.getPosicao[0];
-        int inicio_y = heroi.getPosicao[1];
+        int inicio_x = heroi.getPosicao()[0];
+        int inicio_y = heroi.getPosicao()[1];
         Sala atual = mapa.getSala(inicio_x, inicio_y);
         Sala destino = mapa.getSala(destino_x, destino_y)
-        if(heroi.flechaEquipada()){
+        if(heroi.getflechaEquipada()){
             atiraFlecha(destino);
         }
         if(checaBuraco || checaWumpus){
