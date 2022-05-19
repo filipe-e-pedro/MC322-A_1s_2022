@@ -96,9 +96,13 @@ public class Toolkit {
          caveStr.close();
          outputStr.close();
          if(getMoveStr()!=null)
-        	   moveStr.close();
+        	 moveStr.close();
       } catch(Exception erro){
          erro.printStackTrace();
       }
+   }
+
+   public BufferedReader getMoveStr(){
+      return moveStr;
    }
 }

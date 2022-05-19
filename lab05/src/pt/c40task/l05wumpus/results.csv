@@ -12,9 +12,79 @@ bBfW
 score: -30
 status: x
 =====
-##PB
-#b#f
+##bB
+#bPf
 bBfW
 #bOf
-score: -1045
-status: n
+score: -45
+status: x
+=====
+##bB
+#b#P
+bBfW
+#bOf
+score: -60
+status: x
+=====
+##bB
+#b#f
+bBfP
+#bOf
+score: 325
+status: x
+=====
+##bB
+#b#f
+bBP#
+#bOf
+score: 310
+status: x
+=====
+##bB
+#b#f
+bBf#
+#bOf
+score: 295
+status: x
+=====
+##bB
+#b#f
+bBP#
+#b#f
+score: 280
+status: x
+=====
+##bB
+#bPf
+bBf#
+#b#f
+score: 265
+status: x
+=====
+##PB
+#b#f
+bBf#
+#b#f
+score: 250
+status: x
+=====
+#PbB
+#b#f
+bBf#
+#b#f
+score: 235
+status: x
+=====
+P#bB
+#b#f
+bBf#
+#b#f
+score: 220
+status: x
+=====
+P#bB
+#b#f
+bBf#
+#b#f
+score: 1220
+status: w
