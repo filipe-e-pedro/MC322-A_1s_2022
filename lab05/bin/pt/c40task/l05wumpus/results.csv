@@ -1,146 +1,34 @@
-#Pb#
-#bBb
-b#fO
-BfWf
+#P--
+----
+----
+----
 score: -15
 status: x
 =====
-##b#
-#PBb
-b#fO
-BfWf
+##P-
+----
+----
+----
 score: -30
 status: x
 =====
-##b#
-#bBb
-bPfO
-BfWf
+##b-
+--P-
+----
+----
 score: -45
 status: x
 =====
-##b#
-#bBb
-b#PO
-BfWf
+##b-
+--#-
+--P-
+----
 score: -60
 status: x
 =====
-##b#
-#bBb
-bPfO
-BfWf
-score: -75
-status: x
-=====
-##b#
-#PBb
-b#fO
-BfWf
-score: -90
-status: x
-=====
-##b#
-PbBb
-b#fO
-BfWf
-score: -105
-status: x
-=====
-##b#
-#bBb
-P#fO
-BfWf
-score: -120
-status: x
-=====
-##b#
-#bBb
-bPfO
-BfWf
-score: -135
-status: x
-=====
-##b#
-#PBb
-b#fO
-BfWf
-score: -150
-status: x
-=====
-#Pb#
-#bBb
-b#fO
-BfWf
-score: -165
-status: x
-=====
-##P#
-#bBb
-b#fO
-BfWf
-score: -180
-status: x
-=====
-##bP
-#bBb
-b#fO
-BfWf
-score: -195
-status: x
-=====
-##b#
-#bBP
-b#fO
-BfWf
-score: -210
-status: x
-=====
-##bP
-#bBb
-b#fO
-BfWf
-score: -225
-status: x
-=====
-##P#
-#bBb
-b#fO
-BfWf
-score: -240
-status: x
-=====
-#Pb#
-#bBb
-b#fO
-BfWf
-score: -255
-status: x
-=====
-##b#
-#PBb
-b#fO
-BfWf
-score: -270
-status: x
-=====
-##b#
-#bBb
-bPfO
-BfWf
-score: -285
-status: x
-=====
-##b#
-#bBb
-b#PO
-BfWf
-score: -300
-status: x
-=====
-##b#
-#bBb
-b#PO
-BfWf
-score: -1315
+##b-
+--#-
+--fW
+----
+score: -1175
 status: n

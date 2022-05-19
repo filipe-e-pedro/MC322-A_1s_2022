@@ -24,17 +24,29 @@ public class ControleJogo {
 
         Sala salaAtual = mapa.getSala(posicao_x, posicao_y);
 
-        if(tecla.equalsIgnoreCase("a") && posicao_x > 0){
-            move(posicao_x-1, posicao_y, salaAtual);
+        if(tecla.equalsIgnoreCase("a")){
+            if (posicao_x > 0)
+                move(posicao_x-1, posicao_y, salaAtual);
+            else
+                movimentoInvalido();
         }
-        else if(tecla.equalsIgnoreCase("d") && posicao_x < 3){
-            move(posicao_x+1, posicao_y, salaAtual);
+        else if(tecla.equalsIgnoreCase("d")){
+            if (posicao_x < 3)
+                move(posicao_x+1, posicao_y, salaAtual);
+            else
+                movimentoInvalido();
         }
-        else if(tecla.equalsIgnoreCase("s") && posicao_y < 3){
-            move(posicao_x, posicao_y+1, salaAtual);
+        else if(tecla.equalsIgnoreCase("s")){
+            if (posicao_y < 3)
+                move(posicao_x, posicao_y+1, salaAtual);
+            else
+                movimentoInvalido();
         }
-        else if(tecla.equalsIgnoreCase("w") && posicao_y > 0){
-            move(posicao_x, posicao_y-1, salaAtual);
+        else if(tecla.equalsIgnoreCase("w")){
+            if (posicao_y > 0)
+                move(posicao_x, posicao_y-1, salaAtual);
+            else
+                movimentoInvalido();
         }
         else if(tecla.equalsIgnoreCase("k")){
             if(!heroi.getPossuiFlecha()){
@@ -51,7 +63,7 @@ public class ControleJogo {
             }
         }
         else if(tecla.equalsIgnoreCase("c")){
-            if(mapa.getSala(posicao_x, posicao_y).compMaisImportante() == "O"){
+            if(mapa.getSala(posicao_x, posicao_y).checaOuro()){
                 heroi.pegaOuro();
                 salaAtual.removeOuro();
                 imprimeMensagem("Voce pegou o ouro.");
@@ -65,6 +77,10 @@ public class ControleJogo {
         else{
             System.out.println("Comando invalido. Por favor digite outro comando.");
         }
+    }
+
+    private void movimentoInvalido(){
+        System.out.println("Fim da caverna. Tente se mover em outra direcao.");
     }
 
     public void move(int destino_x, int destino_y, Sala salaAtual){

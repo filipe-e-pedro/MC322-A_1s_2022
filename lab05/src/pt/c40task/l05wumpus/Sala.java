@@ -66,6 +66,19 @@ public class Sala {
 		return false;
 	}
 
+	public boolean checaHeroi(){
+		if(componentesNome[1] == "P")
+			return true;
+		return false;
+	}
+
+	public boolean checaOuro(){
+		if(compMaisImportante() == "O"){
+			return true;
+		}
+		return false;
+	}
+
 	public void removeOuro(){
 		componentes[0] = null;
 		componentesNome[0] = null;

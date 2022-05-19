@@ -9,28 +9,60 @@ public class MontadorCaverna {
 		this.tk = tk;
 	}
 	
-	public void criaSalas() {
+	public boolean criaSalas() {
 		String cave[][] = tk.retrieveCave();
 		int posicao_x, posicao_y;
+		int contadorWumpus = 0, contadorOuro = 0, contadorBuraco = 0, contadorHeroi = 0;
 		Sala novaSala;
-		if(cave.length != 16)
+		boolean noError = true;
+		if(cave.length != 16){
 			System.out.println("Arquivo cave.csv com numero errado de salas");
+			noError = false;
+		}
 		else {
-			if(!cave[0][2].equalsIgnoreCase("P"))
+			if(!cave[0][2].equalsIgnoreCase("P")){
 				System.out.println("Heroi nao esta na primeira sala");
+				noError = false;
+			}
 			else{
 				heroi = new Heroi(0, 0, mapa);
 				novaSala = new Sala(0, 0, "P", mapa);
 				novaSala.revelaSala();
 				mapa.setSala(0, 0, novaSala);
-				for(int i = 1; i < 16; i++) {
-					posicao_x = i%4;
-					posicao_y = i/4;
-					novaSala = new Sala(posicao_x, posicao_y, cave[i][2], mapa);
-					mapa.setSala(posicao_x, posicao_y, novaSala);
-				}
+				contadorHeroi++;
+			}
+			for(int i = contadorHeroi; i < 16; i++) {
+				posicao_x = i%4;
+				posicao_y = i/4;
+				novaSala = new Sala(posicao_x, posicao_y, cave[i][2], mapa);
+				mapa.setSala(posicao_x, posicao_y, novaSala);
+				if(novaSala.checaBuraco())
+					contadorBuraco ++;
+				if(novaSala.checaOuro())
+					contadorOuro ++;
+				if(novaSala.checaWumpus())
+					contadorWumpus ++;
+				if(novaSala.checaHeroi())
+					contadorHeroi ++;
 			}
 		}
+		if(contadorBuraco != 2 && contadorBuraco != 3){
+			System.out.println("Deve haver no minimo 2 e no maximo 3 buracos");
+			noError = false;
+		}
+		if(contadorOuro != 1){
+			System.out.println("Deve haver exclusivamente 1 ouro");
+			noError = false;
+		}
+		if(contadorWumpus != 1){
+			System.out.println("Deve haver exclusivamente 1 Wumpus");
+			noError = false;
+		}
+		if(contadorHeroi != 1){
+			System.out.println("Deve haver exclusivamente 1 Heroi");
+			noError = false;
+		}
+		return noError;
 	}
 
 	public void geraBrisaFedor() {
@@ -81,10 +113,16 @@ public class MontadorCaverna {
 		}
 	}
 	
-	public Caverna geraMapa() {
-		criaSalas();
-		geraBrisaFedor();
+	public Caverna getMapa(){
 		return mapa;
+	}
+
+	public boolean geraMapa() {
+		if (criaSalas()){
+			geraBrisaFedor();
+			return true;
+		}
+		return false;
 	}
 
 	public Heroi getHeroi(){
