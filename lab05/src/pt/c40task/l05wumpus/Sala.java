@@ -120,10 +120,10 @@ public class Sala {
 			}
 		}
 		if (contador == 0) {
-			m = "Esta sala está vazia."
+			m = "Esta sala está vazia.";
 		}
 		else {
-			m = "Esta sala possui:"
+			m = "Esta sala possui:";
 			for (int i = 0; i < contador - 1; i++) {
 				m += " " + elementos[i] + ",";
 			}

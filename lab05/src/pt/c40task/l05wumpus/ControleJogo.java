@@ -75,7 +75,7 @@ public class ControleJogo {
                 imprimeMensagem("Você acertou o Wumpus!");
             }
             else{
-                imprimeMensagem("Você errou o Wumpus.")
+                imprimeMensagem("Você errou o Wumpus.");
             }
         }
 
