@@ -19,7 +19,7 @@ public class Caverna {
 					matriz[i][j] = salas[i][j].compMaisImportante();
 				}
 				else
-					matriz[i][j] = "-";
+					matriz[i][j] = salas[i][j].compMaisImportante();
 			}
 		}
 		return matriz;
