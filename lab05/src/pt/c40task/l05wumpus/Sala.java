@@ -24,15 +24,10 @@ public class Sala {
 		}
 		else if(componente.equalsIgnoreCase("B")){
 			this.componentes[0] = new Buraco(posicao_x, posicao_y, mapa);
-<<<<<<< Updated upstream
-		else if(componente.equalsIgnoreCase("P")) 
-			this.componentes[1] = new Heroi(posicao_x, posicao_y, mapa);
-=======
 			this.componentesNome[0] = "B";
 		}
 		else if(componente.equalsIgnoreCase("P"))
 			this.componentesNome[1] = "P";
->>>>>>> Stashed changes
 	}
 
 	public String compMaisImportante() {
@@ -43,7 +38,7 @@ public class Sala {
 		}
 		return componentesNome[4];
 	}
-	
+
 	public void revelaSala() {
 		revelada = true;
 	}
@@ -98,4 +93,25 @@ public class Sala {
 		componentesNome[0] = null;
 	}
 
+	public String mensagemAuxilio() {
+		String pos0 = "";
+		String pos2 = "";
+		String pos3 = "";
+		if (componentes[0] != null && componentes[0].getNome() == "W") {
+			pos0 = " wumpus";
+		}
+		if (componentes[0] != null && componentes[0].getNome() == "B") {
+			pos0 = " buraco";
+		}
+		if (componentes[0] != null && componentes[0].getNome() == "O") {
+			pos0 = " ouro";
+		}
+		if (componentes[2] != null) {
+			pos2 = " fedor";
+		}
+		if (componentes[3] != null) {
+			pos3 = " brisa";
+		}
+		return "Esta sala possui:" + pos0 + pos2 + pos3 + ".";
+	}
 }
