@@ -94,24 +94,43 @@ public class Sala {
 	}
 
 	public String mensagemAuxilio() {
-		String pos0 = "";
-		String pos2 = "";
-		String pos3 = "";
-		if (componentes[0] != null && componentes[0].getNome() == "W") {
-			pos0 = " wumpus";
+		String[] elementos = new String[4];
+		String m;
+		int contador = 0;
+		for (int i = 0; i < 4; i++) {
+			if (componentesNome[i] == "W") {
+				elementos[contador] = "wumpus";
+				contador++;
+			}
+			else if (componentesNome[i] == "O") {
+				elementos[contador] = "ouro";
+				contador++;
+			}
+			else if (componentesNome[i] == "B") {
+				elementos[contador] = "buraco";
+				contador++;
+			}
+			else if (componentesNome[i] == "f") {
+				elementos[contador] = "fedor";
+				contador++;
+			}
+			else if (componentesNome[i] == "b") {
+				elementos[contador] = "brisa";
+				contador++;
+			}
 		}
-		if (componentes[0] != null && componentes[0].getNome() == "B") {
-			pos0 = " buraco";
+		if (contador == 0) {
+			m = "Esta sala está vazia.";
 		}
-		if (componentes[0] != null && componentes[0].getNome() == "O") {
-			pos0 = " ouro";
+		else {
+			m = "Esta sala possui:";
+			for (int i = 0; i < contador - 1; i++) {
+				m += " " + elementos[i] + ",";
+			}
+			m += " " + elementos[contador - 1];
 		}
-		if (componentes[2] != null) {
-			pos2 = " fedor";
-		}
-		if (componentes[3] != null) {
-			pos3 = " brisa";
-		}
-		return "Esta sala possui:" + pos0 + pos2 + pos3 + ".";
+		return m;
 	}
 }
+
+
