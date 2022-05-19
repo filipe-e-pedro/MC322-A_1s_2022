@@ -1,69 +1,69 @@
-#PbB
-#b#f
-bBfW
-#bOf
+#P--
+----
+----
+----
 score: -15
 status: x
 =====
-##PB
-#b#f
-bBfW
-#bOf
+##P-
+----
+----
+----
 score: -30
 status: x
 =====
-##bB
-#bPf
-bBfW
-#bOf
+##b-
+--P-
+----
+----
 score: -45
 status: x
 =====
-##bB
-#b#f
-bBPW
-#bOf
+##b-
+--#-
+--P-
+----
 score: -60
 status: x
 =====
-##bB
-#b#f
-bBfW
-#bOf
+##b-
+--#-
+--f-
+--O-
 score: -75
 status: x
 =====
-##bB
-#b#f
-bBPW
-#b#f
+##b-
+--#-
+--P-
+--#-
 score: -90
 status: x
 =====
-##bB
-#bPf
-bBfW
-#b#f
+##b-
+--P-
+--f-
+--#-
 score: -105
 status: x
 =====
-##PB
-#b#f
-bBfW
-#b#f
+##P-
+--#-
+--f-
+--#-
 score: -120
 status: x
 =====
-#PbB
-#b#f
-bBfW
-#b#f
+#Pb-
+--#-
+--f-
+--#-
 score: -135
 status: x
 =====
-P#bB
-#b#f
-bBfW
-#b#f
+P#b-
+--#-
+--f-
+--#-
 score: 850
 status: w
