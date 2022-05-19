@@ -36,49 +36,34 @@ public class Sala {
 		return revelada;
 	}
 	
-	public boolean setComponente(Wumpus wumpus) {
-		if (componentesNome[0] != null){
-			return false;
-		}
+	public void setComponente(Wumpus wumpus) {
 		this.wumpus = wumpus;
 		componentesNome[0] = "W";
-		return true;
 	}
 
-	public boolean setComponente(Ouro ouro) {
-		if (componentesNome[0] != null){
-			return false;
-		}
+	public void setComponente(Ouro ouro) {
 		this.ouro = ouro;
 		componentesNome[0] = "O";
-		return true;
 	}
 
-	public boolean setComponente(Buraco buraco) {
-		if (componentesNome[0] != null){
-			return false;
-		}
+	public void setComponente(Buraco buraco) {
 		this.buraco = buraco;
 		componentesNome[0] = "B";
-		return true;
 	}
 
-	public boolean setComponente(Heroi heroi) {
+	public void setComponente(Heroi heroi) {
 		this.heroi = heroi;
 		componentesNome[1] = "P";
-		return true;
 	}
 
-	public boolean setComponente(Fedor fedor) {
+	public void setComponente(Fedor fedor) {
 		this.fedor = fedor;
 		componentesNome[2] = "f";
-		return true;
 	}
 
-	public boolean setComponente(Brisa brisa) {
+	public void setComponente(Brisa brisa) {
 		this.brisa = brisa;
 		componentesNome[3] = "b";
-		return true;
 	}
 
 
