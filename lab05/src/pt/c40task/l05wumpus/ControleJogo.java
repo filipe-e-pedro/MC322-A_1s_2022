@@ -69,7 +69,14 @@ public class ControleJogo {
         score -= 15;
 
         if(heroi.getFlechaEquipada()){
-            score += heroi.atiraFlecha(destino);
+            int scoreFlecha = heroi.atiraFlecha(destino);
+            score += scoreFlecha;
+            if (scoreFlecha == 400) {
+                imprimeMensagem("Você acertou o Wumpus!");
+            }
+            else{
+                imprimeMensagem("Você errou o Wumpus.")
+            }
         }
 
         if(destino.checaBuraco() || destino.checaWumpus()){
