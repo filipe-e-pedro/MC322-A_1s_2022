@@ -4,36 +4,24 @@ public class Caverna {
 	private Sala salas[][] = new Sala[4][4];
 	
 	public void setSala(int posicao_x, int posicao_y, Sala novaSala) {
-		this.salas[posicao_x][posicao_y] = novaSala;
+		this.salas[posicao_y][posicao_x] = novaSala;
 	}
 
 	public Sala getSala(int posicao_x, int posicao_y) {
-		return salas[posicao_x][posicao_y];
+		return salas[posicao_y][posicao_x];
 	}
 	
 	public String[][] getCaverna(){
 		String[][] matriz = new String[4][4];
-		Componente compMaiorPrioridade;
-		
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 4; j++) {
 				if(salas[i][j].foiVisitada()) {
-					compMaiorPrioridade = salas[i][j].compMaisImportante();
-					if (compMaiorPrioridade == null)
-						matriz[i][j] = "#";
-					else
-						matriz[i][j] = compMaiorPrioridade.getNome();
+					matriz[i][j] = salas[i][j].compMaisImportante();
 				}
 				else
-					matriz[i][j] = "-";
+					matriz[i][j] = salas[i][j].compMaisImportante();
 			}
 		}
 		return matriz;
-	}
-
-	public boolean checaSala(int posicao_x, int posicao_y){
-		if (posicao_x < 0 || posicao_x > 3 || posicao_y < 0 || posicao_y > 3)
-			return true;
-		return false;
 	}
 }
