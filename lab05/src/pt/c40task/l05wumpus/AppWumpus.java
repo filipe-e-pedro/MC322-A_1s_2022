@@ -1,79 +1,140 @@
 package pt.c40task.l05wumpus;
 
-public class AppWumpus {
+public class ControleJogo {
+    private Heroi heroi;
+    private Caverna mapa;
+    private Toolkit tk;
+    private String player = "Sting";
+    private int score = 0;
+    private boolean continua = true;
 
-   public static void main(String[] args) {
-      AppWumpus.executaJogo(
-            (args.length > 0) ? args[0] : null,
-            (args.length > 1) ? args[1] : null,
-            (args.length > 2) ? args[2] : null);
-   }
-   
-   public static void executaJogo(String arquivoCaverna, String arquivoSaida,
-                                  String arquivoMovimentos) {
-      Toolkit tk = Toolkit.start(arquivoCaverna, arquivoSaida, arquivoMovimentos);
-<<<<<<< Updated upstream
-=======
-      Scanner keyboard = new Scanner(System.in);
+    public ControleJogo(Heroi heroi, Caverna mapa, Toolkit tk){
+        this.heroi = heroi;
+        this.mapa = mapa;
+        this.tk = tk;
+    }
 
-      MontadorCaverna montador = new MontadorCaverna(tk);
-      Caverna mapa = montador.geraMapa();
-      Heroi heroi = montador.getHeroi();
-      ControleJogo ctrl = new ControleJogo(heroi, mapa, tk);
+    public void setPlayer(String player){
+        this.player = player;
+    }
 
-      String movements = null;
-      String tecla;
-      String player = "";
+    public void recebeComando(String tecla){
+        int posicao_x = heroi.getPosicao()[0];
+        int posicao_y = heroi.getPosicao()[1];
 
-      boolean endMovements = false;
+        Sala salaAtual = mapa.getSala(posicao_x, posicao_y);
 
-      if (tk.getMoveStr() != null){
-         movements = tk.retrieveMovements();
-      }
-      else {
-    	  System.out.println("Digite o nome do player: ");
-    	  player = keyboard.nextLine();
-    	  ctrl.setPlayer(player);
-      }
-      
-      ctrl.imprimeCaverna(player, 0);
->>>>>>> Stashed changes
-      
-      String cave[][] = tk.retrieveCave();
-      System.out.println("=== Caverna");
-      for (int l = 0; l < cave.length; l++) {
-         for (int c = 0; c < cave[l].length; c++)
-            System.out.print(cave[l][c] + ((c < cave[l].length-1) ? ", " : ""));
-         System.out.println();
-      }
-      
-      String movements = tk.retrieveMovements();
-      System.out.println("=== Movimentos");
-      System.out.println(movements);
-      
-      System.out.println("=== Caverna Intermediaria");
-      char partialCave[][] = {
-         {'#', '#', 'b', '-'},
-         {'#', 'b', '-', '-'},
-         {'b', '-', '-', '-'},
-         {'p', '-', '-', '-'}
-      };
-      int score = -120;
-      char status = 'x'; // 'w' para venceu; 'n' para perdeu; 'x' intermediárias
-      tk.writeBoard(partialCave, score, status);
+        if(tecla.equalsIgnoreCase("w") && posicao_x > 0){
+            move(posicao_x-1, posicao_y, salaAtual);
+        }
+        else if(tecla.equalsIgnoreCase("s") && posicao_x < 3){
+            move(posicao_x+1, posicao_y, salaAtual);
+        }
+        else if(tecla.equalsIgnoreCase("d") && posicao_y < 3){
+            move(posicao_x, posicao_y+1, salaAtual);
+        }
+        else if(tecla.equalsIgnoreCase("a") && posicao_y > 0){
+            move(posicao_x, posicao_y-1, salaAtual);
+        }
+        else if(tecla.equalsIgnoreCase("k")){
+            if(!heroi.getPossuiFlecha()){
+            	imprimeMensagem("Sem flechas. Digite outro comando");
+            }
+            else{
+            	if(heroi.getFlechaEquipada()){
+                    imprimeMensagem("Sua flecha ja esta equipada. Digite outro comando");
+                }
+            	else {
+	                heroi.equiparFlecha();
+	                imprimeMensagem("Voce equipou a flecha.");
+            	}
+            }
+        }
+        else if(tecla.equalsIgnoreCase("c")){
+            if(mapa.getSala(posicao_x, posicao_y).compMaisImportante() == "O"){
+                heroi.pegaOuro();
+                salaAtual.removeOuro();
+                imprimeMensagem("Voce pegou o ouro.");
+            }
+            else
+                imprimeMensagem("Sem ouro na sala. Digite outro comando.");
+        }
+        else if(tecla.equalsIgnoreCase("q")){
+            sai();
+        }
+    }
 
-      System.out.println("=== Última Caverna");
-      char finalCave[][] = {
-         {'#', '#', 'b', '-'},
-         {'#', 'b', '#', 'f'},
-         {'b', '-', '-', 'w'},
-         {'#', '-', '-', '-'}
-      };
-      score = -1210;
-      status = 'n'; // 'w' para venceu; 'n' para perdeu; 'x' intermediárias
-      tk.writeBoard(finalCave, score, status);
-      
-      tk.stop();
-   }
+    public void move(int destino_x, int destino_y, Sala salaAtual){
+        Sala destino = mapa.getSala(destino_x, destino_y);
+        score -= 15;
 
+        if(heroi.getFlechaEquipada()){
+            score += heroi.atiraFlecha(destino);
+        }
+
+        if(destino.checaBuraco() || destino.checaWumpus()){
+            score -= 1000;
+            perde();
+        }
+
+        else{
+            salaAtual.removeHeroi();
+            heroi.setPosicao(destino_x, destino_y);
+            destino.adicionaHeroi(heroi);
+            destino.revelaSala();
+            imprimeCaverna(player, score);
+            tk.writeBoard(mapa.getCaverna(), score, 'x');
+            if (!condicaoGanhar())
+                imprimeMensagem(destino.mensagemAuxilio());
+        }
+    }
+
+    public void imprimeCaverna(String player, int score){
+        String[][] matriz = mapa.getCaverna();
+        for (int i = 0; i < 4; i++){
+            System.out.print("\t");
+            for (int j = 0; j < 4; j++){
+                System.out.print(" " + matriz[i][j]);
+            }
+            System.out.print("\n");
+        }
+        System.out.println("Player: " + player);
+        System.out.println("Score: " + score);
+    }
+
+    private void imprimeMensagem(String mensagem){
+        System.out.println(mensagem);
+    }
+
+    public void perde(){
+        imprimeCaverna(player, score);
+        imprimeMensagem("Voce perdeu =(...");
+        tk.writeBoard(mapa.getCaverna(), score, 'n');
+        continua = false;
+    }
+
+    public void sai(){
+        imprimeMensagem("Volte sempre !");
+        continua = false;
+    }
+
+    public void vence(){
+        score += 1000;
+        imprimeCaverna(player, score);
+        imprimeMensagem("Voce ganhou =D !!!");
+        tk.writeBoard(mapa.getCaverna(), score, 'w');
+        continua = false;
+    }
+
+    public boolean condicaoGanhar(){
+        if(heroi.getPosicao()[0] == 0 && heroi.getPosicao()[1] == 0 && heroi.getOuro()){
+            vence();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean getContinua(){
+        return continua;
+    }
 }
