@@ -74,6 +74,8 @@ public class ControleJogo {
 
         if(destino.checaBuraco() || destino.checaWumpus()){
             score -= 1000;
+            salaAtual.removeHeroi();
+            destino.revelaSala();
             perde();
         }
 
