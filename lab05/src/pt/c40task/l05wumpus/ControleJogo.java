@@ -19,25 +19,40 @@ public class ControleJogo {
 
         Sala salaAtual = mapa.getSala(posicao_x, posicao_y);
 
-        if(tecla.equalsIgnoreCase("w") && mapa.checaSala(posicao_x, posicao_y+1)){
-            move(posicao_x, posicao_y+1, salaAtual);
-        }
-        else if(tecla.equalsIgnoreCase("s") && mapa.checaSala(posicao_x, posicao_y-1)){
-            move(posicao_x, posicao_y-1, salaAtual);
-        }
-        else if(tecla.equalsIgnoreCase("d") && mapa.checaSala(posicao_x+1, posicao_y)){
-            move(posicao_x+1, posicao_y, salaAtual);
-        }
-        else if(tecla.equalsIgnoreCase("a") && mapa.checaSala(posicao_x-1, posicao_y)){
+        if(tecla.equalsIgnoreCase("w") && posicao_x > 0){
             move(posicao_x-1, posicao_y, salaAtual);
         }
+        else if(tecla.equalsIgnoreCase("s") && posicao_x < 3){
+            move(posicao_x+1, posicao_y, salaAtual);
+        }
+        else if(tecla.equalsIgnoreCase("d") && posicao_y < 3){
+            move(posicao_x, posicao_y+1, salaAtual);
+        }
+        else if(tecla.equalsIgnoreCase("a") && posicao_y > 0){
+            move(posicao_x, posicao_y-1, salaAtual);
+        }
         else if(tecla.equalsIgnoreCase("k")){
+<<<<<<< Updated upstream
             heroi.equiparFlecha();
             jogando();
             imprimeMensagem("Voce equipou a flecha.");
+=======
+            if(!heroi.getPossuiFlecha()){
+            	imprimeMensagem("Sem flechas. Digite outro comando");
+            }
+            else{
+            	if(heroi.getFlechaEquipada()){
+                    imprimeMensagem("Sua flecha ja esta equipada. Digite outro comando");
+                }
+            	else {
+	                heroi.equiparFlecha();
+	                imprimeMensagem("Voce equipou a flecha.");
+            	}
+            }
+>>>>>>> Stashed changes
         }
         else if(tecla.equalsIgnoreCase("c")){
-            if(mapa.getSala(posicao_x, posicao_y).compMaisImportante().getNome() == "O"){
+            if(mapa.getSala(posicao_x, posicao_y).compMaisImportante() == "O"){
                 heroi.pegaOuro();
                 salaAtual.removeOuro();
                 jogando();
@@ -72,11 +87,15 @@ public class ControleJogo {
         }
     }
 
+<<<<<<< Updated upstream
     private void imprimeCaverna(){
+=======
+    public void imprimeCaverna(String player, int score){
+>>>>>>> Stashed changes
         String[][] matriz = mapa.getCaverna();
         for (int i = 0; i < 4; i++){
             System.out.print("\t");
-            for (int j = 0; j < 4; ){
+            for (int j = 0; j < 4; j++){
                 System.out.print(" " + matriz[i][j]);
             }
             System.out.print("\n");

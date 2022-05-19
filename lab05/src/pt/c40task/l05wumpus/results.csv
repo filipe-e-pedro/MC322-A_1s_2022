@@ -1,13 +1,20 @@
-##b-
-#b--
-b---
-p---
-score: -120
+#PbB
+#b#f
+bBfW
+#bOf
+score: -15
 status: x
 =====
-##b-
+##PB
 #b#f
-b--w
-#---
-score: -1210
+bBfW
+#bOf
+score: -30
+status: x
+=====
+##PB
+#b#f
+bBfW
+#bOf
+score: -1045
 status: n

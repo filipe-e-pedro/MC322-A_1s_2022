@@ -12,6 +12,32 @@ public class AppWumpus {
    public static void executaJogo(String arquivoCaverna, String arquivoSaida,
                                   String arquivoMovimentos) {
       Toolkit tk = Toolkit.start(arquivoCaverna, arquivoSaida, arquivoMovimentos);
+<<<<<<< Updated upstream
+=======
+      Scanner keyboard = new Scanner(System.in);
+
+      MontadorCaverna montador = new MontadorCaverna(tk);
+      Caverna mapa = montador.geraMapa();
+      Heroi heroi = montador.getHeroi();
+      ControleJogo ctrl = new ControleJogo(heroi, mapa, tk);
+
+      String movements = null;
+      String tecla;
+      String player = "";
+
+      boolean endMovements = false;
+
+      if (tk.getMoveStr() != null){
+         movements = tk.retrieveMovements();
+      }
+      else {
+    	  System.out.println("Digite o nome do player: ");
+    	  player = keyboard.nextLine();
+    	  ctrl.setPlayer(player);
+      }
+      
+      ctrl.imprimeCaverna(player, 0);
+>>>>>>> Stashed changes
       
       String cave[][] = tk.retrieveCave();
       System.out.println("=== Caverna");

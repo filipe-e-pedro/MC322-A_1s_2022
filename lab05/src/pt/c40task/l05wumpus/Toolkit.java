@@ -95,7 +95,8 @@ public class Toolkit {
       try {
          caveStr.close();
          outputStr.close();
-         moveStr.close();
+         if(getMoveStr()!=null)
+        	   moveStr.close();
       } catch(Exception erro){
          erro.printStackTrace();
       }

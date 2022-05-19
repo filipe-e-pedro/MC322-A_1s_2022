@@ -2,6 +2,7 @@ package pt.c40task.l05wumpus;
 
 public class Sala {
 	private Componente componentes[] = new Componente[4];
+	private String[] componentesNome = new String[5];
 	private int posicao_x, posicao_y;
 	private boolean revelada = false;
 	
@@ -10,24 +11,37 @@ public class Sala {
 		this.posicao_y = posicao_y;
 		for(int i = 0; i < 4; i++) {
 			this.componentes[i] = null;
+			this.componentesNome[i] = null;
 		}
-		if(componente.equalsIgnoreCase("W")) 
+		this.componentesNome[4] = "#";
+		if(componente.equalsIgnoreCase("W")){
 			this.componentes[0] = new Wumpus(posicao_x, posicao_y, mapa);
-		else if(componente.equalsIgnoreCase("O")) 
+			this.componentesNome[0] = "W";
+		}
+		else if(componente.equalsIgnoreCase("O")){
 			this.componentes[0] = new Ouro(posicao_x, posicao_y, mapa);
-		else if(componente.equalsIgnoreCase("B")) 
+			this.componentesNome[0] = "O";
+		}
+		else if(componente.equalsIgnoreCase("B")){
 			this.componentes[0] = new Buraco(posicao_x, posicao_y, mapa);
+<<<<<<< Updated upstream
 		else if(componente.equalsIgnoreCase("P")) 
 			this.componentes[1] = new Heroi(posicao_x, posicao_y, mapa);
+=======
+			this.componentesNome[0] = "B";
+		}
+		else if(componente.equalsIgnoreCase("P"))
+			this.componentesNome[1] = "P";
+>>>>>>> Stashed changes
 	}
 
-	public Componente compMaisImportante() {
+	public String compMaisImportante() {
 		for (int i = 0; i < 4; i++) {
-			if (componentes[i] != null) {
-				return componentes[i];
+			if (componentesNome[i] != null) {
+				return componentesNome[i];
 			}
 		}
-		return null;
+		return componentesNome[4];
 	}
 	
 	public void revelaSala() {
@@ -40,17 +54,18 @@ public class Sala {
 	
 	public void setComponente(Componente comp) {
 		componentes[comp.getPrioridade()] = comp;
+		componentesNome[comp.getPrioridade()] = comp.getNome();
 	}
 
 	public boolean checaBuraco(){
-		if(compMaisImportante().getNome() == "B"){
+		if(compMaisImportante() == "B"){
 			return true;
 		}
 		return false;
 	}
 
 	public boolean checaWumpus(){
-		if(compMaisImportante().getNome() == "W"){
+		if(compMaisImportante() == "W"){
 			return true;
 		}
 		return false;
@@ -58,14 +73,17 @@ public class Sala {
 
 	public void removeOuro(){
 		componentes[0] = null;
+		componentesNome[0] = null;
 	}
 
 	public void removeHeroi() {
 		componentes[1] = null;
+		componentesNome[1] = null;
 	}
 
 	public void adicionaHeroi(Heroi heroi) {
 		componentes[1] = heroi;
+		componentesNome[1] = "P";
 	}
 	
 	public int[] getPosicao() {
@@ -77,6 +95,7 @@ public class Sala {
 
 	public void removeWumpus() {
 		componentes[0] = null;
+		componentesNome[0] = null;
 	}
 
 }
