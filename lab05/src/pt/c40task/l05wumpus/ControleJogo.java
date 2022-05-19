@@ -62,6 +62,9 @@ public class ControleJogo {
         else if(tecla.equalsIgnoreCase("q")){
             sai();
         }
+        else{
+            System.out.println("Comando invalido. Por favor digite outro comando.");
+        }
     }
 
     public void move(int destino_x, int destino_y, Sala salaAtual){
@@ -84,9 +87,14 @@ public class ControleJogo {
             heroi.setPosicao(destino_x, destino_y);
             destino.adicionaHeroi(heroi);
             destino.revelaSala();
-            imprimeCaverna(player, score);
-            tk.writeBoard(mapa.getCaverna(), score, 'x');
-            if (!condicaoGanhar())
+            if(condicaoGanhar()){
+                vence();
+            }
+            else{
+                imprimeCaverna(player, score);
+                tk.writeBoard(mapa.getCaverna(), score, 'x');
+            }
+            if (continua)
                 imprimeMensagem(destino.mensagemAuxilio());
         }
     }
@@ -130,7 +138,6 @@ public class ControleJogo {
 
     public boolean condicaoGanhar(){
         if(heroi.getPosicao()[0] == 0 && heroi.getPosicao()[1] == 0 && heroi.getOuro()){
-            vence();
             return true;
         }
         return false;
