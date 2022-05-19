@@ -36,7 +36,7 @@ public class Heroi extends Componente{
 		Random rand = new Random();
 		possuiFlecha = false;
 		flechaEquipada = false;
-		if (destino.compMaisImportante().getNome() == "W") {
+		if (destino.compMaisImportante() == "W") {
 			int acerto = rand.nextInt(2);
 			if (acerto == 1) {
 				destino.removeWumpus();

@@ -9,7 +9,7 @@ import java.util.Vector;
 
 public class Toolkit {
    public static String DIRETORIO = System.getProperty("user.dir") +
-		                            "/src/pt/c40task/l05wumpus/";
+		                            "/lab05/src/pt/c40task/l05wumpus/";
    
    private static Toolkit tk;
    
@@ -95,7 +95,8 @@ public class Toolkit {
       try {
          caveStr.close();
          outputStr.close();
-         moveStr.close();
+         if(getMoveStr()!=null)
+        	 moveStr.close();
       } catch(Exception erro){
          erro.printStackTrace();
       }

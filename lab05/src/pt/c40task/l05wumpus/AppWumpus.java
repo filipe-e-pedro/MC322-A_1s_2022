@@ -22,12 +22,24 @@ public class AppWumpus {
 
       String movements = null;
       String tecla;
+      String player = "";
 
       boolean endMovements = false;
 
       if (tk.getMoveStr() != null){
          movements = tk.retrieveMovements();
       }
+      else {
+    	  System.out.println("Digite o nome do player: ");
+    	  player = keyboard.nextLine();
+      }
+      
+      if (player == "") {
+    	  player = "Sting";
+      }
+      ctrl.setPlayer(player);
+      
+      ctrl.imprimeCaverna(player, 0);
       
       while(ctrl.getContinua() && !endMovements){
          if(movements != null){
