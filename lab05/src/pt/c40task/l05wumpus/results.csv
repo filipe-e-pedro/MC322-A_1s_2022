@@ -1,90 +1,146 @@
-#PbB
-#b#f
-bBfW
-#bOf
+#Pb#
+#bBb
+b#fO
+BfWf
 score: -15
 status: x
 =====
-##PB
-#b#f
-bBfW
-#bOf
+##b#
+#PBb
+b#fO
+BfWf
 score: -30
 status: x
 =====
-##bB
-#bPf
-bBfW
-#bOf
+##b#
+#bBb
+bPfO
+BfWf
 score: -45
 status: x
 =====
-##bB
-#b#P
-bBfW
-#bOf
+##b#
+#bBb
+b#PO
+BfWf
 score: -60
 status: x
 =====
-##bB
-#b#f
-bBfP
-#bOf
-score: 325
+##b#
+#bBb
+bPfO
+BfWf
+score: -75
 status: x
 =====
-##bB
-#b#f
-bBP#
-#bOf
-score: 310
+##b#
+#PBb
+b#fO
+BfWf
+score: -90
 status: x
 =====
-##bB
-#b#f
-bBf#
-#bOf
-score: 295
+##b#
+PbBb
+b#fO
+BfWf
+score: -105
 status: x
 =====
-##bB
-#b#f
-bBP#
-#b#f
-score: 280
+##b#
+#bBb
+P#fO
+BfWf
+score: -120
 status: x
 =====
-##bB
-#bPf
-bBf#
-#b#f
-score: 265
+##b#
+#bBb
+bPfO
+BfWf
+score: -135
 status: x
 =====
-##PB
-#b#f
-bBf#
-#b#f
-score: 250
+##b#
+#PBb
+b#fO
+BfWf
+score: -150
 status: x
 =====
-#PbB
-#b#f
-bBf#
-#b#f
-score: 235
+#Pb#
+#bBb
+b#fO
+BfWf
+score: -165
 status: x
 =====
-P#bB
-#b#f
-bBf#
-#b#f
-score: 220
+##P#
+#bBb
+b#fO
+BfWf
+score: -180
 status: x
 =====
-P#bB
-#b#f
-bBf#
-#b#f
-score: 1220
-status: w
+##bP
+#bBb
+b#fO
+BfWf
+score: -195
+status: x
+=====
+##b#
+#bBP
+b#fO
+BfWf
+score: -210
+status: x
+=====
+##bP
+#bBb
+b#fO
+BfWf
+score: -225
+status: x
+=====
+##P#
+#bBb
+b#fO
+BfWf
+score: -240
+status: x
+=====
+#Pb#
+#bBb
+b#fO
+BfWf
+score: -255
+status: x
+=====
+##b#
+#PBb
+b#fO
+BfWf
+score: -270
+status: x
+=====
+##b#
+#bBb
+bPfO
+BfWf
+score: -285
+status: x
+=====
+##b#
+#bBb
+b#PO
+BfWf
+score: -300
+status: x
+=====
+##b#
+#bBb
+b#PO
+BfWf
+score: -1315
+status: n

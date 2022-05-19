@@ -24,8 +24,8 @@ public class MontadorCaverna {
 				novaSala.revelaSala();
 				mapa.setSala(0, 0, novaSala);
 				for(int i = 1; i < 16; i++) {
-					posicao_x = i/4;
-					posicao_y = i%4;
+					posicao_x = i%4;
+					posicao_y = i/4;
 					novaSala = new Sala(posicao_x, posicao_y, cave[i][2], mapa);
 					mapa.setSala(posicao_x, posicao_y, novaSala);
 				}
