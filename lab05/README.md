@@ -2,14 +2,16 @@
 
 # Destaque codigo
 
-public void setComponente(Wumpus wumpus) { <br />
-    this.wumpus = wumpus; <br />
-    componentesNome[0] = "W"; <br />
-} <br />
-public void setComponente(Ouro ouro) { <br />
-    this.ouro = ouro; <br />
-    componentesNome[0] = "O"; <br />
-} <br />
+```java
+public void setComponente(Wumpus wumpus) { 
+    this.wumpus = wumpus; 
+    componentesNome[0] = "W"; 
+} 
+public void setComponente(Ouro ouro) { 
+    this.ouro = ouro; 
+    componentesNome[0] = "O"; 
+} 
+```
 
 Neste lab a Sala foi implementada de maneira a facilitar a criação de novos componentes. Para isso, criamos atributos na Sala que representam cada componente e implementamos o método setComponente por sobrecarga, de maneira que independente do componente passado, ele automaticamente conecta a sala ao componente de maneira correta.
 
