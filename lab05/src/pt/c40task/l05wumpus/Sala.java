@@ -6,28 +6,11 @@ public class Sala {
 	private int posicao_x, posicao_y;
 	private boolean revelada = false;
 	
-	public Sala(int posicao_x, int posicao_y, String componente, Caverna mapa){
+	public Sala(int posicao_x, int posicao_y, Componente[] componentes, String[] componentesNome){
 		this.posicao_x = posicao_x;
 		this.posicao_y = posicao_y;
-		for(int i = 0; i < 4; i++) {
-			this.componentes[i] = null;
-			this.componentesNome[i] = null;
-		}
-		this.componentesNome[4] = "#";
-		if(componente.equalsIgnoreCase("W")){
-			this.componentes[0] = new Wumpus(posicao_x, posicao_y, mapa);
-			this.componentesNome[0] = "W";
-		}
-		else if(componente.equalsIgnoreCase("O")){
-			this.componentes[0] = new Ouro(posicao_x, posicao_y, mapa);
-			this.componentesNome[0] = "O";
-		}
-		else if(componente.equalsIgnoreCase("B")){
-			this.componentes[0] = new Buraco(posicao_x, posicao_y, mapa);
-			this.componentesNome[0] = "B";
-		}
-		else if(componente.equalsIgnoreCase("P"))
-			this.componentesNome[1] = "P";
+		this.componentes = componentes;
+		this.componentesNome = componentesNome;
 	}
 
 	public String compMaisImportante() {

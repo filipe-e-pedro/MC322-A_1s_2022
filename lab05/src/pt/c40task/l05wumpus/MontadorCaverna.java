@@ -24,26 +24,56 @@ public class MontadorCaverna {
 				System.out.println("Heroi nao esta na primeira sala");
 				noError = false;
 			}
-			else{
+			/*else{
 				heroi = new Heroi(0, 0, mapa);
-				novaSala = new Sala(0, 0, "P", mapa);
+				componentes[1] = heroi;
+				componentesNome[1] = "P";
+				novaSala = new Sala(0, 0, componentes, componentesNome, mapa);
 				novaSala.revelaSala();
 				mapa.setSala(0, 0, novaSala);
+				componentes[1] = null;
+				componentesNome[1] = null;
 				contadorHeroi++;
-			}
-			for(int i = contadorHeroi; i < 16; i++) {
+			}*/
+			for(int i = 0; i < 16; i++) {
+				Componente[] componentes = new Componente[4];
+				String[] componentesNome = new String[5];
+				componentesNome[4] = "#";
+				for (int j = 0; j < 4; j++){
+					componentes[j] = null;
+					componentesNome[j] = null;
+				}
 				posicao_x = i%4;
 				posicao_y = i/4;
-				novaSala = new Sala(posicao_x, posicao_y, cave[i][2], mapa);
-				mapa.setSala(posicao_x, posicao_y, novaSala);
-				if(novaSala.checaBuraco())
-					contadorBuraco ++;
-				if(novaSala.checaOuro())
-					contadorOuro ++;
-				if(novaSala.checaWumpus())
+				if(cave[i][2].equalsIgnoreCase("W")){
+					Wumpus wumpus = new Wumpus(posicao_x, posicao_y, mapa);
+					componentes[0] = wumpus;
+					componentesNome[0] = "W";
 					contadorWumpus ++;
-				if(novaSala.checaHeroi())
-					contadorHeroi ++;
+				}
+				else if(cave[i][2].equalsIgnoreCase("O")){
+					Ouro ouro = new Ouro(posicao_x, posicao_y, mapa);
+					componentes[0] = ouro;
+					componentesNome[0] = "O";
+					contadorOuro ++;
+				}
+				else if(cave[i][2].equalsIgnoreCase("B")){
+					Buraco buraco = new Buraco(posicao_x, posicao_y, mapa);
+					componentes[0] = buraco;
+					componentesNome[0] = "B";
+					contadorBuraco ++;
+				}
+				else if(cave[i][2].equalsIgnoreCase("P")){
+					heroi = new Heroi(posicao_x, posicao_y, mapa);
+					componentes[1] = heroi;
+					componentesNome[1] = "P";
+					contadorHeroi++;
+				}
+				novaSala = new Sala(posicao_x, posicao_y, componentes, componentesNome);
+				mapa.setSala(posicao_x, posicao_y, novaSala);
+				if(novaSala.checaHeroi()){
+					novaSala.revelaSala();
+				}
 			}
 		}
 		if(contadorBuraco != 2 && contadorBuraco != 3){
