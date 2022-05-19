@@ -35,10 +35,13 @@ public class Toolkit {
                new FileReader(caveFile));
          tk.outputStr = new PrintWriter(
                new FileWriter(outputFile));
-         tk.moveStr = new BufferedReader(
-               new FileReader(moveFile));
       } catch(IOException erro){
          erro.printStackTrace();
+      }
+      try{
+         tk.moveStr = new BufferedReader(new FileReader(moveFile));
+      } catch(IOException erro){
+         System.out.println("Nenhum arquivo movements.csv encontrado. Os movimentos deverao ser digitados manualmente.");
       }
       return tk;
    }

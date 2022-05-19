@@ -30,12 +30,13 @@ public class AppWumpus {
          movements = tk.retrieveMovements();
       }
       else {
-    	  System.out.println("Digite o nome do player: ");
-    	  player = keyboard.nextLine();
+         System.out.print("Digite o nome do player: ");
+         player = keyboard.nextLine();
       }
       
       if (player == "") {
-    	  player = "Sting";
+    	   player = "Sting";
+         System.out.println("Nome do player nao informado. Nome automatico: Sting\n");
       }
       ctrl.setPlayer(player);
       
