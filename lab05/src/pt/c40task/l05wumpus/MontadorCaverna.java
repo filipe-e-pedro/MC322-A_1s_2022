@@ -39,8 +39,8 @@ public class MontadorCaverna {
 		int posicao_y = 0;
 		Componente comp;
 		for (int i = 0; i < 16; i++) {
-			posicao_x = i/4;
-			posicao_y = i%4;
+			posicao_x = i%4;
+			posicao_y = i/4;
 			s = mapa.getSala(posicao_x, posicao_y);
 			if (s.compMaisImportante() == "B") {
 				if (posicao_x < 3) {
