@@ -24,56 +24,34 @@ public class MontadorCaverna {
 				System.out.println("Heroi nao esta na primeira sala");
 				noError = false;
 			}
-			/*else{
-				heroi = new Heroi(0, 0, mapa);
-				componentes[1] = heroi;
-				componentesNome[1] = "P";
-				novaSala = new Sala(0, 0, componentes, componentesNome, mapa);
-				novaSala.revelaSala();
-				mapa.setSala(0, 0, novaSala);
-				componentes[1] = null;
-				componentesNome[1] = null;
-				contadorHeroi++;
-			}*/
 			for(int i = 0; i < 16; i++) {
-				Componente[] componentes = new Componente[4];
-				String[] componentesNome = new String[5];
-				componentesNome[4] = "#";
 				for (int j = 0; j < 4; j++){
-					componentes[j] = null;
-					componentesNome[j] = null;
 				}
 				posicao_x = i%4;
 				posicao_y = i/4;
+				novaSala = new Sala(posicao_x, posicao_y);
 				if(cave[i][2].equalsIgnoreCase("W")){
 					Wumpus wumpus = new Wumpus(posicao_x, posicao_y, mapa);
-					componentes[0] = wumpus;
-					componentesNome[0] = "W";
+					novaSala.setComponente(wumpus);
 					contadorWumpus ++;
 				}
 				else if(cave[i][2].equalsIgnoreCase("O")){
 					Ouro ouro = new Ouro(posicao_x, posicao_y, mapa);
-					componentes[0] = ouro;
-					componentesNome[0] = "O";
+					novaSala.setComponente(ouro);
 					contadorOuro ++;
 				}
 				else if(cave[i][2].equalsIgnoreCase("B")){
 					Buraco buraco = new Buraco(posicao_x, posicao_y, mapa);
-					componentes[0] = buraco;
-					componentesNome[0] = "B";
+					novaSala.setComponente(buraco);
 					contadorBuraco ++;
 				}
 				else if(cave[i][2].equalsIgnoreCase("P")){
 					heroi = new Heroi(posicao_x, posicao_y, mapa);
-					componentes[1] = heroi;
-					componentesNome[1] = "P";
+					novaSala.setComponente(heroi);
+					novaSala.revelaSala();
 					contadorHeroi++;
 				}
-				novaSala = new Sala(posicao_x, posicao_y, componentes, componentesNome);
 				mapa.setSala(posicao_x, posicao_y, novaSala);
-				if(novaSala.checaHeroi()){
-					novaSala.revelaSala();
-				}
 			}
 		}
 		if(contadorBuraco != 2 && contadorBuraco != 3){
@@ -99,47 +77,14 @@ public class MontadorCaverna {
 		Sala s;
 		int posicao_x = 0;
 		int posicao_y = 0;
-		Componente comp;
 		for (int i = 0; i < 16; i++) {
 			posicao_x = i%4;
 			posicao_y = i/4;
 			s = mapa.getSala(posicao_x, posicao_y);
-			if (s.compMaisImportante() == "B") {
-				if (posicao_x < 3) {
-					comp = new Brisa(posicao_x + 1, posicao_y, mapa);
-					mapa.getSala(posicao_x + 1, posicao_y).setComponente(comp);
-				}
-				if (posicao_x > 0) {
-					comp = new Brisa(posicao_x - 1, posicao_y, mapa);
-					mapa.getSala(posicao_x - 1, posicao_y).setComponente(comp);
-				}
-				if (posicao_y < 3) {
-					comp = new Brisa(posicao_x, posicao_y + 1, mapa);
-					mapa.getSala(posicao_x, posicao_y + 1).setComponente(comp);
-				}
-				if (posicao_y > 0) {
-					comp = new Brisa(posicao_x, posicao_y - 1, mapa);
-					mapa.getSala(posicao_x, posicao_y - 1).setComponente(comp);
-				}
-			}
-			else if (s.compMaisImportante() == "W") {
-				if (posicao_x < 3) {
-					comp = new Fedor(posicao_x + 1, posicao_y, mapa);
-					mapa.getSala(posicao_x + 1, posicao_y).setComponente(comp);
-				}
-				if (posicao_x > 0) {
-					comp = new Fedor(posicao_x - 1, posicao_y, mapa);
-					mapa.getSala(posicao_x - 1, posicao_y).setComponente(comp);
-				}
-				if (posicao_y < 3) {
-					comp = new Fedor(posicao_x, posicao_y + 1, mapa);
-					mapa.getSala(posicao_x, posicao_y + 1).setComponente(comp);
-				}
-				if (posicao_y > 0) {
-					comp = new Fedor(posicao_x, posicao_y - 1, mapa);
-					mapa.getSala(posicao_x, posicao_y - 1).setComponente(comp);
-				}
-			}
+			if(s.checaWumpus())
+				s.getWumpus().geraFedor();
+			if(s.checaBuraco())
+				s.getBuraco().geraBrisa();
 		}
 	}
 	

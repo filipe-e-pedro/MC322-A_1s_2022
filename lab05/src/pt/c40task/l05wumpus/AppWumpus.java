@@ -41,8 +41,8 @@ public class AppWumpus {
          }
          
          if (player == "") {
-            player = "Sting";
-            System.out.println("Nome do player nao informado. Nome automatico: Sting\n");
+            player = "Alcebiades";
+            System.out.println("Nome do player nao informado. Nome automatico: Alcebiades\n");
          }
          ctrl.setPlayer(player);
          

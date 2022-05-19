@@ -4,7 +4,7 @@ public class ControleJogo {
     private Heroi heroi;
     private Caverna mapa;
     private Toolkit tk;
-    private String player = "Sting";
+    private String player = "Alcebiades";
     private int score = 0;
     private boolean continua = true;
 
