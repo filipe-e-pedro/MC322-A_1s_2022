@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 public class Toolkit {
-    public static String DIRETORIO = System.getProperty("user.dir") + "/projeto/src/connectricity/maps_folder/"; /*+ "/src/connectricity/maps_folder/"; */
+    public static String DIRETORIO = System.getProperty("user.dir") + "/src/connectricity/maps_folder/"; /*+ "/src/connectricity/maps_folder/"; */
 
     private BufferedReader retrieveFile(String fileName){
         BufferedReader mapFile = null;

@@ -1,25 +1,25 @@
 package connectricity;
 
 public abstract class Entity {
-	protected int posicao_x, posicao_y;
-	protected Map mapa;
+	protected int xIndex, yIndex;
+	/*protected Map mapa; */
 	
-	public Entity (int posicao_x, int posicao_y, Map mapa){
-		this.posicao_x = posicao_x;
-		this.posicao_y = posicao_y;
-		this.mapa = mapa;
+	public Entity (int xIndex, int yIndex /*,Map mapa*/){
+		this.xIndex = xIndex;
+		this.yIndex = yIndex;
+		// this.mapa = mapa;
 	}
 	
 	public int[] getPosicao() {
 		int posicao[] = new int[2];
-		posicao[0] = posicao_x;
-		posicao[1] = posicao_y;
+		posicao[0] = xIndex;
+		posicao[1] = yIndex;
 		return posicao;
 	}
 
-    public void setPosicao(int posicao_x, int posicao_y) {
-        this.posicao_x = posicao_x;
-        this.posicao_y = posicao_y;
+    public void setPosicao(int xIndex, int yIndex) {
+        this.xIndex = xIndex;
+        this.yIndex = yIndex;
     }
 
     public abstract String getName();
