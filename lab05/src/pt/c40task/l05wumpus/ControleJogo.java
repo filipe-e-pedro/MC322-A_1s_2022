@@ -24,16 +24,16 @@ public class ControleJogo {
 
         Sala salaAtual = mapa.getSala(posicao_x, posicao_y);
 
-        if(tecla.equalsIgnoreCase("w") && posicao_x > 0){
+        if(tecla.equalsIgnoreCase("a") && posicao_x > 0){
             move(posicao_x-1, posicao_y, salaAtual);
         }
-        else if(tecla.equalsIgnoreCase("s") && posicao_x < 3){
+        else if(tecla.equalsIgnoreCase("d") && posicao_x < 3){
             move(posicao_x+1, posicao_y, salaAtual);
         }
-        else if(tecla.equalsIgnoreCase("d") && posicao_y < 3){
+        else if(tecla.equalsIgnoreCase("s") && posicao_y < 3){
             move(posicao_x, posicao_y+1, salaAtual);
         }
-        else if(tecla.equalsIgnoreCase("a") && posicao_y > 0){
+        else if(tecla.equalsIgnoreCase("w") && posicao_y > 0){
             move(posicao_x, posicao_y-1, salaAtual);
         }
         else if(tecla.equalsIgnoreCase("k")){
@@ -62,6 +62,9 @@ public class ControleJogo {
         else if(tecla.equalsIgnoreCase("q")){
             sai();
         }
+        else{
+            System.out.println("Comando invalido. Por favor digite outro comando.");
+        }
     }
 
     public void move(int destino_x, int destino_y, Sala salaAtual){
@@ -81,6 +84,8 @@ public class ControleJogo {
 
         if(destino.checaBuraco() || destino.checaWumpus()){
             score -= 1000;
+            salaAtual.removeHeroi();
+            destino.revelaSala();
             perde();
         }
 
@@ -89,9 +94,14 @@ public class ControleJogo {
             heroi.setPosicao(destino_x, destino_y);
             destino.adicionaHeroi(heroi);
             destino.revelaSala();
-            imprimeCaverna(player, score);
-            tk.writeBoard(mapa.getCaverna(), score, 'x');
-            if (!condicaoGanhar())
+            if(condicaoGanhar()){
+                vence();
+            }
+            else{
+                imprimeCaverna(player, score);
+                tk.writeBoard(mapa.getCaverna(), score, 'x');
+            }
+            if (continua)
                 imprimeMensagem(destino.mensagemAuxilio());
         }
     }
@@ -135,7 +145,6 @@ public class ControleJogo {
 
     public boolean condicaoGanhar(){
         if(heroi.getPosicao()[0] == 0 && heroi.getPosicao()[1] == 0 && heroi.getOuro()){
-            vence();
             return true;
         }
         return false;
