@@ -1,33 +1,22 @@
 package pt.c40task.l05wumpus;
 
 public class Sala {
-	private Componente componentes[] = new Componente[4];
+	private Wumpus wumpus = null;
+	private Ouro ouro = null;
+	private Buraco buraco = null;
+	private Heroi heroi = null;
+	private Brisa brisa = null;
+	private Fedor fedor = null;
 	private String[] componentesNome = new String[5];
 	private int posicao_x, posicao_y;
 	private boolean revelada = false;
 	
-	public Sala(int posicao_x, int posicao_y, String componente, Caverna mapa){
+	public Sala(int posicao_x, int posicao_y){
 		this.posicao_x = posicao_x;
 		this.posicao_y = posicao_y;
-		for(int i = 0; i < 4; i++) {
-			this.componentes[i] = null;
-			this.componentesNome[i] = null;
-		}
-		this.componentesNome[4] = "#";
-		if(componente.equalsIgnoreCase("W")){
-			this.componentes[0] = new Wumpus(posicao_x, posicao_y, mapa);
-			this.componentesNome[0] = "W";
-		}
-		else if(componente.equalsIgnoreCase("O")){
-			this.componentes[0] = new Ouro(posicao_x, posicao_y, mapa);
-			this.componentesNome[0] = "O";
-		}
-		else if(componente.equalsIgnoreCase("B")){
-			this.componentes[0] = new Buraco(posicao_x, posicao_y, mapa);
-			this.componentesNome[0] = "B";
-		}
-		else if(componente.equalsIgnoreCase("P"))
-			this.componentesNome[1] = "P";
+		for(int i = 0; i < 4; i++)
+			componentesNome[i]=null;
+		componentesNome[4] = "#";
 	}
 
 	public String compMaisImportante() {
@@ -47,37 +36,73 @@ public class Sala {
 		return revelada;
 	}
 	
-	public void setComponente(Componente comp) {
-		componentes[comp.getPrioridade()] = comp;
-		componentesNome[comp.getPrioridade()] = comp.getNome();
+	public void setComponente(Wumpus wumpus) {
+		this.wumpus = wumpus;
+		componentesNome[0] = "W";
 	}
 
+	public void setComponente(Ouro ouro) {
+		this.ouro = ouro;
+		componentesNome[0] = "O";
+	}
+
+	public void setComponente(Buraco buraco) {
+		this.buraco = buraco;
+		componentesNome[0] = "B";
+	}
+
+	public void setComponente(Heroi heroi) {
+		this.heroi = heroi;
+		componentesNome[1] = "P";
+	}
+
+	public void setComponente(Fedor fedor) {
+		this.fedor = fedor;
+		componentesNome[2] = "f";
+	}
+
+	public void setComponente(Brisa brisa) {
+		this.brisa = brisa;
+		componentesNome[3] = "b";
+	}
+
+
 	public boolean checaBuraco(){
-		if(compMaisImportante() == "B"){
-			return true;
-		}
-		return false;
+		return (buraco!=null) ? true : false;
 	}
 
 	public boolean checaWumpus(){
-		if(compMaisImportante() == "W"){
-			return true;
-		}
-		return false;
+		return (wumpus!=null) ? true : false;
+	}
+
+	public boolean checaHeroi(){
+		return (heroi!=null) ? true : false;
+	}
+
+	public boolean checaOuro(){
+		return (ouro!=null) ? true : false;
+	}
+
+	public boolean checaBrisa(){
+		return (brisa!=null) ? true : false;
+	}
+
+	public boolean checaFedor(){
+		return (fedor!=null) ? true : false;
 	}
 
 	public void removeOuro(){
-		componentes[0] = null;
+		ouro = null;
 		componentesNome[0] = null;
 	}
 
 	public void removeHeroi() {
-		componentes[1] = null;
+		heroi = null;
 		componentesNome[1] = null;
 	}
 
 	public void adicionaHeroi(Heroi heroi) {
-		componentes[1] = heroi;
+		this.heroi = heroi;
 		componentesNome[1] = "P";
 	}
 	
@@ -88,8 +113,16 @@ public class Sala {
 		return posicao;
 	}
 
+	public Wumpus getWumpus(){
+		return wumpus;
+	}
+
+	public Buraco getBuraco(){
+		return buraco;
+	}
+
 	public void removeWumpus() {
-		componentes[0] = null;
+		wumpus = null;
 		componentesNome[0] = null;
 	}
 

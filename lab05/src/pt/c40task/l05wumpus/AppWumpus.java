@@ -16,49 +16,55 @@ public class AppWumpus {
       Scanner keyboard = new Scanner(System.in);
 
       MontadorCaverna montador = new MontadorCaverna(tk);
-      Caverna mapa = montador.geraMapa();
-      Heroi heroi = montador.getHeroi();
-      ControleJogo ctrl = new ControleJogo(heroi, mapa, tk);
 
-      String movements = null;
-      String tecla;
-      String player = "";
-
-      boolean endMovements = false;
-
-      if (tk.getMoveStr() != null){
-         movements = tk.retrieveMovements();
+      if (!montador.geraMapa()){
+         System.out.println("Nao foi possivel gerar o mapa. Arquivo cave.csv invalido.");
       }
-      else {
-         System.out.print("Digite o nome do player: ");
-         player = keyboard.nextLine();
-      }
-      
-      if (player == "") {
-    	   player = "Sting";
-         System.out.println("Nome do player nao informado. Nome automatico: Sting\n");
-      }
-      ctrl.setPlayer(player);
-      
-      ctrl.imprimeCaverna(player, 0);
-      
-      while(ctrl.getContinua() && !endMovements){
-         if(movements != null){
-            tecla = Character.toString(movements.charAt(0));
 
-            if(movements.length() == 1)
-               endMovements = true;
-            
-            if(movements.length() > 1)
-               movements = movements.substring(1);
+      else{
+         Caverna mapa = montador.getMapa();
+         Heroi heroi = montador.getHeroi();
+         ControleJogo ctrl = new ControleJogo(heroi, mapa, tk);
+
+         String movements = null;
+         String tecla;
+         String player = "";
+
+         boolean endMovements = false;
+
+         if (tk.getMoveStr() != null){
+            movements = tk.retrieveMovements();
          }
-         else{
-            tecla = keyboard.nextLine();
+         else {
+            System.out.print("Digite o nome do player: ");
+            player = keyboard.nextLine();
          }
+         
+         if (player == "") {
+            player = "Alcebiades";
+            System.out.println("Nome do player nao informado. Nome automatico: Alcebiades\n");
+         }
+         ctrl.setPlayer(player);
+         
+         ctrl.imprimeCaverna(player, 0);
+         
+         while(ctrl.getContinua() && !endMovements){
+            if(movements != null){
+               tecla = Character.toString(movements.charAt(0));
 
-         ctrl.recebeComando(tecla);
+               if(movements.length() == 1)
+                  endMovements = true;
+               
+               if(movements.length() > 1)
+                  movements = movements.substring(1);
+            }
+            else{
+               tecla = keyboard.nextLine();
+            }
+            ctrl.recebeComando(tecla);
+         }
       }
-      
+
       keyboard.close();
       tk.stop();
    }

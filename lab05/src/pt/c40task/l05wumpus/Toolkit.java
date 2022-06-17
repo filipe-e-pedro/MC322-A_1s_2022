@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
+import java.io.File;
 
 public class Toolkit {
    public static String DIRETORIO = System.getProperty("user.dir") +
@@ -13,7 +14,7 @@ public class Toolkit {
    
    private static Toolkit tk;
    
-   private BufferedReader moveStr, caveStr;
+   private BufferedReader moveStr = null, caveStr;
    private PrintWriter outputStr;
    
    private boolean firstBoard = true;
@@ -21,6 +22,18 @@ public class Toolkit {
    public static Toolkit start(String cavePath, String outputPath,
                                String movePath) {
       tk = new Toolkit();
+      File [] files = new File(DIRETORIO).listFiles(obj -> obj.isFile() && obj.getName().endsWith(".csv"));
+      for(int i = 0; i < files.length; i ++){
+         String fileName = files[i].getName();
+         if(((fileName.compareTo("cave.csv")!=0) && (fileName.compareTo("results.csv")) != 0)){
+            String moveFile = DIRETORIO + files[i].getName() + "/";
+            try{
+               tk.moveStr = new BufferedReader(new FileReader(moveFile));
+            }catch(IOException erro){
+
+            }
+         }
+      }
       String caveFile = (cavePath == null)
             ? DIRETORIO + "cave.csv" : cavePath;
       String outputFile = (outputPath == null)
@@ -37,11 +50,6 @@ public class Toolkit {
                new FileWriter(outputFile));
       } catch(IOException erro){
          erro.printStackTrace();
-      }
-      try{
-         tk.moveStr = new BufferedReader(new FileReader(moveFile));
-      } catch(IOException erro){
-         System.out.println("Nenhum arquivo movements.csv encontrado. Os movimentos deverao ser digitados manualmente.");
       }
       return tk;
    }
@@ -99,7 +107,7 @@ public class Toolkit {
          caveStr.close();
          outputStr.close();
          if(getMoveStr()!=null)
-        	 moveStr.close();
+        	   moveStr.close();
       } catch(Exception erro){
          erro.printStackTrace();
       }
