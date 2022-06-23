@@ -13,6 +13,10 @@ public class Exit extends Entity{
         return "E";
     }
 
+    public boolean getOpen() {
+        return open;
+    }
+
     public void open() {
         open = true;
     }
@@ -20,4 +24,5 @@ public class Exit extends Entity{
     public void close() {
         open = false;
     }
+
 }

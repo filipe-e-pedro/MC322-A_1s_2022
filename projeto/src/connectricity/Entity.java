@@ -10,17 +10,17 @@ public abstract class Entity {
 		// this.mapa = mapa;
 	}
 	
-	public int[] getPosicao() {
-		int posicao[] = new int[2];
-		posicao[0] = xIndex;
-		posicao[1] = yIndex;
-		return posicao;
+	public int[] getPosition() {
+		int position[] = new int[2];
+		position[0] = xIndex;
+		position[1] = yIndex;
+		return position;
 	}
+
+	public abstract String getName();
 
     public void setPosicao(int xIndex, int yIndex) {
         this.xIndex = xIndex;
         this.yIndex = yIndex;
     }
-
-    public abstract String getName();
 }

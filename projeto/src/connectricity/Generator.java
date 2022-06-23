@@ -1,7 +1,5 @@
 package connectricity;
 
-import connectricity.Entity;
-
 public class Generator extends Entity{
 
     public Generator (int xIndex, int yIndex/*,Map mapa*/){
