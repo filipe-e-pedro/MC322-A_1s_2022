@@ -4,9 +4,8 @@ public class Exit extends Entity{
     
     private boolean open = false;
 
-    public Exit (int xIndex, int yIndex/*,Map mapa*/){
-		super(xIndex, yIndex);
-		// this.mapa = mapa;
+    public Exit (int xIndex, int yIndex, Map map){
+		super(xIndex, yIndex, map);
 	}
 
     public String getName() {

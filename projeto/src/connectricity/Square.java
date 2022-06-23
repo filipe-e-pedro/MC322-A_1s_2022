@@ -8,7 +8,7 @@ public class Square {
 	private Player player = null;
     private Wire wire = null;
 	private int xIndex, yIndex;
-	private boolean light = false;
+	private boolean light = true;
 	
 	public Square (int xIndex, int yIndex){
 		this.xIndex = xIndex;
@@ -66,7 +66,7 @@ public class Square {
 		this.obstacle = obstacle;
 	}
 
-	public void setPlayer(Player player) {
+	public void setEntity(Player player) {
 		this.player = player;
 	}
 
@@ -74,7 +74,7 @@ public class Square {
         this.player = null;
     }
 
-    public void setWire(Wire wire) {
+    public void setEntity(Wire wire) {
         this.wire = wire;
     }
 
@@ -108,5 +108,34 @@ public class Square {
 
     public boolean checkWire(){
 		return (wire!=null) ? true : false;
+	}
+
+	public String mostRelevantEntity() { 
+		// GAMBIARRA, MUDAR DEPOIS
+		if (checkObstacle()) {
+			return "O";
+		}
+
+		if (checkExit()) {
+			return "E";
+		}
+
+		if (checkPlayer()) {
+			return "P";
+		}
+
+		if (checkGenerator()) {
+			return "G";
+		}
+
+		if (checkBattery()) {
+			return "B";
+		}
+
+		if (checkWire()) {
+			return "W";
+		}
+
+		return "-";
 	}
 }

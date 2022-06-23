@@ -2,8 +2,8 @@ package connectricity;
 
 public class Player extends Entity{
 
-    public Player(int xIndex, int yIndex) {
-        super(xIndex, yIndex);
+    public Player(int xIndex, int yIndex, Map map){
+		super(xIndex, yIndex, map);
     }
 
     public String getName() {
