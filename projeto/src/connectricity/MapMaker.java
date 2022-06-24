@@ -2,6 +2,7 @@ package connectricity;
 
 public class MapMaker {
     private Map level;
+    Player player = new Player(0, 0, level);
     int xSize, ySize;
     //private int mapID;
     //private Toolkit tk;
@@ -23,18 +24,7 @@ public class MapMaker {
         }
     }
 
-    public void printLevel() {
-        String[][] matrix = level.getMap();
-        for (int i = 0; i < ySize; i++){
-            System.out.print("\t");
-            for (int j = 0; j < xSize; j++){
-                System.out.print(" " + matrix[i][j]);
-            }
-            System.out.print("\n");
-        }
-    }
-
-    public void createMap() {
+    public boolean createMap() {
         int xIndex, yIndex;
         Square newSquare;
 
@@ -64,7 +54,7 @@ public class MapMaker {
             }
 
             else if(levelInfo[i][2].equalsIgnoreCase("P")){
-                Player player = new Player(xIndex, yIndex, level);
+                player.setPosition(xIndex, yIndex);
                 newSquare.setEntity(player);
             }
 
@@ -75,5 +65,14 @@ public class MapMaker {
             level.setSquare(xIndex, yIndex, newSquare);
         }
         // level.checkCircuits();
+        return true;
     }
+
+    public Map getMap(){
+		return level;
+	}
+
+    public Player getPlayer(){
+		return player;
+	}
 }

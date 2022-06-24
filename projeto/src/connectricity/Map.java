@@ -1,5 +1,7 @@
 package connectricity;
 
+import javax.imageio.ImageIO;
+
 public class Map {
     int xSize, ySize;
     private Square squares[][];
@@ -17,8 +19,15 @@ public class Map {
 	public Square getSquare(int xIndex, int yIndex) {
 		return squares[yIndex][xIndex];
 	}
+
+	public int[] getSize() {
+		int[] size = new int[2];
+		size[0] = xSize;
+		size[1] = ySize;
+		return size;
+	}
 	
-	public String[][] getMap(){
+	public String[][] getMatrix(){
 		String[][] matriz = new String[ySize][xSize];
 		for(int i = 0; i < ySize; i++) {
 			for(int j = 0; j < xSize; j++) {
@@ -30,5 +39,15 @@ public class Map {
 			}
 		}
 		return matriz;
+	}
+	
+	public boolean invalidMove(int xIndex, int yIndex) {
+		if (xIndex < 0 || xIndex >= xSize || yIndex < 0 || yIndex >= ySize) {
+			return true;
+		}
+		if (getSquare(xIndex, yIndex).checkObstacle()) {
+			return true;
+		}
+		return false;
 	}
 }
