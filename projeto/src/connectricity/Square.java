@@ -78,8 +78,10 @@ public class Square {
         this.wire = wire;
     }
 
-    public void removeWire() {
-        this.wire = null;
+    public Wire removeWire() {
+		Wire returnWire = wire;
+    	wire = null;
+		return returnWire;
     }
 
     public void setLight(boolean light) {
@@ -108,6 +110,10 @@ public class Square {
 
     public boolean checkWire(){
 		return (wire!=null) ? true : false;
+	}
+
+	public boolean emptySquare() {
+		return !(checkBattery() || checkExit() || checkGenerator() || checkObstacle() || checkWire());
 	}
 
 	public String mostRelevantEntity() { 

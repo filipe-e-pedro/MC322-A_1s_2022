@@ -35,6 +35,12 @@ public class Controller {
         else if(key.equalsIgnoreCase("q")){
             quit();
         }
+        else if(key.equalsIgnoreCase("f")){
+            takeConductor(curSquare);;
+        }
+        else if(key.equalsIgnoreCase("g")){
+            placeWire(curSquare);;
+        }
         else{
             System.out.println("Comando invalido. Por favor digite outro comando.");
         }
@@ -66,6 +72,31 @@ public class Controller {
             else{
                 printMap();
             }
+        }
+    }
+
+    public void takeConductor(Square curSquare) {
+        if (curSquare.checkWire() && player.hasWireSpace()) {
+            Wire wire = curSquare.removeWire();
+            player.storeWire(wire);
+        }
+        else {
+            System.out.println("Não há condutores ai ou seu inventario esta cheio");
+        }
+    }
+
+    public void placeWire(Square curSquare) {
+        if (curSquare.emptySquare()) {
+            Wire wire = player.spendWire();
+            if (wire != null) {
+                curSquare.setEntity(wire);
+            }
+            else {
+                System.out.println("Voce nao tem fios"); 
+            }
+        }
+        else {
+            System.out.println("Nao eh possivel colocar fio ai"); 
         }
     }
 
