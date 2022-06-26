@@ -10,7 +10,7 @@ public class App {
     public static void executeGame(){
         Scanner keyboard = new Scanner(System.in);
         Toolkit tk = new Toolkit();
-        MapMaker maker = new MapMaker(1, tk);
+        MapMaker maker = new MapMaker(2, tk);
 
         if (!maker.createMap()){
             System.out.println("Invalid level file");

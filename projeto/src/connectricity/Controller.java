@@ -4,6 +4,7 @@ public class Controller {
     private Player player;
     private Map map;
     private Toolkit tk;
+    private CircuitMonitor cm;
     // private String player = "Alcebiades";
     // private int score = 0;
     private boolean continuing = true;
@@ -12,6 +13,7 @@ public class Controller {
         this.player = player;
         this.map = map;
         this.tk = tk;
+        cm = new CircuitMonitor(map);
     }
 
     public void receiveCommand(String key){
@@ -36,10 +38,16 @@ public class Controller {
             quit();
         }
         else if(key.equalsIgnoreCase("f")){
-            takeConductor(curSquare);;
+            takeWire(curSquare);;
         }
         else if(key.equalsIgnoreCase("g")){
             placeWire(curSquare);;
+        }
+        else if(key.equalsIgnoreCase("t")){
+            takeResistor(curSquare);
+        }
+        else if(key.equalsIgnoreCase("r")){
+            placeResistor(curSquare);
         }
         else{
             System.out.println("Comando invalido. Por favor digite outro comando.");
@@ -55,7 +63,7 @@ public class Controller {
 
         Square destSquare = map.getSquare(destSquare_x, destSquare_y);
 
-        if(destSquare.checkWire() && destSquare.getWire().getCurrentLevel() > 0){
+        if(destSquare.checkWire() && destSquare.getWire().getPotentialLevel() > 0){
             curSquare.removePlayer();
             // destSquare.revelaSala(); // VERIFICAR LIGHT
             lose();
@@ -71,11 +79,12 @@ public class Controller {
             }
             else{
                 printMap();
+                cm.testMatrix();
             }
         }
     }
 
-    public void takeConductor(Square curSquare) {
+    public void takeWire(Square curSquare) {
         if (curSquare.checkWire() && player.hasWireSpace()) {
             Wire wire = curSquare.removeWire();
             player.storeWire(wire);
@@ -97,6 +106,31 @@ public class Controller {
         }
         else {
             System.out.println("Nao eh possivel colocar fio ai"); 
+        }
+    }
+
+    public void takeResistor(Square curSquare) {
+        if (curSquare.checkResistor() && player.hasResistorSpace()) {
+            Resistor resistor = curSquare.removeResistor();
+            player.storeResistor(resistor);
+        }
+        else {
+            System.out.println("Não há resistores ai ou seu inventario esta cheio");
+        }
+    }
+
+    public void placeResistor(Square curSquare) {
+        if (curSquare.emptySquare()) {
+            Resistor resistor = player.spendResistor();
+            if (resistor != null) {
+                curSquare.setEntity(resistor);
+            }
+            else {
+                System.out.println("Voce nao tem resistores"); 
+            }
+        }
+        else {
+            System.out.println("Nao eh possivel colocar resistor ai"); 
         }
     }
 

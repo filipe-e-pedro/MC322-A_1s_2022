@@ -2,7 +2,7 @@ package connectricity;
 
 public class MapMaker {
     private Map level;
-    Player player = new Player(0, 0, level);
+    Player player = new Player(0, 0, level, 30, 30);
     int xSize, ySize;
     //private int mapID;
     //private Toolkit tk;
@@ -61,6 +61,11 @@ public class MapMaker {
             else if(levelInfo[i][2].equalsIgnoreCase("W")){
                 Wire wire = new Wire(xIndex, yIndex, level);
                 newSquare.setEntity(wire);
+            }
+
+            else if(levelInfo[i][2].equalsIgnoreCase("R")){
+                Resistor resistor = new Resistor(xIndex, yIndex, level);
+                newSquare.setEntity(resistor);
             }
             level.setSquare(xIndex, yIndex, newSquare);
         }
