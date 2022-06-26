@@ -1,6 +1,7 @@
 package connectricity;
 
 import javax.imageio.ImageIO;
+import java.util.*;
 
 public class Map {
     int xSize, ySize;
@@ -40,6 +41,16 @@ public class Map {
 		}
 		return matriz;
 	}
+
+	public String[][] getCircuit(){
+		String[][] matriz = new String[ySize][xSize];
+		for(int i = 0; i < ySize; i++) {
+			for(int j = 0; j < xSize; j++) {
+				matriz[i][j] = squares[i][j].circuitPart();
+			}
+		}
+		return matriz;
+	}
 	
 	public boolean invalidMove(int xIndex, int yIndex) {
 		if (xIndex < 0 || xIndex >= xSize || yIndex < 0 || yIndex >= ySize) {
@@ -49,5 +60,21 @@ public class Map {
 			return true;
 		}
 		return false;
+	}
+
+	public ArrayList<int[]> getGeneratorPositions() {
+		ArrayList<int[]> generatorPositions = new ArrayList<int[]>();
+		
+		for(int i = 0; i < ySize; i++) {
+			for(int j = 0; j < xSize; j++) {
+				if(squares[i][j].checkGenerator()) {
+					int[] position = new int[2];
+					position[0] = i;
+					position[1] = j;
+					generatorPositions.add(position);
+				}
+			}
+		}
+		return generatorPositions;
 	}
 }

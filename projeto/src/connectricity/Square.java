@@ -51,6 +51,19 @@ public class Square {
 		return resistor;
 	}
 
+	public Conductor getConductor() {
+		if (checkGenerator()) {
+			return generator;
+		}
+		if (checkBattery()) {
+			return battery;
+		}
+		if (checkWire()) {
+			return wire;
+		}
+		return null;
+	}
+
     public boolean getLight() {
         return light;
     }
@@ -138,33 +151,54 @@ public class Square {
 	public String mostRelevantEntity() { 
 		// GAMBIARRA, MUDAR DEPOIS
 		if (checkObstacle()) {
-			return "O";
+			return obstacle.getName();
 		}
 
 		if (checkExit()) {
-			return "E";
+			return exit.getName();
 		}
 
 		if (checkPlayer()) {
-			return "P";
+			return player.getName();
 		}
 
 		if (checkGenerator()) {
-			return "G";
+			return generator.getName();
 		}
 
 		if (checkBattery()) {
-			return "B";
+			return battery.getName();
 		}
 
 		if (checkWire()) {
-			return "W";
+			return wire.getPotential();
 		}
 
 		if(checkResistor()) {
-			return "R";
+			return resistor.getName();
 		}
 
+		return "-";
+	}
+
+	public String circuitPart() { 
+		// GAMBIARRA, MUDAR DEPOIS
+
+		if (checkGenerator()) {
+			return generator.getName();
+		}
+
+		if (checkBattery()) {
+			return battery.getName();
+		}
+
+		if (checkWire()) {
+			return wire.getName();
+		}
+
+		if(checkResistor()) {
+			return resistor.getName();
+		}
 		return "-";
 	}
 }

@@ -63,7 +63,7 @@ public class Controller {
 
         Square destSquare = map.getSquare(destSquare_x, destSquare_y);
 
-        if(destSquare.checkWire() && destSquare.getWire().getPotentialLevel() > 0){
+        if(destSquare.checkWire() && destSquare.getWire().getPotentialLevel() > 4){
             curSquare.removePlayer();
             // destSquare.revelaSala(); // VERIFICAR LIGHT
             lose();
@@ -78,8 +78,8 @@ public class Controller {
                 win();
             }
             else{
+                cm.setPotentals();
                 printMap();
-                cm.testMatrix();
             }
         }
     }

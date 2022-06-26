@@ -3,9 +3,9 @@ import java.util.*;
 
 public class CircuitMonitor {
     private Map map;
-    int generatorLocator[][];
     String model[][];
     int size[];
+    int generatorPotential = 3;
     // Vector<String[]> v = new Vector<String[]>();
     List<String> conductors =  Arrays.asList("W", "G", "B");  
 
@@ -19,19 +19,19 @@ public class CircuitMonitor {
         if (yIndex > 0 && conductors.contains(model[yIndex - 1][xIndex])) {
             samePotential(xIndex, yIndex - 1, potential);
         }
-        if (yIndex < size[1] && conductors.contains(model[yIndex + 1][xIndex])) {
+        if (yIndex < size[1] - 1 && conductors.contains(model[yIndex + 1][xIndex])) {
             samePotential(xIndex, yIndex + 1, potential);
         }
         if (xIndex > 0 && conductors.contains(model[yIndex][xIndex - 1])) {
             samePotential(xIndex - 1, yIndex, potential);
         }
-        if (yIndex < size[0] && conductors.contains(model[yIndex][xIndex + 1])) {
+        if (yIndex < size[0] - 1 && conductors.contains(model[yIndex][xIndex + 1])) {
             samePotential(xIndex + 1, yIndex, potential);
         }
     } 
 
     private int determinatePotentials() {
-        this.model = map.getMatrix();
+        this.model = map.getCircuit();
         int potentialIndex = 0;
         for (int yIndex = 0; yIndex < size[1]; yIndex++) {
             for (int xIndex = 0; xIndex < size[0]; xIndex++) {
@@ -60,14 +60,9 @@ public class CircuitMonitor {
         }
     }
 
-    private int[][] resistorConnections(int numberOfRegeions) {
+    private int[][] resistorConnections(int numberOfRegions, ArrayList<String> potentials) {
         int size[] = map.getSize();
-        ArrayList<String> potentials = new ArrayList<String>();
-        int[][] resistanceGraph = new int[numberOfRegeions][numberOfRegeions];
-
-        for(int i = 0; i < numberOfRegeions; i++) {
-            potentials.add(Integer.toString(i));
-        }
+        int[][] resistanceGraph = new int[numberOfRegions][numberOfRegions];
 
         List<Integer> curResistor = Arrays.asList(-1, -1, -1, -1);
         int conectedPotential = -1;
@@ -80,7 +75,7 @@ public class CircuitMonitor {
                             curResistor.set(0, conectedPotential);
                         }
                     }
-                    if(yIndex < size[1] && potentials.contains(model[yIndex + 1][xIndex])) {
+                    if(yIndex < size[1] - 1 && potentials.contains(model[yIndex + 1][xIndex])) {
                         conectedPotential = Integer.parseInt(model[yIndex + 1][xIndex]);
                         if (!curResistor.contains(conectedPotential)) {
                             curResistor.set(1, conectedPotential);
@@ -92,7 +87,7 @@ public class CircuitMonitor {
                             curResistor.set(2, conectedPotential);
                         }
                     }
-                    if(xIndex < size[0] && potentials.contains(model[yIndex][xIndex + 1])) {
+                    if(xIndex < size[0] - 1 && potentials.contains(model[yIndex][xIndex + 1])) {
                         conectedPotential = Integer.parseInt(model[yIndex][xIndex + 1]);
                         if (!curResistor.contains(conectedPotential)) {
                             curResistor.set(3, conectedPotential);
@@ -105,15 +100,100 @@ public class CircuitMonitor {
         return resistanceGraph;
     }
 
-    public List<Integer> determinePotentials(int numberOfRegeions, int[][] connections) {
-        return null;
+    private void countResistorPath(int[] visited, int[] resistorPath, int[][] connections, int currentPotential) {
+        for (int i = 0; i < connections[currentPotential].length; i++) {
+            if (connections[currentPotential][i] > 0 && visited[i] == 0) {
+                visited[i] = 1;
+                resistorPath[i] = resistorPath[currentPotential] + 1;
+                countResistorPath(visited, resistorPath, connections, i);
+            }
+        }
     }
 
-    public void testMatrix() {
+    private int[] determinePotentials(int numberOfRegions, int[][] connections, int[] generatorPosition) {
+        int generatorPotentialIndex = Integer.parseInt(model[generatorPosition[0]][generatorPosition[1]]);
+        int[] visited = new int[numberOfRegions];
+        int[] resistorPath = new int[numberOfRegions];
+        int[] potentialValues = new int[numberOfRegions];
+
+        for (int i = 0; i < numberOfRegions; i++) {
+            visited[i] = 0;
+            resistorPath[i] = -1;
+            potentialValues[i] = 0;
+        }
+
+        visited[generatorPotentialIndex] = 1;
+        resistorPath[generatorPotentialIndex] = 0;
+        countResistorPath(visited, resistorPath, connections, generatorPotentialIndex);
+
+        for (int i = 0; i < numberOfRegions; i++) {
+            if (resistorPath[i] != -1) {
+                potentialValues[i] = 3 - resistorPath[i];
+            }
+        } 
+
+        return potentialValues;
+    }
+
+    private int[] determineFinalPotentials(int numberOfRegions,  int[][] connections) {
+        int[] partialPotentials = new int[numberOfRegions];
+        int[] finalPotentials = new int[numberOfRegions];
+        ArrayList<int[]> generatorPositions = map.getGeneratorPositions();
+
+        for (int i = 0; i < numberOfRegions; i++) {
+            finalPotentials[i] = 0;
+        }
+        
+        for (int i = 0; i < generatorPositions.size(); i++) {
+            partialPotentials = determinePotentials(numberOfRegions, connections, generatorPositions.get(i));
+            for (int j = 0; j < numberOfRegions; j++) {
+                if (partialPotentials[j] > finalPotentials[j]) {
+                    finalPotentials[j] = partialPotentials[j];
+                }
+            }
+        }
+        return finalPotentials;
+
+    }
+
+    private int[][] createPotentialMatrix(int numberOfRegions, ArrayList<String> potentials,  int[][] connections) {
+        int[][] potentialMatrix = new int[size[1]][size[0]];
+        int[] finalPotentials = determineFinalPotentials(numberOfRegions, connections);
+        
+        for (int yIndex = 0; yIndex < size[1]; yIndex++) {
+            for (int xIndex = 0; xIndex < size[0]; xIndex++) {
+                if (potentials.contains(model[yIndex][xIndex])) {
+                    potentialMatrix[yIndex][xIndex] = finalPotentials[Integer.parseInt(model[yIndex][xIndex])];
+                }
+                else {
+                    potentialMatrix[yIndex][xIndex] = -1;
+                }
+            }
+        }
+        return potentialMatrix;    
+    }
+
+    private ArrayList<String> createPotentialsString(int numberOfRegions) {
+        ArrayList<String> potentials = new ArrayList<String>();
+        for (int i = 0; i < numberOfRegions; i++) {
+            potentials.add(Integer.toString(i));
+        }
+        return potentials;
+    }
+
+    public void setPotentals() {
         int numberOfRegions = determinatePotentials();
-        int[][] connections = resistorConnections(numberOfRegions);
-        System.out.println("Conexoes");
-        printarMatriz(connections);
+        ArrayList<String> potentials = createPotentialsString(numberOfRegions);
+        int[][] connections = resistorConnections(numberOfRegions, potentials);
+        int[][] potentialMatrix = createPotentialMatrix(numberOfRegions, potentials, connections);
+        
+        for (int yIndex = 0; yIndex < size[1]; yIndex++) {
+            for (int xIndex = 0; xIndex < size[0]; xIndex++) {
+                if (potentialMatrix[yIndex][xIndex] >= 0) {
+                    map.getSquare(xIndex, yIndex).getConductor().setPotentialLevel(potentialMatrix[yIndex][xIndex]);
+                }
+            }
+        }
     }
 
     public void printarMatriz(int[][] matriz){
@@ -125,5 +205,13 @@ public class CircuitMonitor {
             System.out.print("\n");
         }
     }
-    
+
+    public String printarLista(int[] lista) {
+        String l = "";
+        for(int i = 0; i < lista.length; i++) {
+            l += lista[i] + " ";
+        }
+        return l;
+    }
+  
 }
