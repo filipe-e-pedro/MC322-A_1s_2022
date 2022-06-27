@@ -100,38 +100,46 @@ public class CircuitMonitor {
         return resistanceGraph;
     }
 
-    private void countResistorPath(int[] visited, int[] resistorPath, int[][] connections, int currentPotential) {
+    private void countResistorPath(Queue<Integer> queue, int[] queued, int[] resistorPath, int[][] connections, int currentPotential) {
         for (int i = 0; i < connections[currentPotential].length; i++) {
-            if (connections[currentPotential][i] > 0 && visited[i] == 0) {
-                visited[i] = 1;
+            if (connections[currentPotential][i] > 0 && queued[i] == 0){
                 resistorPath[i] = resistorPath[currentPotential] + 1;
-                countResistorPath(visited, resistorPath, connections, i);
+                queue.add(i);
+                queued[i] = 1;
             }
         }
+        if (queue.isEmpty()) {
+            return;
+        }
+        int nextPotential = queue.remove();
+        countResistorPath(queue, queued, resistorPath, connections, nextPotential);
     }
+
 
     private int[] determinePotentials(int numberOfRegions, int[][] connections, int[] generatorPosition) {
         int generatorPotentialIndex = Integer.parseInt(model[generatorPosition[0]][generatorPosition[1]]);
-        int[] visited = new int[numberOfRegions];
+        int[] queued = new int[numberOfRegions];
         int[] resistorPath = new int[numberOfRegions];
         int[] potentialValues = new int[numberOfRegions];
+        Queue<Integer> queue = new LinkedList<Integer>(); 
 
         for (int i = 0; i < numberOfRegions; i++) {
-            visited[i] = 0;
+            queued[i] = 0;
             resistorPath[i] = -1;
             potentialValues[i] = 0;
         }
 
-        visited[generatorPotentialIndex] = 1;
+        queued[generatorPotentialIndex] = 1;
         resistorPath[generatorPotentialIndex] = 0;
-        countResistorPath(visited, resistorPath, connections, generatorPotentialIndex);
+        countResistorPath(queue, queued, resistorPath, connections, generatorPotentialIndex);
 
         for (int i = 0; i < numberOfRegions; i++) {
             if (resistorPath[i] != -1) {
                 potentialValues[i] = 3 - resistorPath[i];
             }
         } 
-
+        System.out.println("Valores resistencias: " + printarLista(resistorPath));
+        System.out.println("Valores potenciais: " + printarLista(potentialValues));
         return potentialValues;
     }
 
