@@ -9,7 +9,6 @@ public class Square {
     private Wire wire = null;
 	private Resistor resistor = null;
 	private int xIndex, yIndex;
-	private boolean light = true;
 	
 	public Square (int xIndex, int yIndex){
 		this.xIndex = xIndex;
@@ -64,10 +63,6 @@ public class Square {
 		return null;
 	}
 
-    public boolean getLight() {
-        return light;
-    }
-
     public void setEntity(Battery battery) {
 		this.battery = battery;
 	}
@@ -111,10 +106,6 @@ public class Square {
     	resistor = null;
 		return returnResistor;
     }
-
-    public void setLight(boolean light) {
-		this.light = light;
-	}
 
     public boolean checkBattery(){
 		return (battery!=null) ? true : false;
