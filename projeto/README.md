@@ -31,15 +31,13 @@
 ~~~
 ├── README.md          <- apresentação do projeto
 │
-├── data               <- dados usados pelo jogo (se houver)
+├── data               <- Arquivos .csv contendo as fases do jogo.
 │
-├── src                <- projeto em Java (preferencialmente projeto no Eclipse)
+├── src                <- projeto em Java
 │   │
 │   ├── src            <- arquivos-fonte do projeto (.java)
 │   │
 │   ├── bin            <- arquivos em bytecode (.class)
-│   │
-│   └── README.md      <- instruções básicas de instalação/execução
 │
 └── assets             <- mídias usadas no projeto
 ~~~
