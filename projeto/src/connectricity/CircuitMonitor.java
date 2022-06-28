@@ -6,7 +6,6 @@ public class CircuitMonitor {
     String model[][];
     int size[];
     int generatorPotential = 3;
-    // Vector<String[]> v = new Vector<String[]>();
     List<String> conductors =  Arrays.asList("W", "G", "B");  
 
     public CircuitMonitor(Map map) {
@@ -138,8 +137,6 @@ public class CircuitMonitor {
                 potentialValues[i] = 3 - resistorPath[i];
             }
         } 
-        System.out.println("Valores resistencias: " + printarLista(resistorPath));
-        System.out.println("Valores potenciais: " + printarLista(potentialValues));
         return potentialValues;
     }
 

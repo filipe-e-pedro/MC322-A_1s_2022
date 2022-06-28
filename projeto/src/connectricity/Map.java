@@ -1,6 +1,5 @@
 package connectricity;
 
-import javax.imageio.ImageIO;
 import java.util.*;
 
 public class Map {
@@ -32,11 +31,7 @@ public class Map {
 		String[][] matriz = new String[ySize][xSize];
 		for(int i = 0; i < ySize; i++) {
 			for(int j = 0; j < xSize; j++) {
-				if(squares[i][j].getLight()) {
-					matriz[i][j] = squares[i][j].mostRelevantEntity();
-				}
-				else
-					matriz[i][j] = "#";
+				matriz[i][j] = squares[i][j].mostRelevantEntity();
 			}
 		}
 		return matriz;
@@ -76,5 +71,28 @@ public class Map {
 			}
 		}
 		return generatorPositions;
+	}
+
+	public boolean batteriesSatisfied() {
+		boolean satisfied = true;
+		for(int i = 0; i < ySize; i++) {
+			for(int j = 0; j < xSize; j++) {
+				if(squares[i][j].checkBattery() && !squares[i][j].getBattery().rightPotential()) {
+					satisfied = false;
+				}
+			}
+		}
+		return satisfied;
+	}
+
+	public void manageExits() {
+		boolean batteriesState = batteriesSatisfied();
+		for(int i = 0; i < ySize; i++) {
+			for(int j = 0; j < xSize; j++) {
+				if(squares[i][j].checkExit()) {
+					squares[i][j].getExit().setOpen(batteriesState);
+				}
+			}
+		}
 	}
 }

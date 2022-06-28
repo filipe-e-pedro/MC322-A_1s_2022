@@ -16,12 +16,8 @@ public class Exit extends Entity{
         return open;
     }
 
-    public void open() {
-        open = true;
-    }
-
-    public void close() {
-        open = false;
+    public void setOpen(boolean state) {
+        open = state;
     }
 
 }

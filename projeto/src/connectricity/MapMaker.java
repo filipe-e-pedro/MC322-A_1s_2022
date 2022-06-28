@@ -4,8 +4,6 @@ public class MapMaker {
     private Map level;
     Player player = new Player(0, 0, level, 30, 30);
     int xSize, ySize;
-    //private int mapID;
-    //private Toolkit tk;
     private String[][] levelInfo;
 
     public MapMaker(int mapID, Toolkit tk){
@@ -34,7 +32,7 @@ public class MapMaker {
             newSquare = new Square(xIndex, yIndex);
 
             if(levelInfo[i][2].equalsIgnoreCase("B")){
-                Battery battery = new Battery(xIndex, yIndex, level);
+                Battery battery = new Battery(xIndex, yIndex, level, Integer.parseInt(levelInfo[i][3]));
                 newSquare.setEntity(battery);
             }
 
