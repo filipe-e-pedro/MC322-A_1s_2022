@@ -1,5 +1,3 @@
-# Modelo para Apresentação do Projeto
-
 # Connectricity`
 
 # Descrição
