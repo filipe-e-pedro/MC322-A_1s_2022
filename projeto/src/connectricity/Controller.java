@@ -3,14 +3,12 @@ package connectricity;
 public class Controller {
     private Player player;
     private Map map;
-    private Toolkit tk;
     private CircuitMonitor cm;
     private boolean continuing = true;
 
-    public Controller (Player player, Map map, Toolkit tk){
+    public Controller (Player player, Map map){
         this.player = player;
         this.map = map;
-        this.tk = tk;
         cm = new CircuitMonitor(map);
     }
 

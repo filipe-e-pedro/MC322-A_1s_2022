@@ -24,7 +24,7 @@ public class App {
         
         Map map = maker.getMap();
         Player player = maker.getPlayer();
-        Controller ctrl = new Controller(player, map, tk);
+        Controller ctrl = new Controller(player, map);
         String tecla;
 
         ctrl.printMap();

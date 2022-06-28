@@ -1,7 +1,5 @@
 package connectricity;
 
-import java.io.EOFException;
-
 public class MapMaker {
     private Map level;
     Player player;
@@ -80,12 +78,9 @@ public class MapMaker {
 	}
 
     public void invalidMap() throws InvalidMapException {
-        int xIndex, yIndex;
         int generatorCount = 0, playerCount = 0, batteryCount = 0, exitsCount = 0;
 
         for(int i = 0; i < levelInfo.length; i++) {
-            yIndex = Integer.parseInt(levelInfo[i][0]) - 1;
-            xIndex = Integer.parseInt(levelInfo[i][1]) - 1;
 
             if(levelInfo[i][2].equalsIgnoreCase("B")){
                 batteryCount++;
