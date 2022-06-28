@@ -22,10 +22,10 @@ public class MapMaker {
         }
     }
 
-    public boolean createMap() {
+    public void createMap() {
         int xIndex, yIndex;
         Square newSquare;
-
+    
         for(int i = 0; i < levelInfo.length; i++) {
             yIndex = Integer.parseInt(levelInfo[i][0]) - 1;
             xIndex = Integer.parseInt(levelInfo[i][1]) - 1;
@@ -67,8 +67,6 @@ public class MapMaker {
             }
             level.setSquare(xIndex, yIndex, newSquare);
         }
-        // level.checkCircuits();
-        return true;
     }
 
     public Map getMap(){
@@ -78,4 +76,46 @@ public class MapMaker {
     public Player getPlayer(){
 		return player;
 	}
+
+    public void invalidMap() throws InvalidMapException {
+        int xIndex, yIndex;
+        int generatorCount = 0, playerCount = 0, batteryCount = 0, exitsCount = 0;
+
+        for(int i = 0; i < levelInfo.length; i++) {
+            yIndex = Integer.parseInt(levelInfo[i][0]) - 1;
+            xIndex = Integer.parseInt(levelInfo[i][1]) - 1;
+
+            if(levelInfo[i][2].equalsIgnoreCase("B")){
+                batteryCount++;
+            }
+
+            if(levelInfo[i][2].equalsIgnoreCase("G")){
+                generatorCount++;
+            }
+
+            if(levelInfo[i][2].equalsIgnoreCase("P")){
+                playerCount++;
+            }
+
+            if(levelInfo[i][2].equalsIgnoreCase("E")){
+                exitsCount++;
+            }
+        }
+
+        if (batteryCount == 0) {
+            throw new ZeroBatteries("Nao há baterias no mapa");
+        }
+    
+        if (playerCount != 1) {
+            throw new WrongPlayerNumber("Número de players diferente de 1");
+        }
+    
+        if (generatorCount == 0) {
+            throw new ZeroGenerators("Não há geradores no mapa");
+        }
+
+        if (exitsCount == 0) {
+            throw new ZeroExits("Não há saídas no mapa");
+        }
+    }
 }
