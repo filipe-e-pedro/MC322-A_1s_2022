@@ -78,7 +78,7 @@ public class Controller {
                 win();
             }
             else{
-                cm.setPotentals();
+                //cm.setPotentals();
                 printMap();
             }
         }
