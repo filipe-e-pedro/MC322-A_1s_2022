@@ -8,6 +8,6 @@ public class ZeroGenerators extends InvalidMapException {
 
     public ZeroGenerators(String message) {
         super(message);
- }
+    }
 
 }

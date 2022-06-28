@@ -14,7 +14,7 @@ public class App {
         try {
             maker.invalidMap();
         } catch (InvalidMapException exception) {
-            System.err.println(exception.getMessage());
+            System.err.println("Erro: " + exception.getMessage());
             return;
         }
 
@@ -33,7 +33,7 @@ public class App {
             tecla = keyboard.nextLine();
             ctrl.receiveCommand(tecla);
         }
-        
+
         keyboard.close();
     }
 }
