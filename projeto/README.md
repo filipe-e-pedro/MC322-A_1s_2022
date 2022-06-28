@@ -1,4 +1,4 @@
-# Connectricity`
+# Connectricity
 
 # Descrição
 
