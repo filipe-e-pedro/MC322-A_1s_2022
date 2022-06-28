@@ -28,20 +28,20 @@ public class Map {
 	}
 	
 	public String[][] getMatrix(){
-		String[][] matriz = new String[ySize][xSize];
-		for(int i = 0; i < ySize; i++) {
-			for(int j = 0; j < xSize; j++) {
-				matriz[i][j] = squares[i][j].mostRelevantEntity();
+		String[][] matrix = new String[ySize][xSize];
+		for(int yIndex = 0; yIndex < ySize; yIndex++) {
+			for(int xIndex = 0; xIndex < xSize; xIndex++) {
+				matrix[yIndex][xIndex] = squares[yIndex][xIndex].mostRelevantEntity();
 			}
 		}
-		return matriz;
+		return matrix;
 	}
 
 	public String[][] getCircuit(){
 		String[][] matriz = new String[ySize][xSize];
-		for(int i = 0; i < ySize; i++) {
-			for(int j = 0; j < xSize; j++) {
-				matriz[i][j] = squares[i][j].circuitPart();
+		for(int yIndex = 0; yIndex < ySize; yIndex++) {
+			for(int xIndex = 0; xIndex < xSize; xIndex++) {
+				matriz[yIndex][xIndex] = squares[yIndex][xIndex].circuitPart();
 			}
 		}
 		return matriz;
@@ -60,12 +60,12 @@ public class Map {
 	public ArrayList<int[]> getGeneratorPositions() {
 		ArrayList<int[]> generatorPositions = new ArrayList<int[]>();
 		
-		for(int i = 0; i < ySize; i++) {
-			for(int j = 0; j < xSize; j++) {
-				if(squares[i][j].checkGenerator()) {
+		for(int yIndex = 0; yIndex < ySize; yIndex++) {
+			for(int xIndex = 0; xIndex < xSize; xIndex++) {
+				if(squares[yIndex][xIndex].checkGenerator()) {
 					int[] position = new int[2];
-					position[0] = i;
-					position[1] = j;
+					position[0] = xIndex;
+					position[1] = yIndex;
 					generatorPositions.add(position);
 				}
 			}
@@ -75,9 +75,9 @@ public class Map {
 
 	public boolean batteriesSatisfied() {
 		boolean satisfied = true;
-		for(int i = 0; i < ySize; i++) {
-			for(int j = 0; j < xSize; j++) {
-				if(squares[i][j].checkBattery() && !squares[i][j].getBattery().rightPotential()) {
+		for(int yIndex = 0; yIndex < ySize; yIndex++) {
+			for(int xIndex = 0; xIndex < xSize; xIndex++) {
+				if(squares[yIndex][xIndex].checkBattery() && !squares[yIndex][xIndex].getBattery().rightPotential()) {
 					satisfied = false;
 				}
 			}
@@ -87,10 +87,10 @@ public class Map {
 
 	public void manageExits() {
 		boolean batteriesState = batteriesSatisfied();
-		for(int i = 0; i < ySize; i++) {
-			for(int j = 0; j < xSize; j++) {
-				if(squares[i][j].checkExit()) {
-					squares[i][j].getExit().setOpen(batteriesState);
+		for(int yIndex = 0; yIndex < ySize; yIndex++) {
+			for(int xIndex = 0; xIndex < xSize; xIndex++) {
+				if(squares[yIndex][xIndex].checkExit()) {
+					squares[yIndex][xIndex].getExit().setOpen(batteriesState);
 				}
 			}
 		}
