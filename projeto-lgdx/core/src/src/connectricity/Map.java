@@ -29,27 +29,27 @@ public class Map {
     }
 
     public String[][] getMatrix(){
-        String[][] matriz = new String[ySize][xSize];
+        String[][] matrix = new String[ySize][xSize];
         for(int i = 0; i < ySize; i++) {
             for(int j = 0; j < xSize; j++) {
                 if(squares[i][j].getLight()) {
-                    matriz[i][j] = squares[i][j].mostRelevantEntity();
+                    matrix[i][j] = squares[i][j].mostRelevantEntity();
                 }
                 else
-                    matriz[i][j] = "#";
+                    matrix[i][j] = "#";
             }
         }
-        return matriz;
+        return matrix;
     }
 
     public String[][] getCircuit(){
-        String[][] matriz = new String[ySize][xSize];
+        String[][] matrix = new String[ySize][xSize];
         for(int i = 0; i < ySize; i++) {
             for(int j = 0; j < xSize; j++) {
-                matriz[i][j] = squares[i][j].circuitPart();
+                matrix[i][j] = squares[i][j].circuitPart();
             }
         }
-        return matriz;
+        return matrix;
     }
 
     public boolean invalidMove(int xIndex, int yIndex) {

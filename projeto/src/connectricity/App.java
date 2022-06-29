@@ -8,26 +8,32 @@ public class App {
     }
 
     public static void executeGame(){
-        Scanner keyboard = new Scanner(System.in);
         Toolkit tk = new Toolkit();
         MapMaker maker = new MapMaker(2, tk);
 
-        if (!maker.createMap()){
-            System.out.println("Invalid level file");
+        try {
+            maker.invalidMap();
+        } catch (InvalidMapException exception) {
+            System.err.println(exception.getMessage());
+            return;
         }
-        else{
-            Map map = maker.getMap();
-            Player player = maker.getPlayer();
-            Controller ctrl = new Controller(player, map, tk);
-            String tecla;
 
-            ctrl.printMap();
+        Scanner keyboard = new Scanner(System.in);
 
-            while(ctrl.getContinuing()){
-                tecla = keyboard.nextLine();
-                ctrl.receiveCommand(tecla);
-            }
+        maker.createMap();
+        
+        Map map = maker.getMap();
+        Player player = maker.getPlayer();
+        Controller ctrl = new Controller(player, map, tk);
+        String tecla;
+
+        ctrl.printMap();
+
+        while(ctrl.getContinuing()){
+            tecla = keyboard.nextLine();
+            ctrl.receiveCommand(tecla);
         }
+        
         keyboard.close();
     }
 }

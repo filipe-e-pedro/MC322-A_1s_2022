@@ -5,8 +5,6 @@ public class Controller {
     private Map map;
     private Toolkit tk;
     private CircuitMonitor cm;
-    // private String player = "Alcebiades";
-    // private int score = 0;
     private boolean continuing = true;
 
     public Controller (Player player, Map map, Toolkit tk){
@@ -63,24 +61,17 @@ public class Controller {
 
         Square destSquare = map.getSquare(destSquare_x, destSquare_y);
 
-        if(destSquare.checkWire() && destSquare.getWire().getPotentialLevel() > 4){
-            curSquare.removePlayer();
-            // destSquare.revelaSala(); // VERIFICAR LIGHT
-            lose();
+        
+        curSquare.removePlayer();
+        player.setPosition(destSquare_x, destSquare_y);
+        destSquare.setEntity(player);
+        if(destSquare.checkExit() && destSquare.getExit().getOpen()){
+            win();
         }
-
         else{
-            curSquare.removePlayer();
-            player.setPosition(destSquare_x, destSquare_y);
-            destSquare.setEntity(player);
-            // destSquare.revelaSala();   // VERIFICAR LIGHT
-            if(destSquare.checkExit() && destSquare.getExit().getOpen()){
-                win();
-            }
-            else{
-                //cm.setPotentals();
-                printMap();
-            }
+            cm.setPotentals();
+            map.manageExits();
+            printMap();
         }
     }
 
@@ -150,12 +141,6 @@ public class Controller {
 
     private void printMessage(String mesage){
         System.out.println(mesage);
-    }
-
-    public void lose(){
-        printMap();
-        printMessage("Voce loseu =(...");
-        continuing = false;
     }
 
     public void quit(){

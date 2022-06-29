@@ -6,7 +6,6 @@ public class CircuitMonitor {
     String model[][];
     int size[];
     int generatorPotential = 3;
-    // Vector<String[]> v = new Vector<String[]>();
     List<String> conductors =  Arrays.asList("W", "G", "B");  
 
     public CircuitMonitor(Map map) {
@@ -25,7 +24,7 @@ public class CircuitMonitor {
         if (xIndex > 0 && conductors.contains(model[yIndex][xIndex - 1])) {
             samePotential(xIndex - 1, yIndex, potential);
         }
-        if (yIndex < size[0] - 1 && conductors.contains(model[yIndex][xIndex + 1])) {
+        if (xIndex < size[0] - 1 && conductors.contains(model[yIndex][xIndex + 1])) {
             samePotential(xIndex + 1, yIndex, potential);
         }
     } 
@@ -117,7 +116,7 @@ public class CircuitMonitor {
 
 
     private int[] determinePotentials(int numberOfRegions, int[][] connections, int[] generatorPosition) {
-        int generatorPotentialIndex = Integer.parseInt(model[generatorPosition[0]][generatorPosition[1]]);
+        int generatorPotentialIndex = Integer.parseInt(model[generatorPosition[1]][generatorPosition[0]]);
         int[] queued = new int[numberOfRegions];
         int[] resistorPath = new int[numberOfRegions];
         int[] potentialValues = new int[numberOfRegions];
@@ -138,8 +137,6 @@ public class CircuitMonitor {
                 potentialValues[i] = 3 - resistorPath[i];
             }
         } 
-        System.out.println("Valores resistencias: " + printarLista(resistorPath));
-        System.out.println("Valores potenciais: " + printarLista(potentialValues));
         return potentialValues;
     }
 

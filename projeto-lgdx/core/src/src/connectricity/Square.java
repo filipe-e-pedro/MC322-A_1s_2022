@@ -172,7 +172,7 @@ public class Square {
         }
 
         if (checkWire()) {
-            return wire.getPotential();
+            return wire.getName();
         }
 
         if(checkResistor()) {
