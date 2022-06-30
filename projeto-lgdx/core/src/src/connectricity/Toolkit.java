@@ -12,19 +12,19 @@ public class Toolkit {
         BufferedReader mapFile = null;
         try {
             mapFile = new BufferedReader(new FileReader(fileName));
-        } catch(IOException erro){
+         } catch(IOException erro){
             erro.printStackTrace();
-        }
-        return mapFile;
+         }
+         return mapFile;
     }
 
     public String[][] getMap(int mapID){
         Vector<String[]> v = new Vector<String[]>();
-        BufferedReader mapFile = retrieveFile(DIRETORIO + mapID + ".csv");
+        BufferedReader mapFile = retrieveFile(DIRETORIO + Integer.toString(mapID) + ".csv");
         try {
             String line = mapFile.readLine();
             while (line != null) {
-                String[] ln = line.split(",");
+                String ln[]  = line.split(",");
                 v.add(ln);
                 line = mapFile.readLine();
             }
@@ -32,6 +32,6 @@ public class Toolkit {
         } catch (Exception erro) {
             erro.printStackTrace();
         }
-        return v.toArray(new String[v.size()][]);
+        return (String[][])v.toArray(new String[v.size()][]);
     }
 }

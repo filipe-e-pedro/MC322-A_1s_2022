@@ -1,77 +1,128 @@
 package src.connectricity;
 
-import javax.imageio.ImageIO;
 import java.util.*;
 
 public class Map {
     int xSize, ySize;
-    private final Square[][] squares;
+    private Square squares[][];
+	private boolean exitOpen = false;
+
+	private int[] batteryCharge;
+
+	private int[] chargesNeeded;
 
     public Map (int xSize, int ySize) {
         this.xSize = xSize;
         this.ySize = ySize;
         this.squares = new Square[ySize][xSize];
+		batteryCharge = new int[]{0, 0, 0, 0};
+		chargesNeeded = new int[]{0, 0, 0, 0};
     }
+	
+	public void setSquare(int xIndex, int yIndex, Square newSquare) {
+		squares[yIndex][xIndex] = newSquare;
+	}
 
-    public void setSquare(int xIndex, int yIndex, Square newSquare) {
-        squares[yIndex][xIndex] = newSquare;
-    }
+	public Square getSquare(int xIndex, int yIndex) {
+		return squares[yIndex][xIndex];
+	}
 
-    public Square getSquare(int xIndex, int yIndex) {
-        return squares[yIndex][xIndex];
-    }
+	public int[] getSize() {
+		int[] size = new int[2];
+		size[0] = xSize;
+		size[1] = ySize;
+		return size;
+	}
+	
+	public String[][] getMatrix(){
+		String[][] matrix = new String[ySize][xSize];
+		for(int yIndex = 0; yIndex < ySize; yIndex++) {
+			for(int xIndex = 0; xIndex < xSize; xIndex++) {
+				matrix[yIndex][xIndex] = squares[yIndex][xIndex].mostRelevantEntity();
+			}
+		}
+		return matrix;
+	}
 
-    public int[] getSize() {
-        int[] size = new int[2];
-        size[0] = xSize;
-        size[1] = ySize;
-        return size;
-    }
+	public String[][] getCircuit(){
+		String[][] matriz = new String[ySize][xSize];
+		for(int yIndex = 0; yIndex < ySize; yIndex++) {
+			for(int xIndex = 0; xIndex < xSize; xIndex++) {
+				matriz[yIndex][xIndex] = squares[yIndex][xIndex].circuitPart();
+			}
+		}
+		return matriz;
+	}
+	
+	public boolean invalidMove(int xIndex, int yIndex) {
+		if (xIndex < 0 || xIndex >= xSize || yIndex < 0 || yIndex >= ySize) {
+			return true;
+		}
+		if (getSquare(xIndex, yIndex).checkObstacle()) {
+			return true;
+		}
+		return false;
+	}
 
-    public String[][] getMatrix(){
-        String[][] matrix = new String[ySize][xSize];
-        for(int i = 0; i < ySize; i++) {
-            for(int j = 0; j < xSize; j++) {
-                if(squares[i][j].getLight()) {
-                    matrix[i][j] = squares[i][j].mostRelevantEntity();
-                }
-                else
-                    matrix[i][j] = "#";
-            }
-        }
-        return matrix;
-    }
+	public ArrayList<int[]> getGeneratorPositions() {
+		ArrayList<int[]> generatorPositions = new ArrayList<int[]>();
+		
+		for(int yIndex = 0; yIndex < ySize; yIndex++) {
+			for(int xIndex = 0; xIndex < xSize; xIndex++) {
+				if(squares[yIndex][xIndex].checkGenerator()) {
+					int[] position = new int[2];
+					position[0] = xIndex;
+					position[1] = yIndex;
+					generatorPositions.add(position);
+				}
+			}
+		}
+		return generatorPositions;
+	}
 
-    public String[][] getCircuit(){
-        String[][] matrix = new String[ySize][xSize];
-        for(int i = 0; i < ySize; i++) {
-            for(int j = 0; j < xSize; j++) {
-                matrix[i][j] = squares[i][j].circuitPart();
-            }
-        }
-        return matrix;
-    }
+	public boolean batteriesSatisfied() {
+		boolean satisfied = true;
+		for(int yIndex = 0; yIndex < ySize; yIndex++) {
+			for(int xIndex = 0; xIndex < xSize; xIndex++) {
+				if(squares[yIndex][xIndex].checkBattery()) {
+					setBatteryCharge(squares[yIndex][xIndex].getBattery().getID(), squares[yIndex][xIndex].getBattery().getPotentialLevel());
+					if(!squares[yIndex][xIndex].getBattery().rightPotential())
+						satisfied = false;
+				}
+			}
+		}
+		return satisfied;
+	}
 
-    public boolean invalidMove(int xIndex, int yIndex) {
-        if (xIndex < 0 || xIndex >= xSize || yIndex < 0 || yIndex >= ySize) {
-            return true;
-        }
-        return getSquare(xIndex, yIndex).checkObstacle();
-    }
+	public boolean getExitState(){
+		return exitOpen;
+	}
 
-    public ArrayList<int[]> getGeneratorPositions() {
-        ArrayList<int[]> generatorPositions = new ArrayList<int[]>();
+	public void setBatteryCharge(int battery, int charge){
+		this.batteryCharge[battery] = charge;
+	}
 
-        for(int i = 0; i < ySize; i++) {
-            for(int j = 0; j < xSize; j++) {
-                if(squares[i][j].checkGenerator()) {
-                    int[] position = new int[2];
-                    position[0] = i;
-                    position[1] = j;
-                    generatorPositions.add(position);
-                }
-            }
-        }
-        return generatorPositions;
-    }
+	public int getBatteryCharge(int battery){
+		return this.batteryCharge[battery];
+	}
+
+	public void setNeededCharge(int battery, int chargeNeeded){
+		this.chargesNeeded[battery] = chargeNeeded;
+	}
+
+	public int getNeededCharge(int battery){
+		return chargesNeeded[battery];
+	}
+
+	public void manageExits() {
+		boolean batteriesState = batteriesSatisfied();
+		for(int yIndex = 0; yIndex < ySize; yIndex++) {
+			for(int xIndex = 0; xIndex < xSize; xIndex++) {
+				if(squares[yIndex][xIndex].checkExit()) {
+					squares[yIndex][xIndex].getExit().setOpen(batteriesState);
+					exitOpen = batteriesState;
+				}
+			}
+		}
+	}
 }

@@ -2,7 +2,7 @@ package connectricity;
 
 public class MapMaker {
     private Map level;
-    Player player = new Player(0, 0, level, 30, 30);
+    Player player;
     int xSize, ySize;
     private String[][] levelInfo;
 
@@ -52,7 +52,7 @@ public class MapMaker {
             }
 
             else if(levelInfo[i][2].equalsIgnoreCase("P")){
-                player.setPosition(xIndex, yIndex);
+                player = new  Player(xIndex, yIndex, level, Integer.parseInt(levelInfo[i][3]), Integer.parseInt(levelInfo[i][4]));
                 newSquare.setEntity(player);
             }
 
@@ -78,15 +78,20 @@ public class MapMaker {
 	}
 
     public void invalidMap() throws InvalidMapException {
-        int xIndex, yIndex;
         int generatorCount = 0, playerCount = 0, batteryCount = 0, exitsCount = 0;
 
         for(int i = 0; i < levelInfo.length; i++) {
-            yIndex = Integer.parseInt(levelInfo[i][0]) - 1;
-            xIndex = Integer.parseInt(levelInfo[i][1]) - 1;
 
             if(levelInfo[i][2].equalsIgnoreCase("B")){
                 batteryCount++;
+                try {
+                    int batPot = Integer.parseInt(levelInfo[i][3]);
+                    if (batPot > 3 || batPot < 0) {
+                        throw new Exception();
+                    }
+                } catch (Exception exception) {
+                    throw new WrongBatteryPotential("Potencial desejado na bateria especificado incorretamente");
+                }
             }
 
             if(levelInfo[i][2].equalsIgnoreCase("G")){
@@ -95,6 +100,15 @@ public class MapMaker {
 
             if(levelInfo[i][2].equalsIgnoreCase("P")){
                 playerCount++;
+                try {
+                    int initialWireNumber = Integer.parseInt(levelInfo[i][3]);
+                    int initialResistorNumber = Integer.parseInt(levelInfo[i][4]);
+                    if (initialWireNumber > 60 || initialWireNumber < 0 || initialResistorNumber > 60 || initialResistorNumber < 0) {
+                        throw new Exception();
+                    }
+                } catch (Exception exception) {
+                    throw new WrongPlayerInventory("Numero de fios ou resistores do jogador especificado incorretamente");
+                }
             }
 
             if(levelInfo[i][2].equalsIgnoreCase("E")){

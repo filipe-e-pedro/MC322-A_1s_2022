@@ -1,18 +1,14 @@
 package src.connectricity;
 
 public class Controller {
-    private final Player player;
-    private final Map map;
-    private final Toolkit tk;
-    private final CircuitMonitor cm;
-    // private String player = "Alcebiades";
-    // private int score = 0;
+    private Player player;
+    private Map map;
+    private CircuitMonitor cm;
     private boolean continuing = true;
 
-    public Controller (Player player, Map map, Toolkit tk){
+    public Controller (Player player, Map map){
         this.player = player;
         this.map = map;
-        this.tk = tk;
         cm = new CircuitMonitor(map);
     }
 
@@ -38,16 +34,19 @@ public class Controller {
             quit();
         }
         else if(key.equalsIgnoreCase("f")){
-            takeWire(curSquare);
-        }
-        else if(key.equalsIgnoreCase("g")){
-            placeWire(curSquare);
-        }
-        else if(key.equalsIgnoreCase("t")){
-            takeResistor(curSquare);
+            if (curSquare.checkWire()) {
+                takeWire(curSquare);
+            } else {
+                placeWire(curSquare);
+            }
         }
         else if(key.equalsIgnoreCase("r")){
-            placeResistor(curSquare);
+            if (curSquare.checkResistor()) {
+                takeResistor(curSquare);
+            } else {
+                placeResistor(curSquare);
+            }
+            
         }
         else{
             System.out.println("Comando invalido. Por favor digite outro comando.");
@@ -63,24 +62,17 @@ public class Controller {
 
         Square destSquare = map.getSquare(destSquare_x, destSquare_y);
 
-        if(destSquare.checkWire() && destSquare.getWire().getPotentialLevel() > 4){
-            curSquare.removePlayer();
-            // destSquare.revelaSala(); // VERIFICAR LIGHT
-            lose();
+        
+        curSquare.removePlayer();
+        player.setPosition(destSquare_x, destSquare_y);
+        destSquare.setEntity(player);
+        if(destSquare.checkExit() && destSquare.getExit().getOpen()){
+            win();
         }
-
         else{
-            curSquare.removePlayer();
-            player.setPosition(destSquare_x, destSquare_y);
-            destSquare.setEntity(player);
-            // destSquare.revelaSala();   // VERIFICAR LIGHT
-            if(destSquare.checkExit() && destSquare.getExit().getOpen()){
-                win();
-            }
-            else{
-                //cm.setPotentals();
-                printMap();
-            }
+            cm.setPotentials();
+            map.manageExits();
+            printMap();
         }
     }
 
@@ -101,11 +93,11 @@ public class Controller {
                 curSquare.setEntity(wire);
             }
             else {
-                System.out.println("Voce nao tem fios");
+                System.out.println("Voce nao tem fios"); 
             }
         }
         else {
-            System.out.println("Nao eh possivel colocar fio ai");
+            System.out.println("Nao eh possivel colocar fio ai"); 
         }
     }
 
@@ -126,11 +118,11 @@ public class Controller {
                 curSquare.setEntity(resistor);
             }
             else {
-                System.out.println("Voce nao tem resistores");
+                System.out.println("Voce nao tem resistores"); 
             }
         }
         else {
-            System.out.println("Nao eh possivel colocar resistor ai");
+            System.out.println("Nao eh possivel colocar resistor ai"); 
         }
     }
 
@@ -150,12 +142,6 @@ public class Controller {
 
     private void printMessage(String mesage){
         System.out.println(mesage);
-    }
-
-    public void lose(){
-        printMap();
-        printMessage("Voce loseu =(...");
-        continuing = false;
     }
 
     public void quit(){

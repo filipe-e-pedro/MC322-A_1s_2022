@@ -9,12 +9,12 @@ public class App {
 
     public static void executeGame(){
         Toolkit tk = new Toolkit();
-        MapMaker maker = new MapMaker(2, tk);
+        MapMaker maker = new MapMaker(3, tk);
 
         try {
             maker.invalidMap();
         } catch (InvalidMapException exception) {
-            System.err.println(exception.getMessage());
+            System.err.println("Erro: " + exception.getMessage());
             return;
         }
 
@@ -24,7 +24,7 @@ public class App {
         
         Map map = maker.getMap();
         Player player = maker.getPlayer();
-        Controller ctrl = new Controller(player, map, tk);
+        Controller ctrl = new Controller(player, map);
         String tecla;
 
         ctrl.printMap();
@@ -33,7 +33,7 @@ public class App {
             tecla = keyboard.nextLine();
             ctrl.receiveCommand(tecla);
         }
-        
+
         keyboard.close();
     }
 }

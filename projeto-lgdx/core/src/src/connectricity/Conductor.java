@@ -6,8 +6,8 @@ public abstract class Conductor extends Entity{
     protected int maxPotential = 3;
 
     public Conductor (int xIndex, int yIndex, Map map){
-        super(xIndex, yIndex, map);
-    }
+		super(xIndex, yIndex, map);
+	}
 
     public int getPotentialLevel() {
         return potentialLevel;

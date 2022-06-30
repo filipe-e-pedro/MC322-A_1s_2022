@@ -1,4 +1,4 @@
-package connectricity;
+package src.connectricity;
 
 public class ZeroGenerators extends InvalidMapException {
 

@@ -3,14 +3,12 @@ package connectricity;
 public class Controller {
     private Player player;
     private Map map;
-    private Toolkit tk;
     private CircuitMonitor cm;
     private boolean continuing = true;
 
-    public Controller (Player player, Map map, Toolkit tk){
+    public Controller (Player player, Map map){
         this.player = player;
         this.map = map;
-        this.tk = tk;
         cm = new CircuitMonitor(map);
     }
 
@@ -36,16 +34,19 @@ public class Controller {
             quit();
         }
         else if(key.equalsIgnoreCase("f")){
-            takeWire(curSquare);;
-        }
-        else if(key.equalsIgnoreCase("g")){
-            placeWire(curSquare);;
-        }
-        else if(key.equalsIgnoreCase("t")){
-            takeResistor(curSquare);
+            if (curSquare.checkWire()) {
+                takeWire(curSquare);
+            } else {
+                placeWire(curSquare);
+            }
         }
         else if(key.equalsIgnoreCase("r")){
-            placeResistor(curSquare);
+            if (curSquare.checkResistor()) {
+                takeResistor(curSquare);
+            } else {
+                placeResistor(curSquare);
+            }
+            
         }
         else{
             System.out.println("Comando invalido. Por favor digite outro comando.");
