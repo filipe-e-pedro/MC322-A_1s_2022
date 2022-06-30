@@ -6,8 +6,8 @@ public class MapMaker {
     int xSize, ySize;
     private String[][] levelInfo;
 
-    public MapMaker(int mapID, Toolkit tk){
-        levelInfo = tk.getMap(mapID);
+    public MapMaker(String[][] levelInfo){
+        this.levelInfo = levelInfo;
         ySize = Integer.parseInt(levelInfo[levelInfo.length -1][0]);
         xSize = Integer.parseInt(levelInfo[levelInfo.length -1][1]);
         level = new Map(xSize, ySize);

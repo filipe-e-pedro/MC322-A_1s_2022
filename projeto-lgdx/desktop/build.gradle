@@ -31,6 +31,7 @@ task debug(dependsOn: classes, type: JavaExec) {
 
 task dist(type: Jar) {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    from files(project.assetsDir);
     manifest {
         attributes 'Main-Class': project.mainClassName
     }

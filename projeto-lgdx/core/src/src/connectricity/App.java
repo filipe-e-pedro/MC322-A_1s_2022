@@ -1,24 +1,30 @@
 package src.connectricity;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.io.*;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class App extends ApplicationAdapter {
-	int mapLevel = 1, batteryCount = 0;
+	int mapLevel = 1;
+	String[][] levelInfo;
+	FileHandle mapFile;
+	BufferedReader mapReader;
 	boolean newLevel = true;
 	int gameState = 0;
 	int maxHeight = 720, maxWidth = 1280, cellsX, cellsY;
 	float cellSize;
 	String key;
-	Toolkit tk = new Toolkit();
 	Map map;
 	Controller ctrl;
 	Player player;
@@ -41,6 +47,7 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void create () {
 		playerSprite = new Texture("sprite_folder/player.png");
+		String filePath = playerSprite.toString();
 		obstacleSprite = new Texture("sprite_folder/box1.png");
 		generatorSprite = new Texture("sprite_folder/generator.png");
 		resistorSprite = new Texture("sprite_folder/resistor.png");
@@ -85,6 +92,7 @@ public class App extends ApplicationAdapter {
 
 	private void ruleScreen(){
 		font.draw(batch, "Regras", 200, 200);
+		batch.draw(playerSprite, 400, 400);
 		if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY))
 			gameState++;
 	}
@@ -93,7 +101,7 @@ public class App extends ApplicationAdapter {
 	}
 	private void progressGame(){
 		if (newLevel) {
-			makeMap();
+			makeMap(mapLevel);
 			newLevel = false;
 		} else {
 			if (!ctrl.getContinuing()) {
@@ -176,8 +184,24 @@ public class App extends ApplicationAdapter {
 		font.draw(batch, "F", 62, 35);
 		font.draw(batch, "R", 152, 35);
 	}
-	private boolean makeMap(){
-		maker = new MapMaker(mapLevel, tk);
+	private boolean makeMap(int mapID){
+		mapFile = Gdx.files.internal("maps_folder/"+mapID+".csv");
+		mapReader = mapFile.reader(8192);
+
+		Vector<String[]> v = new Vector<String[]>();
+		try {
+			String line = mapReader.readLine();
+			while (line != null) {
+				String ln[]  = line.split(",");
+				v.add(ln);
+				line = mapReader.readLine();
+			}
+			mapReader.close();
+		} catch (Exception erro) {
+			erro.printStackTrace();
+		}
+		levelInfo = (String[][])v.toArray(new String[v.size()][]);
+		maker = new MapMaker(levelInfo);
 		try {
 			maker.invalidMap();
 		} catch (InvalidMapException exception) {
