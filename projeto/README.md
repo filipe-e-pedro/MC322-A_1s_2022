@@ -15,7 +15,7 @@
 # Slides do Projeto
 
 ## Slides da Prévia
-> Coloque um link para os slides da prévia do projeto.
+https://docs.google.com/presentation/d/1GOxuunC9XyMGQk7AxyWvs8kTky6LrSfkABKOKZ0tpHU/edit#slide=id.p
 
 ## Slides da Apresentação Final
 > Coloque um link para os slides da apresentação final do projeto.
