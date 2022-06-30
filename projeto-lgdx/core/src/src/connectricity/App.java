@@ -1,7 +1,6 @@
 package src.connectricity;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.io.*;
-import java.util.Scanner;
 import java.util.Vector;
 
 public class App extends ApplicationAdapter {
@@ -47,7 +45,6 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void create () {
 		playerSprite = new Texture("sprite_folder/player.png");
-		String filePath = playerSprite.toString();
 		obstacleSprite = new Texture("sprite_folder/box1.png");
 		generatorSprite = new Texture("sprite_folder/generator.png");
 		resistorSprite = new Texture("sprite_folder/resistor.png");
@@ -90,9 +87,71 @@ public class App extends ApplicationAdapter {
 		batch.end();
 	}
 
+	private void rules(){
+		font.getData().setScale(5/2, 5/2);
+		font.draw(batch, "Regras:", 20, maxHeight-30);
+		font.getData().setScale(3/2, 3/2);
+		font.draw(batch, "-Use WASD ou as setinhas para se mover pelo mapa.", 20, maxHeight-100);
+		font.draw(batch, "-Use F para colocar ou remover fios:", 20, maxHeight-140);
+		batch.draw(wireSprite, 270, maxHeight-165, 40, 40);
+		font.draw(batch, "+Os fios conduzem energia sem mudar o potencial.", 40, maxHeight-170);
+		font.draw(batch, "+O número de fios por mapa é limitado.", 40, maxHeight-185);
+		font.draw(batch, "-Use R para colocar ou remover resistores:", 20, maxHeight-220);
+		batch.draw(resistorSprite, 305, maxHeight-245, 40, 40);
+		font.draw(batch, "+Os resistores conduzem energia, mas diminuem o potencial.", 40, maxHeight-250);
+		font.draw(batch, "+O número de resistores por mapa é limitado.", 40, maxHeight-265);
+		font.draw(batch, "+Dois resistores não se conectam diretamente.", 40, maxHeight-280);
+	}
+
+	private void conditions(){
+		font.getData().setScale(5/2, 5/2);
+		font.draw(batch, "Condições de vitória:", 600, maxHeight-30);
+		font.getData().setScale(3/2, 3/2);
+		font.draw(batch, "-Abra a porta e escape até completar todos os leveis.", 620, maxHeight-100);
+		font.draw(batch, "-Para abrir a porta alimente cada bateria com o potencial indicado:", 620, maxHeight-140);
+		batch.draw(new Texture("rules_folder/rule_example1.png"), 620, maxHeight-260, 150, 90);
+		batch.draw(new Texture("rules_folder/charge_example1.png"), 780, maxHeight-260, 120, 90);
+		font.draw(batch, "Nesse caso é necessário carregar \na primeira bateria (azul) com uma carga 3 \ne a segunda (vermelha) com uma carga 1.", 910, maxHeight-190);
+		batch.draw(new Texture("rules_folder/rule_example2.png"), 620, maxHeight-380, 150, 90);
+		batch.draw(new Texture("rules_folder/charge_example2.png"), 780, maxHeight-380, 120, 90);
+		font.draw(batch, "Aqui ambas as baterias foram ligadas \ncom a carga direto do gerador (carga 3), \nportanto a saída não será aberta.", 910, maxHeight-310);
+		batch.draw(new Texture("rules_folder/rule_example3.png"), 620, maxHeight-500, 150, 90);
+		batch.draw(new Texture("rules_folder/charge_example3.png"), 780, maxHeight-500, 120, 90);
+		font.draw(batch, "Aqui a bateria azul foi ligada diretamente \nno gerador (carga 3), enquanto a carga que chega \nna vermelha passou por dois resistores (carga 1). \nAmbas estão com a carga indicada, a saída é aberta.", 910, maxHeight-420);
+		batch.draw(new Texture("rules_folder/rule_example4.png"), 620, maxHeight-620, 150, 90);
+		batch.draw(new Texture("rules_folder/charge_example2.png"), 780, maxHeight-620, 120, 90);
+		font.draw(batch, "Cuidado: \nOs fios conduzem a maior carga \ncom a qual eles têm contato", 910, maxHeight-550);
+	}
+
+	private void entitys(){
+		font.getData().setScale(5/2, 5/2);
+		font.draw(batch, "Elementos:", 20, 400);
+		font.getData().setScale(3/2, 3/2);
+		font.draw(batch, "Jogador:", 20, 360);
+		batch.draw(playerSprite, 20, 285, 60, 60);
+		font.draw(batch, "Obstáculo:", 20, 265);
+		batch.draw(obstacleSprite, 20, 190, 60, 60);
+		font.draw(batch, "Fio:", 20, 175);
+		batch.draw(wireSprite, 20, 100, 60, 60);
+		font.draw(batch, "Resistor:", 20, 85);
+		batch.draw(resistorSprite, 20, 10, 60, 60);
+		font.draw(batch, "Baterias:", 140, 360);
+		for(int i = 0; i < 4; i++)
+			batch.draw(batterySprite[i], 140, 360-75*(i+1), 60, 60);
+		font.draw(batch, "Gerador:", 260, 360);
+		batch.draw(generatorSprite, 260, 285, 60, 60);
+		font.draw(batch, "Saída:", 260, 265);
+		batch.draw(exitSprite[0], 260, 190, 60, 60);
+		batch.draw(exitSprite[1], 260, 115, 60, 60);
+
+	}
 	private void ruleScreen(){
-		font.draw(batch, "Regras", 200, 200);
-		batch.draw(playerSprite, 400, 400);
+		rules();
+		conditions();
+		entitys();
+		font.getData().setScale(2, 2);
+		font.draw(batch, "APERTE  QUALQUER  TECLA  PARA  CONTINUAR", 570, 40);
+		batch.draw(new Texture("rules_folder/arrow.png"), 1220, 14, 40, 30);
 		if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY))
 			gameState++;
 	}
@@ -184,7 +243,7 @@ public class App extends ApplicationAdapter {
 		font.draw(batch, "F", 62, 35);
 		font.draw(batch, "R", 152, 35);
 	}
-	private boolean makeMap(int mapID){
+	private void makeMap(int mapID){
 		mapFile = Gdx.files.internal("maps_folder/"+mapID+".csv");
 		mapReader = mapFile.reader(8192);
 
@@ -206,7 +265,6 @@ public class App extends ApplicationAdapter {
 			maker.invalidMap();
 		} catch (InvalidMapException exception) {
 			System.err.println("Erro: " + exception.getMessage());
-			return false;
 		}
 
 		maker.createMap();
@@ -214,7 +272,6 @@ public class App extends ApplicationAdapter {
 		map = maker.getMap();
 		player = maker.getPlayer();
 		ctrl = new Controller(player, map);
-		return true;
 	}
 
 	private Texture getSprite(int x, int y){

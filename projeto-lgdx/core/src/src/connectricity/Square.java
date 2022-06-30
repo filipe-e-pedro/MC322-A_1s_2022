@@ -139,8 +139,7 @@ public class Square {
 		return !(checkBattery() || checkExit() || checkGenerator() || checkObstacle() || checkWire() || checkResistor());
 	}
 
-	public String mostRelevantEntity() { 
-		// GAMBIARRA, MUDAR DEPOIS
+	public String mostRelevantEntity() {
 		if (checkObstacle()) {
 			return obstacle.getName();
 		}
@@ -172,8 +171,7 @@ public class Square {
 		return "-";
 	}
 
-	public String circuitPart() { 
-		// GAMBIARRA, MUDAR DEPOIS
+	public String circuitPart() {
 
 		if (checkGenerator()) {
 			return generator.getName();
