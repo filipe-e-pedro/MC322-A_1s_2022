@@ -32,12 +32,10 @@ https://docs.google.com/presentation/d/1YOW_dtf9_ErJ-F-U-c1zVL32a357mV5I6yyOJDY2
 ~~~
 ├── README.md          <- apresentação do projeto
 │
-└── src                <- projeto em Java
-    │
-    ├── src            <- arquivos-fonte do projeto (.java)
-        └── data       <- Arquivos .csv contendo as fases do jogo
-    │
-    └── bin            <- arquivos em bytecode (.class)
+├── src            <- arquivos-fonte do projeto (.java)
+|    └── data       <- Arquivos .csv contendo as fases do jogo
+│
+└── bin            <- arquivos em bytecode (.class)
 ~~~
 
 
