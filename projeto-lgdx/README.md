@@ -30,22 +30,29 @@ https://docs.google.com/presentation/d/1YOW_dtf9_ErJ-F-U-c1zVL32a357mV5I6yyOJDY2
 # Estrutura de Arquivos e Pastas
 
 ~~~
-├── README.md          <- apresentação do projeto
+├─── README.md                                         <- apresentação do projeto
 │
-├── assets             <- mídias usadas no projeto
-|     └── maps_folder  <- Arquivos .csv contendo as fases do jogo
+├─── assets                                            <- mídias usadas no projeto
+|     └── maps_folder                                  <- Arquivos .csv contendo as fases do jogo
 |
-├── core/src           <- arquivos-fonte do projeto (.java)
-├── desktop/src        <- arquivo .java main (launcher)
-│
-└── bin                <- arquivos em bytecode (.class)
+├─── core/src           
+|     ├── build/classes/java/main/src/connectricity    <- arquivos em bytecode (.class)
+|     └── src/src/connectricity                        <- arquivos-fonte do projeto (.java)
+|
+└─── desktop/src                              
+        ├── build/classes/java/main/src/connectricity  <- arquivo do main em bytecode (.class)
+        └── src/src/connectricity                      <- arquivo-fonte do main do projeto (.java)
 ~~~
 
 
-## [maps_folder](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto/src/connectricity/maps_folder)
+## [maps_folder](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto-lgdx/assets/maps_folder)
 
 Arquivos .csv contendo as fases do jogo.
 
-## [src](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto)
+## [src](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto-lgdx)
 
 Projeto principal do jogo em java.
+
+## [assets](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto-lgdx/assets)
+
+Qualquer mídia usada no seu projeto: vídeo, imagens, animações, slides etc.
