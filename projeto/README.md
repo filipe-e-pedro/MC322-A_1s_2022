@@ -32,27 +32,20 @@ https://docs.google.com/presentation/d/1YOW_dtf9_ErJ-F-U-c1zVL32a357mV5I6yyOJDY2
 ~~~
 ├── README.md          <- apresentação do projeto
 │
-├── data               <- Arquivos .csv contendo as fases do jogo.
-│
-├── src                <- projeto em Java
-│   │
-│   ├── src            <- arquivos-fonte do projeto (.java)
-│   │
-│   ├── bin            <- arquivos em bytecode (.class)
-│
-└── assets             <- mídias usadas no projeto
+└── src                <- projeto em Java
+    │
+    ├── src            <- arquivos-fonte do projeto (.java)
+        └── data       <- Arquivos .csv contendo as fases do jogo
+    │
+    └── bin            <- arquivos em bytecode (.class)
 ~~~
 
 
-## `data`
+## [data](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto/src/connectricity/maps_folder)
 
 Arquivos .csv contendo as fases do jogo.
 
-## `src`
+## [src](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto)
 
 Projeto principal do jogo em java.
-
-## `assets`
-
-Sprites usados no jogo.
 
