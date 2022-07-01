@@ -39,6 +39,8 @@ public class Controller {
             } else {
                 placeWire(curSquare);
             }
+            cm.setPotentials();
+            map.manageExits();
         }
         else if(key.equalsIgnoreCase("r")){
             if (curSquare.checkResistor()) {
@@ -46,7 +48,8 @@ public class Controller {
             } else {
                 placeResistor(curSquare);
             }
-            
+            cm.setPotentials();
+            map.manageExits();
         }
         else{
             System.out.println("Comando invalido. Por favor digite outro comando.");
@@ -70,8 +73,6 @@ public class Controller {
             win();
         }
         else{
-            cm.setPotentials();
-            map.manageExits();
             printMap();
         }
     }

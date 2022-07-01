@@ -88,9 +88,9 @@ public class App extends ApplicationAdapter {
 	}
 
 	private void rules(){
-		font.getData().setScale(5/2, 5/2);
+		font.getData().setScale(2, 2);
 		font.draw(batch, "Regras:", 20, maxHeight-30);
-		font.getData().setScale(3/2, 3/2);
+		font.getData().setScale(1, 1);
 		font.draw(batch, "-Use WASD ou as setinhas para se mover pelo mapa.", 20, maxHeight-100);
 		font.draw(batch, "-Use F para colocar ou remover fios:", 20, maxHeight-140);
 		batch.draw(wireSprite, 270, maxHeight-165, 40, 40);
@@ -104,9 +104,9 @@ public class App extends ApplicationAdapter {
 	}
 
 	private void conditions(){
-		font.getData().setScale(5/2, 5/2);
+		font.getData().setScale(2, 2);
 		font.draw(batch, "Condições de vitória:", 600, maxHeight-30);
-		font.getData().setScale(3/2, 3/2);
+		font.getData().setScale(1, 1);
 		font.draw(batch, "-Abra a porta e escape até completar todos os leveis.", 620, maxHeight-100);
 		font.draw(batch, "-Para abrir a porta alimente cada bateria com o potencial indicado:", 620, maxHeight-140);
 		batch.draw(new Texture("rules_folder/rule_example1.png"), 620, maxHeight-260, 150, 90);
@@ -124,9 +124,9 @@ public class App extends ApplicationAdapter {
 	}
 
 	private void entitys(){
-		font.getData().setScale(5/2, 5/2);
+		font.getData().setScale(2, 2);
 		font.draw(batch, "Elementos:", 20, 400);
-		font.getData().setScale(3/2, 3/2);
+		font.getData().setScale(1, 1);
 		font.draw(batch, "Jogador:", 20, 360);
 		batch.draw(playerSprite, 20, 285, 60, 60);
 		font.draw(batch, "Obstáculo:", 20, 265);
@@ -150,13 +150,12 @@ public class App extends ApplicationAdapter {
 		conditions();
 		entitys();
 		font.getData().setScale(2, 2);
-		font.draw(batch, "APERTE  QUALQUER  TECLA  PARA  CONTINUAR", 570, 40);
-		batch.draw(new Texture("rules_folder/arrow.png"), 1220, 14, 40, 30);
+		font.draw(batch, "APERTE  QUALQUER  TECLA  PARA  CONTINUAR > >", 540, 40);
 		if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY))
 			gameState++;
 	}
 	private void victoryScreen(){
-		font.draw(batch, "Vitóriaa", 200, 200);
+		batch.draw(new Texture("sprite_folder/Vitoria.png"), 0, 0, maxWidth, maxHeight);
 	}
 	private void progressGame(){
 		if (newLevel) {
@@ -237,7 +236,7 @@ public class App extends ApplicationAdapter {
 		batch.draw(itemFrameSprite, 40, 40, 50, 50);
 		batch.draw(resistorSprite, 130, 40, 50, 50);
 		batch.draw(itemFrameSprite, 130, 40, 50, 50);
-
+		font.getData().setScale(1, 1);
 		font.draw(batch, "x"+player.getWireNumber(), 90, 40);
 		font.draw(batch, "x"+player.getResistorNumber(), 180, 40);
 		font.draw(batch, "F", 62, 35);
