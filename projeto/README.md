@@ -32,14 +32,14 @@ https://docs.google.com/presentation/d/1YOW_dtf9_ErJ-F-U-c1zVL32a357mV5I6yyOJDY2
 ~~~
 ├── README.md          <- apresentação do projeto
 │
-├── src            <- arquivos-fonte do projeto (.java)
-|    └── data       <- Arquivos .csv contendo as fases do jogo
+├── src                <- arquivos-fonte do projeto (.java)
+|    └── maps_folder   <- Arquivos .csv contendo as fases do jogo
 │
-└── bin            <- arquivos em bytecode (.class)
+└── bin                <- arquivos em bytecode (.class)
 ~~~
 
 
-## [data](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto/src/connectricity/maps_folder)
+## [maps_folder](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto/src/connectricity/maps_folder)
 
 Arquivos .csv contendo as fases do jogo.
 
