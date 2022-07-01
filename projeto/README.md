@@ -3,6 +3,7 @@
 # Descrição
 
 > Connectricity é um jogo celular com o objetivo de levar energia às baterias para abrir a saída da fase. Para isso, é necessário conectar os geradores às baterias por meio de fios, e uitlizar resistores para regular o potencial fornecido da maneira correta.
+Esse é o projeto que roda no console, sem interface gráfica.
 
 # Equipe
 * Filipe Franco Ferreira - 251027`
@@ -10,7 +11,7 @@
 
 # Arquivo Executável do Jogo
 
-> Coloque aqui um link para download do arquivo `jar` ou equivalente para execução do seu jogo.
+Link para o .jar do projeto-lgdx (com interface gráfica): [connectricity.jar](https://drive.google.com/drive/folders/1WL17o8a_5FCVKHCNIZUWu5nxxDBHZqtz?usp=sharing)
 
 # Slides do Projeto
 
