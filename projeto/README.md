@@ -6,7 +6,7 @@
 Esse é o projeto que roda no console, sem interface gráfica.
 
 # Equipe
-* Filipe Franco Ferreira - 251027`
+* Filipe Franco Ferreira - 251027
 * Pedro Henrique Peraçoli Pereira Ceccon - 247327
 
 # Arquivo Executável do Jogo
