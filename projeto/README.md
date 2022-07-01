@@ -25,7 +25,7 @@ https://docs.google.com/presentation/d/1YOW_dtf9_ErJ-F-U-c1zVL32a357mV5I6yyOJDY2
 
 ## Diagrama Geral da Arquitetura do Jogo
 
-> Apresente um diagrama geral da arquitetura do jogo. O formato é livre. A escolha de um ou mais estilos arquiteturais será considerado um diferencial.
+![Diagrama de classes](https://github.com/filipe-e-pedro/MC322-A_1s_2022/blob/main/imagens/diagrama_classes.png)
 
 # Estrutura de Arquivos e Pastas
 
