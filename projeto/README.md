@@ -23,7 +23,7 @@ https://docs.google.com/presentation/d/1YOW_dtf9_ErJ-F-U-c1zVL32a357mV5I6yyOJDY2
 
 # Diagramas
 
-## Diagrama Geral da Arquitetura do Jogo
+## Diagrama Geral das classes do jogo
 
 ![Diagrama de classes](https://github.com/filipe-e-pedro/MC322-A_1s_2022/blob/main/imagens/diagrama_classes.png)
 
