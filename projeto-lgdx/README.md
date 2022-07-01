@@ -56,3 +56,6 @@ Projeto principal do jogo em java.
 ## [assets](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto-lgdx/assets)
 
 Qualquer mídia usada no seu projeto: vídeo, imagens, animações, slides etc.
+
+#Tutorial de como rodar o programa no Eclipse:
+![Tutorial](https://github.com/filipe-e-pedro/MC322-A_1s_2022/blob/main/imagens/tutorial-eclipse.mp4)
