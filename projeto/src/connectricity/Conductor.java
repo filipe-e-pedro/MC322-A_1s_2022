@@ -1,3 +1,4 @@
+
 package connectricity;
 
 public abstract class Conductor extends Entity{
@@ -9,6 +10,12 @@ public abstract class Conductor extends Entity{
 		super(xIndex, yIndex, map);
 	}
 
+    public void setPotentialLevel(int level) {
+        if (level >= 0 && level <= maxPotential) {
+            potentialLevel = level;
+        }
+    }
+
     public int getPotentialLevel() {
         return potentialLevel;
     }
@@ -19,11 +26,5 @@ public abstract class Conductor extends Entity{
 
     public String getName() {
         return "C";
-    }
-
-    public void setPotentialLevel(int level) {
-        if (level >= 0 && level <= maxPotential) {
-            potentialLevel = level;
-        }
     }
 }
