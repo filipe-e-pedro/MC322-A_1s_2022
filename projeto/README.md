@@ -15,10 +15,10 @@
 # Slides do Projeto
 
 ## Slides da Prévia
-> Coloque um link para os slides da prévia do projeto.
+https://docs.google.com/presentation/d/1GOxuunC9XyMGQk7AxyWvs8kTky6LrSfkABKOKZ0tpHU/edit#slide=id.g11cae6dbe76_0_0
 
 ## Slides da Apresentação Final
-> Coloque um link para os slides da apresentação final do projeto.
+https://docs.google.com/presentation/d/1YOW_dtf9_ErJ-F-U-c1zVL32a357mV5I6yyOJDY2s6o/edit#slide=id.g13acd6c184b_0_15
 
 # Diagramas
 
