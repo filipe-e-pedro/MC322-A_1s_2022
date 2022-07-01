@@ -57,5 +57,5 @@ Projeto principal do jogo em java.
 
 Qualquer mídia usada no seu projeto: vídeo, imagens, animações, slides etc.
 
-#Tutorial de como rodar o programa no Eclipse:
+# Tutorial de como rodar o programa no Eclipse:
 [![Tutorial Eclipse](https://github.com/filipe-e-pedro/MC322-A_1s_2022/blob/main/imagens/tutorial.PNG)](https://drive.google.com/drive/folders/1PGl_afuXQMtUjWaVt8GY6R_hzqNhJoDg?usp=sharing)
