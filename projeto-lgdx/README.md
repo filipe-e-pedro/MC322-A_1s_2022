@@ -54,7 +54,7 @@ private int[][] createPotentialMatrix(int numberOfRegions, ArrayList<String> pot
     }
 ~~~
 
-Essa função conta quantos resistores tem em um determinado caminho do circuito para determinar o potencial
+Essa função conta quantos resistores tem em um determinado caminho do circuito para determinar o potencial dos condutores.
 
 ~~~java
 private void countResistorPath(Queue<Integer> queue, int[] queued, int[] resistorPath, int[][] connections, int currentPotential) {
