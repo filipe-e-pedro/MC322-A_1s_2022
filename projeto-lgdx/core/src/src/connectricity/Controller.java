@@ -1,6 +1,9 @@
 package src.connectricity;
 
 public class Controller {
+    /**
+     * Classe do controlador do jogo. Realiza os comndos do jogador.
+     */
     private Player player;
     private Map map;
     private CircuitMonitor cm;

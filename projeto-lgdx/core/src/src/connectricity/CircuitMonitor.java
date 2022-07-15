@@ -2,6 +2,9 @@ package src.connectricity;
 import java.util.*;
 
 public class CircuitMonitor {
+    /**
+     * Classe responsavel por determinar e dar set no potencial de cada componente do circuito
+     */
     private Map map;
     String model[][];
     int size[];
