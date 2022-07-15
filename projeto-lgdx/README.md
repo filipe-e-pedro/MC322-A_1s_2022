@@ -43,12 +43,7 @@ public abstract class Conductor extends Entity{
         }
     }
 }
-
-# Diagramas
-
-## Diagrama Geral das classes do jogo
-
-![Diagrama de classes](https://github.com/filipe-e-pedro/MC322-A_1s_2022/blob/main/imagens/diagrama_classes.png)
+~~~~
 
 # Estrutura de Arquivos e Pastas
 
