@@ -45,7 +45,7 @@ public abstract class Conductor extends Entity{
 }
 ~~~~
 
-Código do CircuitMonitor utilizando polimorfismo para modificar os potenciais de cada condutor.
+Código do CircuitMonitor utilizando polimorfismo para modificar os potenciais de cada condutor:
 ~~~java
 public void setPotentials() {
         int numberOfRegions = determinatePotentials();
@@ -107,7 +107,7 @@ public void setPotentials() {
     }
 ~~~
 
-> Explicação de como o pattern foi adotado e quais suas vantagens, referenciando o diagrama.
+Isso permite a fácil modificação do potencial de todos os condutores simultaneamente para o potencial correto.
 
 # Estrutura de Arquivos e Pastas
 
