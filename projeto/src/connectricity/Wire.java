@@ -1,19 +1,13 @@
 package connectricity;
 
-public class Wire extends Entity{
-    
-    private int current = 0;
+public class Wire extends Conductor{
 
-    public Wire (int xIndex, int yIndex/*,Map mapa*/){
-		super(xIndex, yIndex);
-		// this.mapa = mapa;
+    public Wire (int xIndex, int yIndex, Map map){
+		super(xIndex, yIndex, map);
 	}
-
-    public int getCurrent() {
-        return current;
-    }
 
     public String getName() {
         return "W";
     }
+
 }

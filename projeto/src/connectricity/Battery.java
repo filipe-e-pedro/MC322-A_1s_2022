@@ -1,25 +1,19 @@
 package connectricity;
 
-public class Battery extends Entity{
+public class Battery extends Conductor{
 
-    private int chargeLevel = 0;
+    private int targetPotential;
 
-    public Battery (int xIndex, int yIndex/*,Map mapa*/){
-		super(xIndex, yIndex);
-		// this.mapa = mapa;
+    public Battery (int xIndex, int yIndex, Map map, int targetPotential){
+		super(xIndex, yIndex, map);
+        this.targetPotential = targetPotential;
 	}
 
     public String getName() {
         return "B";
     }
 
-    public int getChargeLevel() {
-        return chargeLevel;
-    }
-
-    public void setChargeLevel(int level) {
-        if (level >= 0 && level < 3) {
-            chargeLevel = level;
-        }
+    public boolean rightPotential() {
+        return targetPotential == potentialLevel;
     }
 }
