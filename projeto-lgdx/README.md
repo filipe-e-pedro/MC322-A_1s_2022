@@ -193,3 +193,24 @@ Qualquer mídia usada no seu projeto: vídeo, imagens, animações, slides etc.
 
 # Tutorial de como rodar o programa no Eclipse:
 [![Tutorial Eclipse](https://github.com/filipe-e-pedro/MC322-A_1s_2022/blob/main/imagens/tutorial.PNG)](https://drive.google.com/drive/folders/1PGl_afuXQMtUjWaVt8GY6R_hzqNhJoDg?usp=sharing)
+
+# Plano de Exceções
+
+## Diagrama da hierarquia de exceções
+> Diagrama das exceptions
+
+![Hierarquia Exceções](https://github.com/filipe-e-pedro/MC322-A_1s_2022/blob/main/imagens/Exceptions.PNG)
+
+## Descrição das classes de exceção
+
+> Tabela das exceptions:
+
+Classe | Descrição
+----- | -----
+InvalidMapException | Engloba todas as exceções que deixam o arquivo de mapa inválido.
+WrongBatteryPotential | Indica que tem bateria com um potencial necessário inválido
+WrongPlayerInventory | Indica que o inventário do jogador foi indicado de maneira inválida.
+WrongPlayerNumber | Indica que o número de jogadores indicado no arquivo de mapa é inválido.
+ZeroBatteries | Indica que não tem baterias representadas no arquivo de mapa.
+ZeroExits | Indica que não tem saídas representadas no arquivo de mapa.
+ZeroGenerators | Indica que não tem geradores representados no arquivo de mapa.
