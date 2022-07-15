@@ -3,6 +3,9 @@ package src.connectricity;
 import java.util.*;
 
 public class Map {
+/**
+ * Classe que representa o mapa da fase
+ */
     int xSize, ySize;
     private Square squares[][];
 	private boolean exitOpen = false;
@@ -12,6 +15,12 @@ public class Map {
 	private int[] chargesNeeded;
 
     public Map (int xSize, int ySize) {
+	/**
+	 * Recebe dois inteiros que representam o tamanho do mapa
+	 *
+	 * Gera uma matriz de objetos da classe Square, que representam as celulas
+	 * do espaco celular do jogo, gera dois vetores para o controle das baterias
+	 */
         this.xSize = xSize;
         this.ySize = ySize;
         this.squares = new Square[ySize][xSize];
@@ -33,8 +42,12 @@ public class Map {
 		size[1] = ySize;
 		return size;
 	}
-	
+
 	public String[][] getMatrix(){
+	/**
+	 * Retorna uma matriz de String contendo o nome do elemento
+	 * mais importante em cada celula
+	 */
 		String[][] matrix = new String[ySize][xSize];
 		for(int yIndex = 0; yIndex < ySize; yIndex++) {
 			for(int xIndex = 0; xIndex < xSize; xIndex++) {
@@ -45,6 +58,10 @@ public class Map {
 	}
 
 	public String[][] getCircuit(){
+	/**
+	 * Retorna uma matriz de String contendo o nome do elemento
+	 * em cada celula que pode fazer parte de algum circuito
+	 */
 		String[][] matriz = new String[ySize][xSize];
 		for(int yIndex = 0; yIndex < ySize; yIndex++) {
 			for(int xIndex = 0; xIndex < xSize; xIndex++) {
@@ -81,6 +98,9 @@ public class Map {
 	}
 
 	public boolean batteriesSatisfied() {
+	/**
+	 * Retorna true se as baterias estao carregadas corretamente e false caso contrario
+	 */
 		boolean satisfied = true;
 		for(int yIndex = 0; yIndex < ySize; yIndex++) {
 			for(int xIndex = 0; xIndex < xSize; xIndex++) {
@@ -115,6 +135,9 @@ public class Map {
 	}
 
 	public void manageExits() {
+	/**
+	 * Abre o portao caso as baterias estejam carregadas corretamente
+	 */
 		boolean batteriesState = batteriesSatisfied();
 		for(int yIndex = 0; yIndex < ySize; yIndex++) {
 			for(int xIndex = 0; xIndex < xSize; xIndex++) {

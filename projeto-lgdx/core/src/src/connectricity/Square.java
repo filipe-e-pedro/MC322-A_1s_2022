@@ -1,6 +1,9 @@
 package src.connectricity;
 
 public class Square {
+/**
+ * Classe que representa cada celula do espaco celular do jogo
+ */
     private Battery battery = null;
     private Exit exit = null;
     private Generator generator = null;

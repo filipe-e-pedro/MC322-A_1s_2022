@@ -3,7 +3,7 @@
 # Descrição
 
 > Connectricity é um jogo celular com o objetivo de levar energia às baterias para abrir a saída da fase. Para isso, é necessário conectar os geradores às baterias por meio de fios, e uitlizar resistores para regular o potencial fornecido da maneira correta.
-Esse é o projeto que roda no console, sem interface gráfica. A vesão com interface gráfica se localiza [aqui](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto-lgdx).
+Esse é o projeto que roda no console, sem interface gráfica. A vesão com interface gráfica, documentada e com a entrega definitiva se localiza [aqui](https://github.com/filipe-e-pedro/MC322-A_1s_2022/tree/main/projeto-lgdx).
 
 # Equipe
 * Filipe Franco Ferreira - 251027
@@ -11,7 +11,7 @@ Esse é o projeto que roda no console, sem interface gráfica. A vesão com inte
 
 # Arquivo Executável do Jogo
 
-Link para o .jar do projeto-lgdx (com interface gráfica): [connectricity.jar](https://drive.google.com/drive/folders/1WL17o8a_5FCVKHCNIZUWu5nxxDBHZqtz?usp=sharing)
+Link para o .jar do projeto-lgdx (com interface gráfica): [connectricity.jar](https://github.com/filipe-e-pedro/MC322-A_1s_2022/blob/main/projeto-lgdx/desktop/build/libs/connectricity.jar)
 
 # Slides do Projeto
 
