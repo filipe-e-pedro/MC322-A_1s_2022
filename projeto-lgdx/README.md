@@ -24,15 +24,54 @@ https://docs.google.com/presentation/d/1YOW_dtf9_ErJ-F-U-c1zVL32a357mV5I6yyOJDY2
 ## Relatório de Evolução
 
 Primeiro tentamos encontrar algum estilo de jogo que fosse do gosto de nós dois, e chegamos a conclusão que queríamos fazer algum jogo de puzzle. Concluímos que queríamos fazer algo relacionado a circuitos elétricos, que é relacionado ao nosso curso.
-	
+
 A ideia principal se manteve a mesma ao longo de todo o projeto: o objetivo principal do jogo seria alimentar o circuito de uma forma que abrisse a saída da sala. Na ideia original do jogo o controle dos circuitos seria feito considerando tensão e corrente, os componentes que poderiam interagir com o circuito seriam: fio, resistor, gerador, bateria, lâmpada e isolante. A ideia era existir um sistema de iluminação, que parte do mapa ficasse oculta até que uma lâmpada fosse acesa através do circuito. A ideia era que o jogador poderia se machucar, ou até morrer, caso uma corrente muito alta passasse pelo seu corpo. A ideia era ter um menu que você poderia selecionar a fase que deseja jogar, além de acessar as regras pelo menu.
 	
 A primeira ideia que descartamos foi o dano ao jogador, decidimos que a ideia do jogo era resolver o puzzle, não queríamos um jogo que punisse o jogador por decisões erradas. Depois descartamos a ideia do isolante, o propósito inicial principal dele seria fornecer alguma segurança ao jogador, mas como retiramos o potencial do jogador levar dano/morrer não teria muito sentido em manter ele no jogo. Aqui foi feita a primeira versão do jogo, que rodava no terminal, e basicamente era um personagem que andava em um espaço celular e podia interagir com os resistores e fios, mas não tinha a parte de conferir o circuito então não dava para fazer muita coisa.
 	
 Depois descartamos a ideia de que o controle fosse feito considerando a tensão e corrente do circuito, percebemos que seria uma lógica muito difícil de implementar e decidimos trabalhar apenas com potencial, que ainda se mostrou bem desafiador visto que circuitos poderiam ser montados de várias formas e, apesar de já termos descartado uma parte da concordância com a física de circuitos, ainda queríamos manter alguma semelhança com circuitos reais.A partir disso fizemos a segunda versão, que também rodava no terminal, e agora os componentes comunicavam entre si e era possível exercer a condição de vitória montando os circuitos corretamente.
 	
-\t A partir daqui percebemos que realmente estávamos ficando sem tempo, tínhamos bastante coisa para fazer ainda, mas com o prazo apertando e um dos membros doente decidimos que teríamos que descartar mais coisas. Decidimos não implementar a mecânica de luz e, com ela, as lâmpadas. Também percebemos que não teríamos tempo para implementar um menu. Daí veio a versão final do jogo que implementamos interface gráfica na versão anterior.
+A partir daqui percebemos que realmente estávamos ficando sem tempo, tínhamos bastante coisa para fazer ainda, mas com o prazo apertando e um dos membros doente decidimos que teríamos que descartar mais coisas. Decidimos não implementar a mecânica de luz e, com ela, as lâmpadas. Também percebemos que não teríamos tempo para implementar um menu. Daí veio a versão final do jogo que implementamos interface gráfica na versão anterior.
 
+# Destaques de Código
+Essa função cria uma matriz que representa todo o mapa e coloca o potencial certo em todos os condutores.
+~~~java
+private int[][] createPotentialMatrix(int numberOfRegions, ArrayList<String> potentials,  int[][] connections) {
+        int[][] potentialMatrix = new int[size[1]][size[0]];
+        int[] finalPotentials = determineFinalPotentials(numberOfRegions, connections);
+
+        for (int yIndex = 0; yIndex < size[1]; yIndex++) {
+            for (int xIndex = 0; xIndex < size[0]; xIndex++) {
+                if (potentials.contains(model[yIndex][xIndex])) {
+                    potentialMatrix[yIndex][xIndex] = finalPotentials[Integer.parseInt(model[yIndex][xIndex])];
+                }
+                else {
+                    potentialMatrix[yIndex][xIndex] = -1;
+                }
+            }
+        }
+        return potentialMatrix;
+    }
+~~~
+
+Essa função conta quantos resistores tem em um determinado caminho do circuito para determinar o potencial
+
+~~~java
+private void countResistorPath(Queue<Integer> queue, int[] queued, int[] resistorPath, int[][] connections, int currentPotential) {
+        for (int i = 0; i < connections[currentPotential].length; i++) {
+            if (connections[currentPotential][i] > 0 && queued[i] == 0){
+                resistorPath[i] = resistorPath[currentPotential] + 1;
+                queue.add(i);
+                queued[i] = 1;
+            }
+        }
+        if (queue.isEmpty()) {
+            return;
+        }
+        int nextPotential = queue.remove();
+        countResistorPath(queue, queued, resistorPath, connections, nextPotential);
+    }
+~~~
 
 # Destaques de Orientação a Objetos
 Foi utilizado polimorfismo por meio de uma classe abstrata “Conductor”.
