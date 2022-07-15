@@ -45,6 +45,70 @@ public abstract class Conductor extends Entity{
 }
 ~~~~
 
+Código do CircuitMonitor utilizando polimorfismo para modificar os potenciais de cada condutor.
+~~~java
+public void setPotentials() {
+        int numberOfRegions = determinatePotentials();
+        ArrayList<String> potentials = createPotentialsString(numberOfRegions);
+        int[][] connections = resistorConnections(numberOfRegions, potentials);
+        int[][] potentialMatrix = createPotentialMatrix(numberOfRegions, potentials, connections);
+
+        for (int yIndex = 0; yIndex < size[1]; yIndex++) {
+            for (int xIndex = 0; xIndex < size[0]; xIndex++) {
+                if (potentialMatrix[yIndex][xIndex] >= 0) {
+                    map.getSquare(xIndex, yIndex).getConductor().setPotentialLevel(potentialMatrix[yIndex][xIndex]);
+                }
+            }
+        }
+    }
+~~~
+
+# Destaques de Pattern
+A classe CircuitMonitor serve como um observer, que sempre que um comando que modifica o circuito é acionado ele calcula os potenciais corretos para todos os condutores e se comunica indiretamente com cada um para mudar o valor de seu potencial.
+
+## Código do Pattern
+Codigo do Controller acionando o circuit monitor sempre que um comando que modifica o circuito é acionado:
+~~~java
+else if(key.equalsIgnoreCase("f")){
+            if (curSquare.checkWire()) {
+                takeWire(curSquare);
+            } else {
+                placeWire(curSquare);
+            }
+            cm.setPotentials();
+            map.manageExits();
+        }
+        else if(key.equalsIgnoreCase("r")){
+            if (curSquare.checkResistor()) {
+                takeResistor(curSquare);
+            } else {
+                placeResistor(curSquare);
+            }
+            cm.setPotentials();
+            map.manageExits();
+        }
+~~~
+
+Código do método setPotentials() do CircuitMonitor, que modifica o potencial de cada condutor:
+~~~java
+public void setPotentials() {
+        int numberOfRegions = determinatePotentials();
+        ArrayList<String> potentials = createPotentialsString(numberOfRegions);
+        int[][] connections = resistorConnections(numberOfRegions, potentials);
+        int[][] potentialMatrix = createPotentialMatrix(numberOfRegions, potentials, connections);
+
+        for (int yIndex = 0; yIndex < size[1]; yIndex++) {
+            for (int xIndex = 0; xIndex < size[0]; xIndex++) {
+                if (potentialMatrix[yIndex][xIndex] >= 0) {
+                    map.getSquare(xIndex, yIndex).getConductor().setPotentialLevel(potentialMatrix[yIndex][xIndex]);
+                }
+            }
+        }
+    }
+~~~
+
+> Explicação de como o pattern foi adotado e quais suas vantagens, referenciando o diagrama.
+
 # Estrutura de Arquivos e Pastas
 
 ~~~
