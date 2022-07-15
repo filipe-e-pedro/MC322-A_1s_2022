@@ -165,7 +165,8 @@ Isso permite a fácil modificação do potencial de todos os condutores simultan
 
 Sentimos dificuldade em organizar a quantidade de arquivos que um projeto java acaba precisando, principalmente ao se trabalhar com o GitHub, que pode dar problemas de versões e conflitos. Gostaríamos de ter tido mais tempo e se organizado melhor com o tempo que tínhamos para conseguir fazer tudo o que queríamos.
 
-	Sentimos que aprendemos a utilidade prática dos conteúdos passados em aula, como com o polimorfismo, por exemplo, para definir os condutores, o que acabou facilitando muito no monitoramento dos circuitos e deixa mais fácil para implementar novos componentes caso seja do nosso interesse.
+Sentimos que aprendemos a utilidade prática dos conteúdos passados em aula, como com o polimorfismo, por exemplo, para definir os condutores, o que acabou facilitando muito no monitoramento dos circuitos e deixa mais fácil para implementar novos componentes caso seja do nosso interesse.
+
 Apesar de não termos organizado nosso tempo de forma que conseguimos implementar tudo o que queríamos, ficamos satisfeitos com o resultado. Achamos que ficou um jogo que alguém pode se divertir jogando, e que roda de forma bem fluída.
 
 Para possíveis futuras implementações queremos adicionar um menu principal, no qual seria possível ver as regras, selecionar o modo de jogo e selecionar qual mapa o usuário gostaria de jogar; queremos adicionar mais componentes, como a lâmpada, e a mecânica de iluminação; queremos adicionar um modo que o usuário cria o próprio mapa e o programa gere um arquivo .csv equivalente; e, principalmente, queremos fazer mais fases,  mais desafiadoras e divertidas.
