@@ -13,6 +13,10 @@ public class Controller {
     }
 
     public void receiveCommand(String key){
+    /**
+     * Recebe uma string com a tecla pressionada pelo jogador
+     * Executa o método correto a partir do comando utilizado
+     */
         int xIndex = player.getPosition()[0];
         int yIndex = player.getPosition()[1];
 
@@ -57,6 +61,10 @@ public class Controller {
     }
 
     public void move(int destSquare_x, int destSquare_y, Square curSquare){
+      /**
+     * Se possivel, realiza o movimento do jogador. 
+     * Tambem checa se o jogador atingiu uma saida aberta para ganhar o jogo
+     */
 
         if (map.invalidMove(destSquare_x, destSquare_y)) {
             System.out.println("MOVIMENTO INVALIDO!");
@@ -78,6 +86,9 @@ public class Controller {
     }
 
     public void takeWire(Square curSquare) {
+    /**
+     * Se possivel, retira um fio da posicao atual e o coloca no inventario do jogador.
+     */
         if (curSquare.checkWire() && player.hasWireSpace()) {
             Wire wire = curSquare.removeWire();
             player.storeWire(wire);
@@ -88,6 +99,9 @@ public class Controller {
     }
 
     public void placeWire(Square curSquare) {
+    /**
+     * Se possivel, retira um fio do inventário do jogador e o coloca na posicao atual
+     */
         if (curSquare.emptySquare()) {
             Wire wire = player.spendWire();
             if (wire != null) {
@@ -103,6 +117,9 @@ public class Controller {
     }
 
     public void takeResistor(Square curSquare) {
+    /**
+     * Se possivel, retira um resistor da posicao atual e o coloca no inventario do jogador.
+     */
         if (curSquare.checkResistor() && player.hasResistorSpace()) {
             Resistor resistor = curSquare.removeResistor();
             player.storeResistor(resistor);
@@ -113,6 +130,9 @@ public class Controller {
     }
 
     public void placeResistor(Square curSquare) {
+    /**
+     * Se possivel, retira um resistor do inventário do jogador e o coloca na posicao atual
+     */
         if (curSquare.emptySquare()) {
             Resistor resistor = player.spendResistor();
             if (resistor != null) {
