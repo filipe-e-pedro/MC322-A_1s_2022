@@ -11,7 +11,7 @@ Esse é o projeto com interface gráfica, o arquivo .java main é o DesktopLaunc
 
 # Arquivo Executável do Jogo
 
-Link para o .jar: [connectricity.jar](https://drive.google.com/drive/folders/1WL17o8a_5FCVKHCNIZUWu5nxxDBHZqtz?usp=sharing)
+Link para o .jar: [connectricity.jar](https://github.com/filipe-e-pedro/MC322-A_1s_2022/blob/main/projeto-lgdx/desktop/build/libs/connectricity.jar)
 
 # Slides do Projeto
 
