@@ -1,7 +1,10 @@
 package src.connectricity;
 
 public abstract class Conductor extends Entity{
-
+/**
+ * Classe abstrata que representa os Conductor, que engloba outras tres classes:
+ * Wire, Generator e Battery, ela eh filha da classe abstrata Entity
+ */
     protected int potentialLevel = 0;
     protected int maxPotential = 3;
 

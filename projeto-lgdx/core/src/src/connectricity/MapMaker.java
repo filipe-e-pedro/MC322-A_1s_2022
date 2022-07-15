@@ -1,12 +1,19 @@
 package src.connectricity;
 
 public class MapMaker {
+/**
+ * Classe que monta o mapa da fase em questao
+ */
     private Map level;
     Player player;
     int xSize, ySize;
     private String[][] levelInfo;
 
     public MapMaker(String[][] levelInfo){
+    /**
+     * Recebe uma matriz de String contendo todos os
+     * dados do .csv do mapa que se deseja montar
+     */
         this.levelInfo = levelInfo;
         ySize = Integer.parseInt(levelInfo[levelInfo.length -1][0]);
         xSize = Integer.parseInt(levelInfo[levelInfo.length -1][1]);
@@ -23,6 +30,9 @@ public class MapMaker {
     }
 
     public void createMap() {
+    /**
+     * Gera o mapa, todas as celulas e entidades presentes nele
+     */
         int xIndex, yIndex;
         Square newSquare;
         int batteryCount = 0;
@@ -82,6 +92,10 @@ public class MapMaker {
 	}
 
     public void invalidMap() throws InvalidMapException {
+    /**
+     * Confere a validade das informacoes recebidas para a constucao
+     * do mapa e chama exception caso seja invalido
+     */
         int generatorCount = 0, playerCount = 0, batteryCount = 0, exitsCount = 0;
 
         for(int i = 0; i < levelInfo.length; i++) {

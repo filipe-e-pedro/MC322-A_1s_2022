@@ -1,7 +1,9 @@
 package src.connectricity;
 
 public class Player extends Entity{
-
+/**
+ * Classe que representa o jogador
+ */
 	int wireInventorySize = 60;
 	int wireNumber = 0;
 

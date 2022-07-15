@@ -1,7 +1,11 @@
 package src.connectricity;
 
 public class Exit extends Entity{
-    
+/**
+ * Classe que representa Exit
+ *
+ * Controla se o portao esta aberto ou fechado
+ */
     private boolean open = false;
 
     public Exit (int xIndex, int yIndex, Map map){

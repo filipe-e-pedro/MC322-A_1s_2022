@@ -14,6 +14,10 @@ import java.io.*;
 import java.util.Vector;
 
 public class App extends ApplicationAdapter {
+/**
+ * Classe chamada pelo main (DesktopLauncher.java)
+ * que renderiza o jogo e recebe os comandos do usuario
+ */
 	int mapLevel = 1;
 	String[][] levelInfo;
 	FileHandle mapFile;
@@ -44,6 +48,9 @@ public class App extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+	/**
+	 * Cria todos os objetos utilizados para a renderizacao
+	 */
 		playerSprite = new Texture("sprite_folder/player.png");
 		obstacleSprite = new Texture("sprite_folder/box1.png");
 		generatorSprite = new Texture("sprite_folder/generator.png");
@@ -74,6 +81,9 @@ public class App extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+	/**
+	 * Funcao que roda em loop renderizando o jogo e recebendo os comandos do usuario
+	 */
 		ScreenUtils.clear(0, 0, 0, 1);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
@@ -88,6 +98,9 @@ public class App extends ApplicationAdapter {
 	}
 
 	private void rules(){
+	/**
+	 * Metodo que renderiza as regras
+	 */
 		font.getData().setScale(2, 2);
 		font.draw(batch, "Regras:", 20, maxHeight-30);
 		font.getData().setScale(1, 1);
@@ -104,6 +117,9 @@ public class App extends ApplicationAdapter {
 	}
 
 	private void conditions(){
+	/**
+	 * Metodo que renderiza as condicoes de vitoria
+	 */
 		font.getData().setScale(2, 2);
 		font.draw(batch, "Condições de vitória:", 600, maxHeight-30);
 		font.getData().setScale(1, 1);
@@ -124,6 +140,9 @@ public class App extends ApplicationAdapter {
 	}
 
 	private void entitys(){
+	/**
+	 * Metodo que renderiza todas as entitidades do jogo
+	 */
 		font.getData().setScale(2, 2);
 		font.draw(batch, "Elementos:", 20, 400);
 		font.getData().setScale(1, 1);
@@ -145,7 +164,11 @@ public class App extends ApplicationAdapter {
 		batch.draw(exitSprite[1], 260, 115, 60, 60);
 
 	}
+
 	private void ruleScreen(){
+	/**
+	 * Metodo que renderiza a tela de regras e espera que alguma tecla seja pressionada para passar para o jogo
+	 */
 		rules();
 		conditions();
 		entitys();
@@ -154,10 +177,18 @@ public class App extends ApplicationAdapter {
 		if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY))
 			gameState++;
 	}
+
 	private void victoryScreen(){
 		batch.draw(new Texture("sprite_folder/Vitoria.png"), 0, 0, maxWidth, maxHeight);
 	}
+
 	private void progressGame(){
+	/**
+	 * Metodo que garante a progressao do jogo, le um novo arquivo de mapa caso esteja em uma nova fase,
+	 * redimensiona o tamanho de cada celula para que ela seja o maior possivel garantindo que haja espaco para
+	 * os outros elementos dessa tela, renderiza o mapa, o inventario do jogador e o estado da carga das baterias,
+	 * e recebe os comandos do usuario, repassando para a classe controller
+	 */
 		if (newLevel) {
 			makeMap(mapLevel);
 			newLevel = false;
@@ -203,7 +234,11 @@ public class App extends ApplicationAdapter {
 			}
 		}
 	}
+
 	private void renderMap(){
+	/**
+	 * Renderiza o mapa
+	 */
 		Texture sprite;
 		for(int i = 0; i < cellsX; i++){
 			for(int j = 0; j < cellsY; j++){
@@ -221,6 +256,9 @@ public class App extends ApplicationAdapter {
 	}
 
 	private void renderChargeBars(){
+	/**
+	 * Renderiza a carga atual das baterias
+	 */
 		for(int i = 0; i < 4 ; i++){
 			if(map.getNeededCharge(i)>0){
 				batch.draw(batterySprite[i], cellsX*cellSize+50, maxHeight-100-(100*i), 50, 50);
@@ -231,7 +269,11 @@ public class App extends ApplicationAdapter {
 			}
 		}
 	}
+
 	private void renderInventory(){
+	/**
+	 * Renderiza o inventario do jogador
+	 */
 		batch.draw(wireSprite, 40, 40, 50, 50);
 		batch.draw(itemFrameSprite, 40, 40, 50, 50);
 		batch.draw(resistorSprite, 130, 40, 50, 50);
@@ -242,7 +284,15 @@ public class App extends ApplicationAdapter {
 		font.draw(batch, "F", 62, 35);
 		font.draw(batch, "R", 152, 35);
 	}
+
 	private void makeMap(int mapID){
+	/**
+	 * Recebe o ID do mapa da fase que esta sendo jogada
+	 *
+	 * Le o arquivo do mapa relativo ao ID recebido e passa para o MapMaker fazer o mapa.
+	 *
+	 * Quando ele le o arquivo .csv do mapa ele coloca as informacoes em uma matriz de String
+	 */
 		mapFile = Gdx.files.internal("maps_folder/"+mapID+".csv");
 		mapReader = mapFile.reader(8192);
 
@@ -274,6 +324,10 @@ public class App extends ApplicationAdapter {
 	}
 
 	private Texture getSprite(int x, int y){
+	/**
+	 * Recebe dois inteiros que representam uma posicao no mapa
+	 * Retorna a sprite da entidade mais importante que esta naquela posicao do mapa
+	 */
 		String name = map.getMatrix()[y][x];
 		String component = name.substring(0, 1);
 		int state;
