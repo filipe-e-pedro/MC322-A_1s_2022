@@ -7,6 +7,6 @@ public class Obstacle extends Entity{
 	}
     
     public String getName() {
-        return "W";
+        return "O";
     }
 }

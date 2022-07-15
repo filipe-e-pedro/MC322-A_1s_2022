@@ -140,7 +140,6 @@ public class Square {
 	}
 
 	public String mostRelevantEntity() { 
-		// GAMBIARRA, MUDAR DEPOIS
 		if (checkObstacle()) {
 			return obstacle.getName();
 		}
@@ -173,8 +172,6 @@ public class Square {
 	}
 
 	public String circuitPart() { 
-		// GAMBIARRA, MUDAR DEPOIS
-
 		if (checkGenerator()) {
 			return generator.getName();
 		}
