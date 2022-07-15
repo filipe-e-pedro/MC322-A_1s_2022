@@ -21,6 +21,29 @@ https://docs.google.com/presentation/d/1GOxuunC9XyMGQk7AxyWvs8kTky6LrSfkABKOKZ0t
 ## Slides da Apresentação Final
 https://docs.google.com/presentation/d/1YOW_dtf9_ErJ-F-U-c1zVL32a357mV5I6yyOJDY2s6o/edit#slide=id.g13acd6c184b_0_15
 
+# Destaques de Orientação a Objetos
+Foi utilizado polimorfismo por meio de uma classe abstrata “Conductor”.
+Os geradores, baterias e fios são seus herdeiros.
+Isso é importante para o uso dos métodos getConductor() e setPotentialLevel() em todos estes objetos ao fim do cálculo dos potenciais.
+
+## Código do Destaque OO
+~~~java
+public abstract class Conductor extends Entity{
+
+    protected int potentialLevel = 0;
+    protected int maxPotential = 3;
+
+    public Conductor (int xIndex, int yIndex, Map map){
+		super(xIndex, yIndex, map);
+	}
+    
+    public void setPotentialLevel(int level) {
+        if (level >= 0 && level <= maxPotential) {
+            potentialLevel = level;
+        }
+    }
+}
+
 # Diagramas
 
 ## Diagrama Geral das classes do jogo
